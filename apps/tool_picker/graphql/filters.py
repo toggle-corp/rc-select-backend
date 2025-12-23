@@ -1,0 +1,14 @@
+import strawberry
+import strawberry_django
+
+from apps.tool_picker.models import Catalog, Tool
+
+
+@strawberry_django.filters.filter(Catalog, lookups=True)
+class CatalogFilter:
+    id: strawberry.ID | None
+
+
+@strawberry_django.filters.filter(Tool, lookups=True)
+class ToolFilter:
+    id: strawberry.ID | None

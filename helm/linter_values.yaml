@@ -1,0 +1,77 @@
+app:
+  environment: Alpha
+  image:
+    name: ghcr.io/toggle-corp/nrcs-backend-alpha
+    tag: 20-merge.c8d87c8f
+
+  ingress:
+    enabled: true
+    className: nginx
+    host: api.test.com
+
+  redis:
+    master:
+      persistence:
+        size: .5Gi
+        storageClass: longhorn
+  postgresql:
+    enabled: true
+    auth:
+      postgresPassword: "testing-passowrd"
+      username: "test"
+      password: "testing-passowrd"
+      database: "test"
+    primary:
+      persistence:
+        storageClass: "longhorn"
+        size: 1Gi
+
+  minio:
+    enabled: true
+    global:
+      defaultStorageClass: longhorn
+    apiIngress:
+      enabled: true
+      ingressClassName: nginx
+      hostname: test-minio.com
+    auth:
+      rootUser: timur
+      rootPassword: capan-passowrd
+    persistence:
+      enabled: true
+      size: 0.5Gi
+  # NOTE: Check main/settings.py for all available options
+  env:
+    # AWS
+    AWS_S3_ENABLED: "false"
+    AWS_S3_ENDPOINT_URL: "https://nrcs.minio.com"
+    AWS_S3_STATIC_BUCKET_NAME: "static-data"
+    AWS_S3_MEDIA_BUCKET_NAME: "media-data"
+    # App Domain
+    SESSION_COOKIE_DOMAIN: .test.com
+    CSRF_COOKIE_DOMAIN: .test.com
+    APP_TYPE: "WEB"
+    APP_DOMAIN: "https://nrcs-nepal.com"
+    APP_RELEASE: "1.1.1"
+    DJANGO_DEBUG: "false"
+    FRONTEND_DOMAIN: "https://nrcs-frontend.com"
+    SESSION_COOKIE_DOMAIN: "https://nrcs-session.com"
+    CSRF_COOKIE_DOMAIN: "https://nrcs-cookie.com"
+    SENTRY_ENABLED: "false"
+    TIME_ZONE: "Asia/Kathmandu"
+
+  # NOTE: Check main/settings.py for all available options
+  secrets:
+    DJANGO_SECRET_KEY: "very-secret-key"
+    # Postgres
+    POSTGRES_DB: "test"
+    POSTGRES_USER: "test"
+    POSTGRES_PASSWORD: "test"
+    POSTGRES_HOST: "test"
+    POSTGRES_PORT: "test"
+    # Minio (S3)
+    AWS_S3_ACCESS_KEY_ID: "test"
+    AWS_S3_SECRET_ACCESS_KEY: "test"
+    AWS_S3_REGION: "us-east-1"
+    # Misc
+    SENTRY_DSN: "https://test.com"

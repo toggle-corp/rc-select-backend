@@ -1,0 +1,15 @@
+/* Alternate background for stacked inlines */
+.inline-group .inline-related:nth-child(odd) >* {
+    background-color: #e0e0e0;
+}
+
+.inline-group .inline-related:nth-child(even) {
+    background-color: #ffffff;
+}
+
+/* Optional: spacing & border polish */
+.inline-group .inline-related {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}

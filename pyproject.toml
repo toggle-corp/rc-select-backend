@@ -1,0 +1,221 @@
+[project]
+name = "rc-select-backend"
+version = "0.1.0"
+description = "Backend for RC Select"
+authors = [
+  {name = "Togglecorp", email = "dev@togglecorp.com"},
+]
+license = { text = "Apache-2.0" }
+readme = "README.md"
+requires-python = "~=3.13.2"
+
+dependencies = [
+    "Django~=5.2.9",
+    "django-cors-headers",
+    "django-cte",
+    "django-environ",
+    "django-premailer",
+    "django-storages[s3]",
+    "djangoql", # Admin panel query search
+    "djangorestframework",
+    "factory-boy~=3.3.3",
+    "gunicorn~=22.0.0",
+    "psycopg2-binary",
+    "sentry-sdk",
+    "strawberry-graphql-django~=0.70.1",
+    "django-choices-field", # Required by strawberry-graphql-django
+    "django-health-check",
+    "pillow", # Required by django ImageField
+    "pydantic==2.12.5",
+    "python-ulid>=3.0.0",
+    "httpx",
+    "redis>=7.0.1",
+    "django-mdeditor>=0.1.20",
+]
+
+[dependency-groups]
+dev = [
+    "django-debug-toolbar",
+    "django-stubs",
+    "ipython",
+    "colorlog",
+]
+test = [
+    "pytest-django",
+    "pytest-icdiff",
+    "pytest-ordering",
+    "pytest-profiling",
+]
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "main.settings"
+log_cli = true
+
+[tool.ruff]
+line-length = 125
+extend-exclude = [
+    ".git",
+    ".pytest_cache",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".venv",
+    "venv",
+    "**/migrations/*",
+    "__pycache__",
+]
+
+[tool.ruff.lint]
+flake8-builtins.builtins-strict-checking = false
+extend-select = [
+    "I",  # isort
+    "E",  # pycodestyle
+    "F",  # pyflakes
+    "B",  # flake8-bugbear
+    "A",  # flake8-builtins
+    "W",  # pycodestyle
+    "DJ",  # flake8-django
+    "AIR",  # airflow
+    "COM",  # flake8-commas
+    "INT",  # flake8-gettext
+    "ISC",  # flake8-implicit-str-concat
+    "ICN",  # flake8-import-conventions
+    "LOG",  # flake8-logging
+    "G",  # flake8-logging-format
+    "T20",  # flake8-print
+    "TID",  # flake8-tidy-imports
+    "PT",  # flake8-pytest-style
+    "Q",  # flake8-quotes
+    "RET",  # flake8-return
+    "SIM",  # flake8-simplify
+    "TC",  # flake8-type-checking
+    "PTH",  # flake8-use-pathlib
+    "UP",  # pyupgrad
+
+    "D", # pydocstyle
+    "ASYNC",  # flake8-async
+    "S",  # flake8-bandit
+    "BLE",  # blind-except
+    # "FBT",  # flake8-boolean-trap
+    # "C4",  # flake8-comprehensions
+    # "DTZ",  # flake8-datetimez
+    # "EM",  # flake8-errmsg
+    "FA",  # flake8-future-annotations
+    "INP",  # flake8-no-pep420
+    "PIE",  # flake8-pie
+    "RSE",  # flake8-raise
+    # "SLF",  # flake8-self
+    "SLOT",  # flake8-slots
+    "FLY",  # flynt
+    "C90",  # mccabe
+    # "N",  # pep8-naming
+    # "PERF",  # Perflint
+    "PGH",  # pygrep-hooks
+    "PLC",  # Convention
+    "PLE",  # Error
+    # "PLR",  # Refactor
+    "PLW",  # Warning
+    "FURB",  # refurb
+    "RUF",  # Ruff-specific rules
+    "TRY",  # tryceratops
+]
+
+ignore = [
+    "C901",  # C90 complex-structure
+    "E701",  # E multiple-statements-on-one-line-colon
+    "E203",  # E whitespace-before-punctuation
+    "E501",  # FIXME: @adityakhatri
+    "DJ001",  # DJ django-nullable-model-string-field
+    # FIXME(thenav56): Check if we can enable G201 and keep sending logs to sentry
+    "G201",  # G logging-exc-info
+
+    "BLE001",  # BLE blind-except (NOTE: "except Exception" is already explicitly defined)
+    "S101",  # S assert
+    "S608",  # hardcoded-sql-expression
+    "RUF012",  # mutable-class-default
+    "TRY300",  # try-consider-else
+    "TRY003",  # raise-vanilla-args
+    "TRY002",  # raise-vanilla-class
+    "TRY301",  # raise-within-try
+    "TRY400",  # error-instead-of-exception
+
+    "D100",  # undocumented-public-moduleg
+    "D102",  # undocumented-public-methodg
+    "D103",  # undocumented-public-functiong
+    "D104",  # undocumented-public-packageg
+    "D105",  # undocumented-magic-methodg
+    "D106",  # undocumented-public-nested-classg
+    "D107",  # undocumented-public-initg
+    "D401",
+    "D205",
+]
+
+# TODO(thenav56): Use this instead `select = ["ALL"]` and add rules to ignore
+#   ruff check --statistics ./
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402"]
+"/**/tests/*_mock_data.py" = ["E501"]
+"**/snap_test_*.py" = ["E501"]
+"!./apps/**/models.py" = ["D101"]  # undocumented-public-class
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+exclude = [
+    "**/__pycache__",
+    "**/snap_test_*.py",
+    ".venv/",
+    "**/migrations/*.py",
+]
+typeCheckingMode = "standard"
+analyzeUnannotatedFunctions = true
+enableReachabilityAnalysis = true
+strictDictionaryInference = true
+strictListInteference = true
+strictSetInference = true
+reportCallInDefaultInitializer = "information"
+reportConstantRedefinition = "error"
+reportDeprecated = "information"
+reportDuplicateImport = "warning"
+reportImplicitOverride = "error"
+reportImplicitStringConcatenation = "none"
+reportImportCycles = "none"
+reportInconsistentConstructor = "warning"
+reportMatchNotExhaustive = "warning"
+reportMissingImports = "error"
+reportMissingParameterType = "warning"
+reportMissingTypeArgument = "warning"
+reportMissingTypeStubs = "warning"
+reportPrivateUsage = "error"
+reportPropertyTypeMismatch = "error"
+reportShadowedImports = "error"
+reportUninitializedInstanceVariable = "warning"
+reportUnknownArgumentType = "none"
+reportUnknownLambdaType = "none"
+reportUnknownMemberType = "none"
+reportUnknownParameterType = "none"
+reportUnknownVariableType = "none"
+reportUnnecessaryCast = "warning"
+reportUnnecessaryComparison = "warning"
+reportUnnecessaryContains = "warning"
+reportUnnecessaryIsInstance = "warning"
+reportUnnecessaryTypeIgnoreComment = "error"
+reportUntypedBaseClass = "warning"
+reportUntypedClassDecorator = "warning"
+reportUntypedFunctionDecorator = "warning"
+reportUntypedNamedTuple = "warning"
+reportUnusedClass = "warning"
+reportUnusedExpression = "warning"
+reportUnusedFunction = "warning"
+reportUnusedImport = "warning"
+reportUnusedVariable = "warning"
+reportPrivateImportUsage = "error"
+
+[tool.coverage.report]
+# https://coverage.readthedocs.io/en/7.10.6/excluding.html#advanced-exclusion
+exclude_also = [
+    "raise NotImplementedError",
+    "if typing.TYPE_CHECKING:",
+]
+partial_branches = [
+    "if typing.TYPE_CHECKING:",
+]

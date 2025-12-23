@@ -1,0 +1,6 @@
+dependencies:
+- name: toggle-django-helm
+  repository: oci://ghcr.io/toggle-corp
+  version: 0.2.0
+digest: sha256:670c8daa77095e7a9fffd8bd0027757ad118d789f8d3650615d4a10ed4903fb3
+generated: "2025-08-25T10:44:01.366851+05:45"
