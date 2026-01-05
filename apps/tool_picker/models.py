@@ -1,6 +1,7 @@
 import typing
+import uuid
 
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django_choices_field import IntegerChoicesField
 from django_stubs_ext.db.models.manager import RelatedManager
@@ -98,8 +99,8 @@ class Tool(UserResource):
     name = models.CharField[str, str](max_length=200)
     tagline = models.CharField[str, str](max_length=300, blank=True)
     description = models.TextField[str, str]()
-    video_link = models.TextField[str, str](blank=True, null=True)
-    tool_link = models.TextField[str, str](blank=True, null=True)
+    video_link = models.CharField[str, str](blank=True, null=True)
+    tool_link = models.CharField[str, str](blank=True, null=True)
     logo = models.ImageField(
         upload_to="logs/",
         verbose_name="Logo",
@@ -167,3 +168,105 @@ class ToolAnswer(UserResource):
             [opt.text for opt in self.selected_options.all()],
         )
         return f"{self.tool.name} - {self.question.title}: [{options}]"
+
+
+class UserSubmission(models.Model):
+    """Model representing a user's submission of answers for a catalog."""
+
+    id = models.UUIDField[uuid.UUID, uuid.UUID](
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    catalog = models.ForeignKey(
+        Catalog,
+        on_delete=models.CASCADE,
+        related_name="submissions",
+    )
+
+    # type hints
+    answers: typing.ClassVar[RelatedManager["UserAnswer"]]
+    results: typing.ClassVar[RelatedManager["RecommendationResult"]]
+
+    class Meta(UserResource.Meta):
+        ordering = ["-created_at"]
+        verbose_name = "User Submission"
+        verbose_name_plural = "User Submissions"
+
+    @typing.override
+    def __str__(self):
+        return f"Submission {self.id} for {self.catalog.name} at {self.created_at}"
+
+
+class UserAnswer(models.Model):
+    """Model representing a user's answer to a specific question."""
+
+    submission = models.ForeignKey(
+        UserSubmission,
+        on_delete=models.CASCADE,
+        related_name="answers",
+    )
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.CASCADE,
+        related_name="user_answers",
+    )
+
+    # For ordinal questions
+    ordinal_value: int = IntegerChoicesField(  # type: ignore[reportAssignmentType]
+        choices_enum=OrdinalTypeEnum,
+        blank=True,
+        null=True,
+    )
+
+    # For checkbox questions
+    selected_options = models.ManyToManyField(
+        CheckboxOption,
+        related_name="user_answers",
+        blank=True,
+    )
+
+    class Meta(UserResource.Meta):
+        unique_together = ["submission", "question"]
+        ordering = ["question__order"]
+        verbose_name = "User Answer"
+        verbose_name_plural = "User Answers"
+
+    @typing.override
+    def __str__(self):
+        if self.question.question_type == QuestionTypeEnum.ORDINAL:
+            return f"Answer to '{self.question.title}': {self.ordinal_value}"
+        options = ", ".join([opt.text for opt in self.selected_options.all()])
+        return f"Answer to '{self.question.title}': [{options}]"
+
+
+class RecommendationResult(models.Model):
+    """Model representing recommended tools for a submission."""
+
+    submission = models.ForeignKey(
+        UserSubmission,
+        on_delete=models.CASCADE,
+        related_name="results",
+    )
+    tool = models.ForeignKey(
+        Tool,
+        on_delete=models.CASCADE,
+        related_name="recommendations",
+    )
+    rank = models.IntegerField[int, int](
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
+    score = models.FloatField[float, float](
+        help_text="Proximity score - lower is better (closer match)"
+    )
+
+    class Meta(UserResource.Meta):
+        ordering = ["submission", "rank"]
+        unique_together = ["submission", "rank"]
+        verbose_name = "Recommendation Result"
+        verbose_name_plural = "Recommendation Results"
+
+    @typing.override
+    def __str__(self):
+        return f"#{self.rank} {self.tool.name} (score: {self.score:.2f})"

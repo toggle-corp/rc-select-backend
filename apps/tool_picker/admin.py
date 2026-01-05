@@ -32,19 +32,11 @@ class QuestionInline(admin.StackedInline):  # type: ignore[reportMissingTypeArgu
     show_change_link = True
 
 
-# Inline for Tools within Catalog
-class ToolInline(admin.TabularInline):  # type: ignore[reportMissingTypeArgument]
-    model = Tool
-    extra = 0
-    fields = ["name", "tagline"]
-    show_change_link = True
-
-
 @admin.register(Catalog)
 class CatalogAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
     list_display = ["name", "question_count", "tool_count"]
     search_fields = ["name", "description"]
-    inlines = [QuestionInline, ToolInline]
+    inlines = [QuestionInline]
 
     @admin.display(description="Questions")
     def question_count(self, obj: Catalog):
@@ -251,7 +243,12 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
         (
             "Basic Information",
             {
-                "fields": ("catalog", "name", "tagline", "description"),
+                "fields": (
+                    "catalog", "name",
+                    "tagline", "description",
+                    "video_link", "tool_link",
+                    "logo",
+                ),
             },
         ),
     )
