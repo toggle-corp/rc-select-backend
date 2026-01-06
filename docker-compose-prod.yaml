@@ -1,4 +1,4 @@
-name: nrcs-backend
+name: rc-select-backend
 
 services:
   web:

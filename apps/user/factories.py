@@ -1,6 +1,7 @@
 # pyright: reportRedeclaration=false
 # pyright: reportIncompatibleVariableOverride=false
 # pyright: reportMissingTypeArgument=false
+# pyright: reportPrivateImportUsage=false
 import typing
 
 import factory

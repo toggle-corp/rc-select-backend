@@ -1,7 +1,7 @@
 import typing
 import uuid
 
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django_choices_field import IntegerChoicesField
 from django_stubs_ext.db.models.manager import RelatedManager
@@ -58,6 +58,7 @@ class Question(UserResource):
 
     # type hints
     options: typing.ClassVar[RelatedManager["CheckboxOption"]]
+    get_question_type_display: typing.ClassVar[typing.Callable[[typing.Self], str]]
 
     class Meta(UserResource.Meta):
         ordering = ["catalog", "order"]
@@ -255,10 +256,10 @@ class RecommendationResult(models.Model):
         related_name="recommendations",
     )
     rank = models.IntegerField[int, int](
-        validators=[MinValueValidator(1), MaxValueValidator(5)]
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
     )
     score = models.FloatField[float, float](
-        help_text="Proximity score - lower is better (closer match)"
+        help_text="Proximity score - lower is better (closer match)",
     )
 
     class Meta(UserResource.Meta):

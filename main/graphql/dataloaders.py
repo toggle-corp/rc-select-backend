@@ -1,4 +1,4 @@
-# from django.utils.functional import cached_property
+# from django.utils.functional import cached_propertygra/data
 # from apps.user.graphql.dataloaders import UserDataLoader
 
 

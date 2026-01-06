@@ -8,8 +8,7 @@ from .managers import CustomUserManager
 
 
 class User(AbstractUser):
-    """Custom user model with email as unique identifier.
-    """
+    """Custom user model with email as unique identifier."""
 
     EMAIL_FIELD = USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -28,7 +27,6 @@ class User(AbstractUser):
         email_name, email_domain = self.email.split("@")
         email_name_first_char, email_name_last_char = email_name[:1], email_name[-1:]
         return f"{email_name_first_char}***{email_name_last_char}@{email_domain}"
-
 
     @typing.override
     def save(self, *args, **kwargs):  # type: ignore[reportMissingParameterType]

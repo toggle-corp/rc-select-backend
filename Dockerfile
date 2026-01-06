@@ -2,7 +2,7 @@ FROM python:3.13-slim-bookworm AS base
 COPY --from=ghcr.io/astral-sh/uv:0.6.2 /uv /uvx /bin/
 
 LABEL maintainer="TC Dev"
-LABEL org.opencontainers.image.source="https://github.com/capn-nepal/website-backend/"
+LABEL org.opencontainers.image.source="https://github.com/toggle-corp/rc-select-backend/"
 
 ENV PYTHONUNBUFFERED=1
 

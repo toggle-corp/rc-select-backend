@@ -1,11 +1,11 @@
 apiVersion: v2
-name: nrcs-website-backend
-description: "Helm chart for NRCs website backend"
+name: rc-select-backend
+description: "Helm chart for RC Select backend"
 type: application
 version: 0.1.0-SET-BY-CICD
 appVersion: "1.16.0"
 sources:
-  - https://github.com/toggle-corp/nrcs-backend
+  - https://github.com/toggle-corp/rc-select-backend
 
 
 dependencies:

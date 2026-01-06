@@ -10,8 +10,11 @@ from .models import (
     OrdinalTypeEnum,
     Question,
     QuestionTypeEnum,
+    RecommendationResult,
     Tool,
     ToolAnswer,
+    UserAnswer,
+    UserSubmission,
 )
 
 
@@ -244,9 +247,12 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
             "Basic Information",
             {
                 "fields": (
-                    "catalog", "name",
-                    "tagline", "description",
-                    "video_link", "tool_link",
+                    "catalog",
+                    "name",
+                    "tagline",
+                    "description",
+                    "video_link",
+                    "tool_link",
                     "logo",
                 ),
             },
@@ -278,3 +284,113 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
                     else None,
                 },
             )
+
+
+# ============================================================================
+# User Submission Models Admin
+# ============================================================================
+
+
+class UserAnswerInline(admin.TabularInline):  # type: ignore[reportMissingTypeArgument]
+    model = UserAnswer
+    extra = 0
+    fields = ["question", "ordinal_value", "get_selected_options"]
+    readonly_fields = ["get_selected_options"]
+    ordering = ["question__order"]
+
+    @admin.display(description="Checkbox Options")
+    def get_selected_options(self, obj: UserAnswer):
+        if obj.pk and obj.question.question_type == "checkbox":
+            return ", ".join([opt.text for opt in obj.selected_options.all()])
+        return "-"
+
+
+class RecommendationResultInline(admin.TabularInline):  # type: ignore[reportMissingTypeArgument]
+    model = RecommendationResult
+    extra = 0
+    fields = ["rank", "tool", "score"]
+    ordering = ["rank"]
+
+
+@admin.register(UserSubmission)
+class UserSubmissionAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
+    list_display = ["id", "catalog", "created_at", "answer_count", "recommendation_count"]
+    list_filter = ["catalog", "created_at"]
+    readonly_fields = ["id", "created_at"]
+    fields = ["id", "catalog"]
+    inlines = [UserAnswerInline, RecommendationResultInline]
+
+    @admin.display(description="Answers")
+    def answer_count(self, obj: UserSubmission):
+        return obj.answers.count()
+
+    @admin.display(description="Results")
+    def recommendation_count(self, obj: UserSubmission):
+        return obj.results.count()
+
+
+@admin.register(UserAnswer)
+class UserAnswerAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
+    list_display = ["submission_id", "question", "question_type", "get_answer"]
+    list_filter = ["submission__catalog", "question__question_type"]
+    search_fields = ["submission__id", "question__title"]
+
+    def get_fields(self, request, obj=None):  # type: ignore[reportMissingTypeArgument]
+        """Show only relevant fields based on question type"""
+        base_fields = ["submission", "question"]
+        if obj and obj.question.question_type == "ordinal":
+            return base_fields + ["ordinal_value"]
+        if obj and obj.question.question_type == "checkbox":
+            return base_fields + ["selected_options"]
+        return base_fields + ["ordinal_value", "selected_options"]
+
+    def get_form(self, request, obj=None, **kwargs):  # type: ignore[reportMissingTypeArgument]
+        form = super().get_form(request, obj, **kwargs)
+        if obj and obj.question.question_type == "checkbox":
+            self.filter_horizontal = ["selected_options"]
+        else:
+            self.filter_horizontal = []
+        return form
+
+    @admin.display(description="Submission")
+    def submission_id(self, obj: UserAnswer):
+        return str(obj.submission.id)[:8] + "..."
+
+    @admin.display(description="Type")
+    def question_type(self, obj: UserAnswer):
+        return obj.question.get_question_type_display()
+
+    @admin.display(description="Answer")
+    def get_answer(self, obj: UserAnswer):
+        if obj.question.question_type == "ordinal":
+            return obj.ordinal_value or "-"
+        options = obj.selected_options.all()
+        return ", ".join([opt.text for opt in options]) if options else "(none)"
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):  # type: ignore[reportMissingTypeArgument]
+        if db_field.name == "selected_options":
+            user_answer_id = request.resolver_match.kwargs.get("object_id")  # type: ignore[reportOptionsArgumentAccess]
+            if user_answer_id:
+                try:
+                    user_answer = UserAnswer.objects.get(pk=user_answer_id)
+                    kwargs["queryset"] = CheckboxOption.objects.filter(question=user_answer.question)
+                except UserAnswer.DoesNotExist:
+                    pass
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
+
+
+@admin.register(RecommendationResult)
+class RecommendationResultAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
+    list_display = ["submission_short", "rank", "tool", "score", "catalog"]
+    list_filter = ["submission__catalog", "rank"]
+    search_fields = ["submission__id", "tool__name"]
+    ordering = ["submission", "rank"]
+    fields = ["submission", "tool", "rank", "score"]
+
+    @admin.display(description="Submission")
+    def submission_short(self, obj: RecommendationResult):
+        return str(obj.submission.id)[:8] + "..."
+
+    @admin.display(description="Catalog")
+    def catalog(self, obj: RecommendationResult):
+        return obj.submission.catalog.name

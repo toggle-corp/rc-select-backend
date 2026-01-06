@@ -44,19 +44,19 @@ app:
   env:
     # AWS
     AWS_S3_ENABLED: "false"
-    AWS_S3_ENDPOINT_URL: "https://nrcs.minio.com"
+    AWS_S3_ENDPOINT_URL: "https://rc-select.minio.com"
     AWS_S3_STATIC_BUCKET_NAME: "static-data"
     AWS_S3_MEDIA_BUCKET_NAME: "media-data"
     # App Domain
     SESSION_COOKIE_DOMAIN: .test.com
     CSRF_COOKIE_DOMAIN: .test.com
     APP_TYPE: "WEB"
-    APP_DOMAIN: "https://nrcs-nepal.com"
+    APP_DOMAIN: "https://rc-select.com"
     APP_RELEASE: "1.1.1"
     DJANGO_DEBUG: "false"
-    FRONTEND_DOMAIN: "https://nrcs-frontend.com"
-    SESSION_COOKIE_DOMAIN: "https://nrcs-session.com"
-    CSRF_COOKIE_DOMAIN: "https://nrcs-cookie.com"
+    FRONTEND_DOMAIN: "https://rc-select-frontend.com"
+    SESSION_COOKIE_DOMAIN: "https://rc-select-session.com"
+    CSRF_COOKIE_DOMAIN: "https://rc-select-cookie.com"
     SENTRY_ENABLED: "false"
     TIME_ZONE: "Asia/Kathmandu"
 
