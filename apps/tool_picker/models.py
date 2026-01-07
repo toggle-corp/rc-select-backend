@@ -103,7 +103,7 @@ class Tool(UserResource):
     video_link = models.CharField[str, str](blank=True, null=True)
     tool_link = models.CharField[str, str](blank=True, null=True)
     logo = models.ImageField(
-        upload_to="logs/",
+        upload_to="logos/",
         verbose_name="Logo",
         null=True,
         blank=True,

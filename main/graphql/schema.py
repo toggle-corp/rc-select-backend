@@ -5,6 +5,7 @@ from strawberry.file_uploads import Upload
 from strawberry_django.optimizer import DjangoOptimizerExtension
 
 from apps.tool_picker.graphql import queries as tool_picker_queries
+from apps.resources.graphql import queries as resources_queries
 
 from .context import GraphQLContext
 from .dataloaders import GlobalDataLoader
@@ -23,6 +24,7 @@ class CustomAsyncGraphQLView(AsyncGraphQLView):
 @strawberry.type
 class Query(
     tool_picker_queries.Query,
+    resources_queries.Query,
 ):
     enums: AppEnumCollection = strawberry.field(  # type: ignore[reportGeneralTypeIssues]
         resolver=lambda: AppEnumCollectionData(),

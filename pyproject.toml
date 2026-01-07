@@ -122,7 +122,6 @@ ignore = [
     "C901",  # C90 complex-structure
     "E701",  # E multiple-statements-on-one-line-colon
     "E203",  # E whitespace-before-punctuation
-    "E501",  # FIXME: @adityakhatri
     "DJ001",  # DJ django-nullable-model-string-field
     # FIXME(thenav56): Check if we can enable G201 and keep sending logs to sentry
     "G201",  # G logging-exc-info

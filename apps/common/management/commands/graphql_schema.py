@@ -4,7 +4,6 @@ import typing
 from django.core.management.base import BaseCommand, CommandParser
 from strawberry.printer import printer as sp
 
-import utils.graphql.monkey_patches_printer  # noqa: F401 # type: ignore[reportUnusedImport]
 from main.graphql.schema import schema
 
 

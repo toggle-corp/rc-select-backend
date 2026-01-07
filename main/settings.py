@@ -127,6 +127,7 @@ INSTALLED_APPS = [
     # Internal
     "apps.common",
     "apps.tool_picker",
+    "apps.resources",
     "apps.user",
 ]
 
