@@ -46,15 +46,16 @@ class Question(UserResource):
         choices_enum=QuestionTypeEnum,
     )
     title = models.CharField[str, str](max_length=500)
+    short_name = models.CharField[str, str](max_length=500)
     description = models.TextField[str, str](blank=True)
     order = models.IntegerField[int, int](default=0, validators=[MinValueValidator(0)])
 
     # Ordinal-specific fields
-    label_na = models.CharField[str, str](max_length=100, default="N/A", blank=True)
-    label_1 = models.CharField[str, str](max_length=100, default="1", blank=True)
-    label_2 = models.CharField[str, str](max_length=100, default="2", blank=True)
-    label_3 = models.CharField[str, str](max_length=100, default="3", blank=True)
-    label_4 = models.CharField[str, str](max_length=100, default="4", blank=True)
+    label_na = models.TextField[str, str](default="N/A", blank=True)
+    label_1 = models.TextField[str, str](default="1", blank=True)
+    label_2 = models.TextField[str, str](default="2", blank=True)
+    label_3 = models.TextField[str, str](default="3", blank=True)
+    label_4 = models.TextField[str, str](default="4", blank=True)
 
     # type hints
     options: typing.ClassVar[RelatedManager["CheckboxOption"]]
