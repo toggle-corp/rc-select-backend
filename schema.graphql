@@ -13,6 +13,19 @@ type AppEnumCollectionQuestionTypeEnum {
   label: String!
 }
 
+input BoolBaseFilterLookup {
+  """Exact match. Filter will be skipped on `null` value"""
+  exact: Boolean
+
+  """Assignment test. Filter will be skipped on `null` value"""
+  isNull: Boolean
+
+  """
+  Exact match of items in a given list. Filter will be skipped on `null` value
+  """
+  inList: [Boolean!]
+}
+
 """Model representing case study of national society for specific tool."""
 input CaseStudyFilter {
   id: ID
@@ -48,6 +61,7 @@ type CaseStudyTypeOffsetPaginated {
 """Model representing catalog where a tool belongs to."""
 input CatalogFilter {
   id: ID
+  showInHelpMeChoose: BoolBaseFilterLookup
   AND: CatalogFilter
   OR: CatalogFilter
   NOT: CatalogFilter
@@ -62,6 +76,7 @@ input CatalogOrder {
 type CatalogType {
   id: ID!
   name: String!
+  showInHelpMeChoose: Boolean!
   description: String!
   questions: [QuestionType!]!
 }

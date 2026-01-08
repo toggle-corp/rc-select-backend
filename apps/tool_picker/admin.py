@@ -37,7 +37,7 @@ class QuestionInline(admin.StackedInline):  # type: ignore[reportMissingTypeArgu
 
 @admin.register(Catalog)
 class CatalogAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
-    list_display = ["name", "question_count", "tool_count"]
+    list_display = ["name", "question_count", "tool_count", "show_in_help_me_choose"]
     search_fields = ["name", "description"]
     inlines = [QuestionInline]
 

@@ -14,6 +14,7 @@ class Catalog(UserResource):
 
     name = models.CharField[str, str](max_length=200)
     description = models.TextField[str, str]()
+    show_in_help_me_choose = models.BooleanField[bool | None, bool | None](default=False)
 
     # type hints
     questions: typing.ClassVar[RelatedManager["Question"]]

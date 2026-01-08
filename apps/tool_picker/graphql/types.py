@@ -39,6 +39,7 @@ class QuestionType:
 class CatalogType:
     id: strawberry.ID
     name: strawberry.auto
+    show_in_help_me_choose: strawberry.auto
     description: strawberry.auto
     questions: list[QuestionType]
 
