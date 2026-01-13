@@ -141,6 +141,19 @@ type DjangoFileType {
   url: String!
 }
 
+input IDBaseFilterLookup {
+  """Exact match. Filter will be skipped on `null` value"""
+  exact: ID
+
+  """Assignment test. Filter will be skipped on `null` value"""
+  isNull: Boolean
+
+  """
+  Exact match of items in a given list. Filter will be skipped on `null` value
+  """
+  inList: [ID!]
+}
+
 type OffsetPaginationInfo {
   offset: Int!
   limit: Int
@@ -214,6 +227,7 @@ type ToolAnswerType {
 """Model representing tool."""
 input ToolFilter {
   id: ID
+  catalogId: IDBaseFilterLookup
   AND: ToolFilter
   OR: ToolFilter
   NOT: ToolFilter
