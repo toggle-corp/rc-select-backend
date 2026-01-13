@@ -272,18 +272,19 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
         """After saving tool, auto-create answer entries for all questions in the catalog."""
         super().save_model(request, obj, form, change)
 
-        for question in obj.catalog.questions.all():
-            ToolAnswer.objects.get_or_create(
-                tool=obj,
-                created_by=request.user,
-                modified_by=request.user,
-                question=question,
-                defaults={
-                    "ordinal_value": OrdinalTypeEnum.NOT_AVAILABLE
-                    if question.question_type == QuestionTypeEnum.ORDINAL
-                    else None,
-                },
-            )
+        if not change:
+            for question in obj.catalog.questions.all():
+                ToolAnswer.objects.get_or_create(
+                    tool=obj,
+                    created_by=request.user,
+                    modified_by=request.user,
+                    question=question,
+                    defaults={
+                        "ordinal_value": OrdinalTypeEnum.NOT_AVAILABLE
+                        if question.question_type == QuestionTypeEnum.ORDINAL
+                        else None,
+                    },
+                )
 
 
 # ============================================================================

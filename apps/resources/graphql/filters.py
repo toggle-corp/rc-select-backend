@@ -1,7 +1,7 @@
 import strawberry
 import strawberry_django
 
-from apps.resources.models import ContactRequest, CaseStudy
+from apps.resources.models import CaseStudy, ContactRequest
 
 
 @strawberry_django.filters.filter(ContactRequest, lookups=True)

@@ -2,8 +2,8 @@ import strawberry
 import strawberry_django
 
 from apps.resources.models import (
-    ContactRequest,
     CaseStudy,
+    ContactRequest,
 )
 from utils.graphql.types import DjangoFileType
 

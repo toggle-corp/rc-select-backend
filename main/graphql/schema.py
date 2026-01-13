@@ -4,8 +4,8 @@ from strawberry.django.views import AsyncGraphQLView
 from strawberry.file_uploads import Upload
 from strawberry_django.optimizer import DjangoOptimizerExtension
 
-from apps.tool_picker.graphql import queries as tool_picker_queries
 from apps.resources.graphql import queries as resources_queries
+from apps.tool_picker.graphql import queries as tool_picker_queries
 
 from .context import GraphQLContext
 from .dataloaders import GlobalDataLoader
