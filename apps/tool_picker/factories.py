@@ -1,37 +1,32 @@
-import factory
+# pyright: reportRedeclaration=false
+# pyright: reportIncompatibleVariableOverride=false
+# pyright: reportMissingTypeArgument=false
+import typing
+
+from factory.declarations import SubFactory
 from factory.django import DjangoModelFactory
+
+from apps.tool_picker.models import Catalog, Tool
 from apps.user.factories import UserFactory
-from django.core.files.uploadedfile import SimpleUploadedFile
-from .models import Catalog, Tool
 
-class CatalogFactory(DjangoModelFactory[Catalog]):
+
+class CatalogFactory(DjangoModelFactory):
     class Meta:
-        model = Catalog
+        model: type[Catalog] = Catalog
 
-    name = factory.Sequence(lambda n: f"Catalog {n}")
-    description = factory.Faker("paragraph")
-    show_in_help_me_choose = False
-
-    created_by = factory.SubFactory(UserFactory)
-    modified_by = factory.SubFactory(UserFactory)
+    created_by = SubFactory(UserFactory)
+    modified_by = SubFactory(UserFactory)
 
 
-class ToolFactory(DjangoModelFactory[Tool]):
+class ToolFactory(DjangoModelFactory):
     class Meta:
-        model = Tool
+        model: type[Tool] = Tool
 
-    catalog = factory.SubFactory(CatalogFactory)
+    catalog = SubFactory(CatalogFactory)
+    created_by = SubFactory(UserFactory)
+    modified_by = SubFactory(UserFactory)
 
-    name = factory.Sequence(lambda n: f"Tool {n}")
-    tagline = factory.Faker("catch_phrase")
-    description = factory.Faker("paragraph")
 
-    video_link = factory.Faker("url")
-    tool_link = factory.Faker("url")
-    logo = SimpleUploadedFile(
-        "logo.png",
-        b"fake-image-content",
-        content_type="image/png",
-    )
-    created_by = factory.SubFactory(UserFactory)
-    modified_by = factory.SubFactory(UserFactory)
+if typing.TYPE_CHECKING:
+    ToolFactory: type[DjangoModelFactory[Tool]]
+    CatalogFactory: type[DjangoModelFactory[Catalog]]

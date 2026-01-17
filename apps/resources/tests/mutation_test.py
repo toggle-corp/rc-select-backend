@@ -40,7 +40,7 @@ class TestContactRequestMutation(TestCase):
         super().setUpClass()
         cls.user = UserFactory.create(email="test@gmail.com")
 
-    def _create_contact_request_mutation(self, data: dict[str, str], **kwargs):
+    def _create_contact_request_mutation(self, data: dict[str, str], **kwargs: typing.Any):
         return self.query_check(
             query=self.Mutation.CREATE_CONTACT_REQUEST,
             variables={

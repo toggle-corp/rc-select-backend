@@ -138,6 +138,19 @@ type DjangoFileType {
   url: String!
 }
 
+input IDBaseFilterLookup {
+  """Exact match. Filter will be skipped on `null` value"""
+  exact: ID
+
+  """Assignment test. Filter will be skipped on `null` value"""
+  isNull: Boolean
+
+  """
+  Exact match of items in a given list. Filter will be skipped on `null` value
+  """
+  inList: [ID!]
+}
+
 type Mutation {
   createContactRequest(data: ContactRequestInput!): CreateContactRequestPayload! @isAuthenticated
 }
@@ -279,8 +292,10 @@ type ToolTypeOffsetPaginated {
 
 """Custom user model with email as unique identifier."""
 type UserMeType {
-  email: String!
+  id: ID!
   firstName: String!
   lastName: String!
   displayName: String!
+  anonymizedEmail: String!
+  email: String!
 }
