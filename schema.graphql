@@ -1,3 +1,5 @@
+directive @oneOf on INPUT_OBJECT
+
 type AppEnumCollection {
   QuestionTypeEnum: [AppEnumCollectionQuestionTypeEnum!]!
   OrdinalTypeEnum: [AppEnumCollectionOrdinalTypeEnum!]!
@@ -11,19 +13,6 @@ type AppEnumCollectionOrdinalTypeEnum {
 type AppEnumCollectionQuestionTypeEnum {
   key: QuestionTypeEnum!
   label: String!
-}
-
-input BoolBaseFilterLookup {
-  """Exact match. Filter will be skipped on `null` value"""
-  exact: Boolean
-
-  """Assignment test. Filter will be skipped on `null` value"""
-  isNull: Boolean
-
-  """
-  Exact match of items in a given list. Filter will be skipped on `null` value
-  """
-  inList: [Boolean!]
 }
 
 """Model representing case study of national society for specific tool."""
@@ -61,14 +50,14 @@ type CaseStudyTypeOffsetPaginated {
 """Model representing catalog where a tool belongs to."""
 input CatalogFilter {
   id: ID
-  showInHelpMeChoose: BoolBaseFilterLookup
+  showInHelpMeChoose: Boolean
   AND: CatalogFilter
   OR: CatalogFilter
   NOT: CatalogFilter
   DISTINCT: Boolean
 }
 
-input CatalogOrder {
+input CatalogOrder @oneOf {
   id: Ordering
 }
 
@@ -182,14 +171,15 @@ enum OrdinalTypeEnum {
 }
 
 type Query {
+  catalogs(pagination: OffsetPaginationInput, filters: CatalogFilter, order: CatalogOrder): CatalogTypeOffsetPaginated!
   catalog(id: ID!): CatalogType!
+  tools(pagination: OffsetPaginationInput, filters: ToolFilter, order: ToolOrder): ToolTypeOffsetPaginated!
   tool(id: ID!): ToolType!
-  catalogs(filters: CatalogFilter, order: CatalogOrder, pagination: OffsetPaginationInput): CatalogTypeOffsetPaginated!
-  tools(filters: ToolFilter, order: ToolOrder, pagination: OffsetPaginationInput): ToolTypeOffsetPaginated!
   caseStudy(id: ID!): CaseStudyType!
   contactRequest(id: ID!): ContactRequestType!
   caseStudies(filters: CaseStudyFilter, order: CaseStudyOrder, pagination: OffsetPaginationInput): CaseStudyTypeOffsetPaginated!
   contactRequests(filters: ContactRequestFilter, order: ContactRequestOrder, pagination: OffsetPaginationInput): ContactRequestTypeOffsetPaginated!
+  me: UserMeType
   enums: AppEnumCollection!
 }
 
@@ -234,7 +224,7 @@ input ToolFilter {
   DISTINCT: Boolean
 }
 
-input ToolOrder {
+input ToolOrder @oneOf {
   id: Ordering
 }
 
@@ -259,4 +249,14 @@ type ToolTypeOffsetPaginated {
 
   """List of paginated results."""
   results: [ToolType!]!
+}
+
+"""Custom user model with email as unique identifier."""
+type UserMeType {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  displayName: String!
+  anonymizedEmail: String!
+  email: String!
 }

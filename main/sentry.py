@@ -70,7 +70,7 @@ class SentryConfig:
 class SentryTransactionMiddlewareHelper:
     @classmethod
     @sync_to_async
-    def atrack_transaction(cls, graphql_urls: set[str], request: typing.Any):
+    def attrack_transaction(cls, graphql_urls: set[str], request: typing.Any):
         return cls.track_transaction(graphql_urls, request)
 
     @staticmethod

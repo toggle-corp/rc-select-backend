@@ -78,10 +78,3 @@ repos:
             typing_extensions,
             wadler_lindig,
           ]
-
-# TODO: Setup https://pre-commit.ci/
-# sets up .pre-commit-ci.yaml to ensure pre-commit dependencies stay up to date
-# ci:
-#   autoupdate_schedule: weekly
-#   skip: []
-#   submodules: false

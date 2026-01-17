@@ -46,10 +46,10 @@ def fetch_git_sha(path: Path, head: str | None = None, raise_on_error: bool = Tr
         if packed_file.exists():
             with packed_file.open() as fh:
                 for line in fh:
-                    line = line.rstrip()
-                    if line and line[:1] not in ("#", "^"):
+                    stripped_line = line.rstrip()
+                    if stripped_line and stripped_line[:1] not in ("#", "^"):
                         try:
-                            revision, ref = line.split(" ", 1)
+                            revision, ref = stripped_line.split(" ", 1)
                         except ValueError:
                             continue
                         if ref == head:

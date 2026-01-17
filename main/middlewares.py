@@ -20,7 +20,7 @@ def sentry_middleware(get_response: typing.Any):
 
         async def amiddleware(request):  # type: ignore[reportMissingParameterType]
             if settings.SENTRY_ENABLED:
-                await SentryTransactionMiddlewareHelper.atrack_transaction(graphql_urls, request)
+                await SentryTransactionMiddlewareHelper.attrack_transaction(graphql_urls, request)
             return await get_response(request)
 
         return amiddleware

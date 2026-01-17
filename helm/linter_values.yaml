@@ -1,8 +1,8 @@
 app:
   environment: Alpha
   image:
-    name: ghcr.io/toggle-corp/nrcs-backend-alpha
-    tag: 20-merge.c8d87c8f
+    name: ghcr.io/toggle-corp/rc-select
+    tag: latest
 
   ingress:
     enabled: true
@@ -17,9 +17,9 @@ app:
   postgresql:
     enabled: true
     auth:
-      postgresPassword: "testing-passowrd"
+      postgresPassword: "testing-password"
       username: "test"
-      password: "testing-passowrd"
+      password: "testing-password"
       database: "test"
     primary:
       persistence:
@@ -36,7 +36,7 @@ app:
       hostname: test-minio.com
     auth:
       rootUser: timur
-      rootPassword: capan-passowrd
+      rootPassword: capan-password
     persistence:
       enabled: true
       size: 0.5Gi
