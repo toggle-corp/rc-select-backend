@@ -1,7 +1,9 @@
 import typing
+
 from apps.resources.models import ContactRequest
-from main.tests import TestCase
 from apps.user.factories import UserFactory
+from main.tests import TestCase
+
 
 class TestContactRequestMutation(TestCase):
     class Mutation:
@@ -31,28 +33,28 @@ class TestContactRequestMutation(TestCase):
             }
         }
         """
+
     @typing.override
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.user = UserFactory.create(email="test@gmail.com")
 
-
-    def _create_contact_request_mutation(self, data: dict[str,str], **kwargs):
+    def _create_contact_request_mutation(self, data: dict[str, str], **kwargs):
         return self.query_check(
             query=self.Mutation.CREATE_CONTACT_REQUEST,
             variables={
                 "data": data,
-            }
+            },
         )
+
     def test_create_contact_request(self):
         contact_request_data = {
-                "name": "John",
-                "email": "john@test.com",
-                "nationalSociety": "Test National Society",
-                "content": "This is test content",
-            }
-
+            "name": "John",
+            "email": "john@test.com",
+            "nationalSociety": "Test National Society",
+            "content": "This is test content",
+        }
 
         # Without authentication
         content = self._create_contact_request_mutation(contact_request_data)
@@ -76,9 +78,9 @@ class TestContactRequestMutation(TestCase):
 
         contact_request = ContactRequest.objects.get(pk=response_data["result"]["id"])
         assert response_data["result"] == {
-        "id": self.gID(contact_request.pk),
-        "name": contact_request.name,
-        "email": contact_request.email,
-        "content": contact_request.content,
-        "nationalSociety": contact_request.national_society,
+            "id": self.gID(contact_request.pk),
+            "name": contact_request.name,
+            "email": contact_request.email,
+            "content": contact_request.content,
+            "nationalSociety": contact_request.national_society,
         }
