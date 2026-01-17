@@ -35,7 +35,7 @@ class CaseStudy(UserResource):
         null=True,
         blank=True,
     )
-    tool = models.ForeignKey(
+    tool = models.ForeignKey[Tool, Tool](
         Tool,
         on_delete=models.CASCADE,
         related_name="case_studies",
