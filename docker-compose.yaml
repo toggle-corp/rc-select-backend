@@ -7,7 +7,6 @@ x-server: &base_server_setup
   tty: true
   environment: &base_server_environments
     DEBUG: ${DEBUG:-true}
-    ENABLE_DEBUG_TOOLBAR: ${ENABLE_DEBUG_TOOLBAR:-true}
     APP_ENVIRONMENT: ${APP_ENVIRONMENT:-DEV}
     DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:?error}
     # Domain configs
