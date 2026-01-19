@@ -33,11 +33,6 @@ class Query(
     )
 
 
-# NOTE: for now we are not using mutation
-# @strawberry.type
-# class Mutation: ...
-
-
 schema = strawberry.Schema(
     query=Query,
     extensions=[
