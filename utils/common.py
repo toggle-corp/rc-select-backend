@@ -8,6 +8,7 @@ import secrets
 import string
 import typing
 
+from captcha.models import CaptchaStore
 from django.core.exceptions import ValidationError
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
@@ -213,3 +214,19 @@ def to_groups[T](features: list[T], group_size: int, start_index: int = 100):
 
 def get_random_string(length: int) -> str:
     return "".join(secrets.choice(string.ascii_letters + string.digits) for _ in range(length))
+
+
+def validate_captcha(hashkey: str, code: str):
+    """Raise ValidationError if captcha invalid."""
+    if not hashkey or not code:
+        raise ValidationError("CAPTCHA is required.")
+
+    try:
+        captcha = CaptchaStore.objects.get(hashkey=hashkey)
+    except CaptchaStore.DoesNotExist:
+        raise ValidationError("Invalid or expired CAPTCHA")  # noqa: B904
+
+    if captcha.response.lower() != code.lower():
+        raise ValidationError("Invalid CAPTCHA")
+
+    captcha.delete()  # NOTE: Delete after successful validation

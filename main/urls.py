@@ -16,6 +16,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("health-check/", include("health_check.urls")),
     path(r"mdeditor/", include("mdeditor.urls")),
+    path("captcha/", include("captcha.urls")),
     path(
         "graphql/",
         csrf_exempt(

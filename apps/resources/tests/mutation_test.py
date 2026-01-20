@@ -1,5 +1,7 @@
 import typing
 
+from captcha.models import CaptchaStore
+
 from apps.resources.models import ContactRequest
 from apps.user.factories import UserFactory
 from main.tests import TestCase
@@ -49,27 +51,20 @@ class TestContactRequestMutation(TestCase):
         )
 
     def test_create_contact_request(self):
+        # Generates CAPTCHA key and value
+        captcha_key = CaptchaStore.generate_key()
+        captcha_obj = CaptchaStore.objects.get(hashkey=captcha_key)
+        captcha_code = captcha_obj.response
+
         contact_request_data = {
             "name": "John",
             "email": "john@test.com",
             "nationalSociety": "Test National Society",
             "content": "This is test content",
+            "captchaHashkey": captcha_key,
+            "captchaCode": captcha_code,
         }
 
-        # Without authentication
-        content = self._create_contact_request_mutation(contact_request_data)
-
-        assert content["data"]["createContactRequest"]["messages"] == [
-            {
-                "code": None,
-                "field": "createContactRequest",
-                "kind": "PERMISSION",
-                "message": "User is not authenticated.",
-            },
-        ]
-
-        # With authentication
-        self.force_login(self.user)
         content = self._create_contact_request_mutation(data=contact_request_data)
         response_data = content["data"]["createContactRequest"]
 
@@ -84,3 +79,23 @@ class TestContactRequestMutation(TestCase):
             "content": contact_request.content,
             "nationalSociety": contact_request.national_society,
         }
+
+    def test_create_contact_request_without_captcha(self):
+        contact_request_data = {
+            "name": "John",
+            "email": "john@test.com",
+            "nationalSociety": "Test National Society",
+            "content": "This is test content",
+            "captchaHashkey": "",
+            "captchaCode": "",
+        }
+
+        content = self._create_contact_request_mutation(data=contact_request_data)
+        assert content["data"]["createContactRequest"]["messages"] == [
+            {
+                "code": None,
+                "field": None,
+                "kind": "VALIDATION",
+                "message": "CAPTCHA is required.",
+            },
+        ], content

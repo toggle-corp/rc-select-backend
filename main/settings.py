@@ -105,6 +105,7 @@ INSTALLED_APPS = [
     "djangoql",
     "rest_framework",
     "mdeditor",
+    "captcha",
     # - Health-check
     "health_check",  # required
     "health_check.db",

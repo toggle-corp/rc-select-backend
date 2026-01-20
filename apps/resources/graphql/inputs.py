@@ -1,12 +1,11 @@
 import strawberry
-import strawberry_django
-
-from apps.resources.models import ContactRequest
 
 
-@strawberry_django.input(ContactRequest)
+@strawberry.input
 class ContactRequestInput:
-    name: strawberry.auto
-    email: strawberry.auto
-    national_society: strawberry.auto
-    content: strawberry.auto
+    name: str
+    email: str
+    national_society: str
+    content: str
+    captcha_hashkey: str
+    captcha_code: str
