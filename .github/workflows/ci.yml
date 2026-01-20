@@ -1,18 +1,18 @@
 name: Pre-Commit checks
 
 on:
-  workflow_call:
+  pull_request:
 
 jobs:
   pre_commit_checks:
-    name: Pre-Commit checks
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@main
       
       - uses: astral-sh/setup-uv@v5
-        with python-version-file: '.python-version'
+        with:
+          python-version-file: .python-version
       
       - uses: astral-sh/setup-uv@v5
         with:

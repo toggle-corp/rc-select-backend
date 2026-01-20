@@ -1,15 +1,3 @@
-"""
-Can only be resolved by authenticated users.
-
-When the condition fails, the following can be returned (following this priority):
-1) `OperationInfo`/`OperationMessage` if those types are allowed at the return type
-2) `null` in case the field is not mandatory (e.g. `String` or `[String]`)
-3) An empty list in case the field is a list (e.g. `[String]!`)
-4) An empty `Connection` in case the return type is a relay connection
-2) Otherwise, an error will be raised
-"""
-directive @isAuthenticated repeatable on FIELD_DEFINITION
-
 directive @oneOf on INPUT_OBJECT
 
 type AppEnumCollection {
@@ -100,12 +88,13 @@ type CheckboxOptionType {
   text: String!
 }
 
-"""Model representing contact where anyone can react out to the admins."""
 input ContactRequestInput {
   name: String!
   email: String!
   nationalSociety: String!
-  content: String
+  content: String!
+  captchaHashkey: String!
+  captchaCode: String!
 }
 
 """Model representing contact where anyone can react out to the admins."""
@@ -152,7 +141,7 @@ input IDBaseFilterLookup {
 }
 
 type Mutation {
-  createContactRequest(data: ContactRequestInput!): CreateContactRequestPayload! @isAuthenticated
+  createContactRequest(data: ContactRequestInput!): CreateContactRequestPayload!
 }
 
 type OffsetPaginationInfo {

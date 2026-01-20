@@ -1,6 +1,5 @@
 import strawberry
 import strawberry_django
-from strawberry_django.permissions import IsAuthenticated
 
 from apps.resources.graphql.inputs import ContactRequestInput
 from apps.resources.graphql.types import ContactRequestType
@@ -12,7 +11,7 @@ from utils.graphql.types import MutationResponseType
 
 @strawberry.type
 class Mutation:
-    @strawberry_django.mutation(extensions=[IsAuthenticated()])
+    @strawberry_django.mutation()
     async def create_contact_request(
         self,
         info: Info,
