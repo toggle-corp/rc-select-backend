@@ -46,11 +46,6 @@ repos:
       - id: typos
         args: ["--exclude=CHANGELOG.md", "--force-exclude"]
 
-  # - repo: https://github.com/asottile/pyupgrade
-  #   rev: v3.20.0
-  #   hooks:
-  #   - id: pyupgrade
-
   # Run the Ruff linter.
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.9.8
@@ -78,10 +73,3 @@ repos:
             typing_extensions,
             wadler_lindig,
           ]
-
-# TODO: Setup https://pre-commit.ci/
-# sets up .pre-commit-ci.yaml to ensure pre-commit dependencies stay up to date
-# ci:
-#   autoupdate_schedule: weekly
-#   skip: []
-#   submodules: false

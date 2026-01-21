@@ -337,13 +337,16 @@ class UserAnswerAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgume
     search_fields = ["submission__id", "question__title"]
 
     def get_fields(self, request, obj=None):  # type: ignore[reportMissingTypeArgument]
-        """Show only relevant fields based on question type"""
+        """Show only relevant fields based on question type."""
         base_fields = ["submission", "question"]
+
         if obj and obj.question.question_type == "ordinal":
-            return base_fields + ["ordinal_value"]
+            return [*base_fields, "ordinal_value"]
+
         if obj and obj.question.question_type == "checkbox":
-            return base_fields + ["selected_options"]
-        return base_fields + ["ordinal_value", "selected_options"]
+            return [*base_fields, "selected_options"]
+
+        return [*base_fields, "ordinal_value", "selected_options"]
 
     def get_form(self, request, obj=None, **kwargs):  # type: ignore[reportMissingTypeArgument]
         form = super().get_form(request, obj, **kwargs)

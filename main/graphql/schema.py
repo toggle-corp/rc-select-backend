@@ -6,6 +6,7 @@ from strawberry_django.optimizer import DjangoOptimizerExtension
 
 from apps.resources.graphql import queries as resources_queries
 from apps.tool_picker.graphql import queries as tool_picker_queries
+from apps.user.graphql import queries as user_queries
 
 from .context import GraphQLContext
 from .dataloaders import GlobalDataLoader
@@ -25,15 +26,11 @@ class CustomAsyncGraphQLView(AsyncGraphQLView):
 class Query(
     tool_picker_queries.Query,
     resources_queries.Query,
+    user_queries.Query,
 ):
     enums: AppEnumCollection = strawberry.field(  # type: ignore[reportGeneralTypeIssues]
         resolver=lambda: AppEnumCollectionData(),
     )
-
-
-# NOTE: for now we are not using mutation
-# @strawberry.type
-# class Mutation: ...
 
 
 schema = strawberry.Schema(

@@ -21,7 +21,6 @@ dependencies = [
     "factory-boy~=3.3.3",
     "gunicorn~=22.0.0",
     "psycopg2-binary",
-    "sentry-sdk",
     "strawberry-graphql-django~=0.70.1",
     "django-choices-field", # Required by strawberry-graphql-django
     "django-health-check",
@@ -147,7 +146,6 @@ ignore = [
     "D205",
 ]
 
-# TODO(thenav56): Use this instead `select = ["ALL"]` and add rules to ignore
 #   ruff check --statistics ./
 
 [tool.ruff.lint.per-file-ignores]
