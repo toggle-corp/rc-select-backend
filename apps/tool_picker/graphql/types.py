@@ -64,4 +64,10 @@ class ToolType:
     video_link: strawberry.auto
     tool_link: strawberry.auto
     logo: DjangoFileType | None
-    answers: list[ToolAnswerType]
+    tool_answer: list[ToolAnswerType]
+
+
+@strawberry.type
+class UserAnswerType:
+    id: strawberry.ID
+    catalog: CatalogType

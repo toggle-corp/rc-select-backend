@@ -121,6 +121,11 @@ type ContactRequestTypeOffsetPaginated {
   results: [ContactRequestType!]!
 }
 
+union CreateUserAnswerPayload = UserAnswerTypeMutationResponseType | OperationInfo
+
+"""A generic type to return error messages"""
+scalar CustomErrorType
+
 """Date with time (isoformat)"""
 scalar DateTime
 
@@ -143,6 +148,10 @@ input IDBaseFilterLookup {
   inList: [ID!]
 }
 
+type Mutation {
+  createUserAnswer(data: UserAnswerInput!): CreateUserAnswerPayload!
+}
+
 type OffsetPaginationInfo {
   offset: Int!
   limit: Int
@@ -151,6 +160,35 @@ type OffsetPaginationInfo {
 input OffsetPaginationInput {
   offset: Int! = 0
   limit: Int
+}
+
+type OperationInfo {
+  """List of messages returned by the operation."""
+  messages: [OperationMessage!]!
+}
+
+type OperationMessage {
+  """The kind of this message."""
+  kind: OperationMessageKind!
+
+  """The error message."""
+  message: String!
+
+  """
+  The field that caused the error, or `null` if it isn't associated with any particular field.
+  """
+  field: String
+
+  """The error code, or `null` if no error code was set."""
+  code: String
+}
+
+enum OperationMessageKind {
+  INFO
+  WARNING
+  ERROR
+  PERMISSION
+  VALIDATION
 }
 
 enum Ordering {
@@ -204,7 +242,7 @@ enum QuestionTypeEnum {
   CHECKBOX
 }
 
-"""Model representing tool's selection of question and its answer."""
+"""Model representing Tool Answer."""
 type ToolAnswerType {
   id: ID!
   toolId: ID!
@@ -238,7 +276,7 @@ type ToolType {
   videoLink: String
   toolLink: String
   logo: DjangoFileType
-  answers: [ToolAnswerType!]!
+  toolAnswer: [ToolAnswerType!]!
 }
 
 type ToolTypeOffsetPaginated {
@@ -249,6 +287,23 @@ type ToolTypeOffsetPaginated {
 
   """List of paginated results."""
   results: [ToolType!]!
+}
+
+input UserAnswerInput {
+  catalog: ID!
+  question: ID!
+  ordinalValue: Int
+}
+
+type UserAnswerType {
+  id: ID!
+  catalog: CatalogType!
+}
+
+type UserAnswerTypeMutationResponseType {
+  ok: Boolean!
+  errors: CustomErrorType
+  result: UserAnswerType
 }
 
 """Custom user model with email as unique identifier."""
