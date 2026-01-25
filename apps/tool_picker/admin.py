@@ -14,7 +14,6 @@ from .models import (
     Tool,
     ToolAnswer,
     UserAnswer,
-    UserSubmission,
 )
 
 
@@ -287,11 +286,6 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
                 )
 
 
-# ============================================================================
-# User Submission Models Admin
-# ============================================================================
-
-
 class UserAnswerInline(admin.TabularInline):  # type: ignore[reportMissingTypeArgument]
     model = UserAnswer
     extra = 0
@@ -313,32 +307,14 @@ class RecommendationResultInline(admin.TabularInline):  # type: ignore[reportMis
     ordering = ["rank"]
 
 
-@admin.register(UserSubmission)
-class UserSubmissionAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
-    list_display = ["id", "catalog", "created_at", "answer_count", "recommendation_count"]
-    list_filter = ["catalog", "created_at"]
-    readonly_fields = ["id", "created_at"]
-    fields = ["id", "catalog"]
-    inlines = [UserAnswerInline, RecommendationResultInline]
-
-    @admin.display(description="Answers")
-    def answer_count(self, obj: UserSubmission):
-        return obj.answers.count()
-
-    @admin.display(description="Results")
-    def recommendation_count(self, obj: UserSubmission):
-        return obj.results.count()
-
-
 @admin.register(UserAnswer)
 class UserAnswerAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
-    list_display = ["submission_id", "question", "question_type", "get_answer"]
-    list_filter = ["submission__catalog", "question__question_type"]
-    search_fields = ["submission__id", "question__title"]
+    list_display = ["question", "question_type", "get_answer"]
+    list_filter = ["question__question_type"]
 
     def get_fields(self, request, obj=None):  # type: ignore[reportMissingTypeArgument]
         """Show only relevant fields based on question type."""
-        base_fields = ["submission", "question"]
+        base_fields = ["question"]
 
         if obj and obj.question.question_type == "ordinal":
             return [*base_fields, "ordinal_value"]
@@ -356,17 +332,13 @@ class UserAnswerAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgume
             self.filter_horizontal = []
         return form
 
-    @admin.display(description="Submission")
-    def submission_id(self, obj: UserAnswer):
-        return str(obj.submission.id)[:8] + "..."
-
     @admin.display(description="Type")
     def question_type(self, obj: UserAnswer):
         return obj.question.get_question_type_display()
 
     @admin.display(description="Answer")
     def get_answer(self, obj: UserAnswer):
-        if obj.question.question_type == "ordinal":
+        if obj.question.question_type == QuestionTypeEnum.ORDINAL.value:
             return obj.ordinal_value or "-"
         options = obj.selected_options.all()
         return ", ".join([opt.text for opt in options]) if options else "(none)"
@@ -385,16 +357,12 @@ class UserAnswerAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgume
 
 @admin.register(RecommendationResult)
 class RecommendationResultAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
-    list_display = ["submission_short", "rank", "tool", "score", "catalog"]
-    list_filter = ["submission__catalog", "rank"]
-    search_fields = ["submission__id", "tool__name"]
-    ordering = ["submission", "rank"]
-    fields = ["submission", "tool", "rank", "score"]
-
-    @admin.display(description="Submission")
-    def submission_short(self, obj: RecommendationResult):
-        return str(obj.submission.id)[:8] + "..."
+    list_display = ["rank", "tool", "score", "catalog"]
+    list_filter = ["catalog", "rank"]
+    search_fields = ["tool__name"]
+    ordering = ["rank"]
+    fields = ["tool", "rank", "score"]
 
     @admin.display(description="Catalog")
     def catalog(self, obj: RecommendationResult):
-        return obj.submission.catalog.name
+        return obj.catalog.name

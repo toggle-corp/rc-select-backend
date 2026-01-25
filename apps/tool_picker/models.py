@@ -1,8 +1,8 @@
 import typing
-import uuid
 
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.db.models import UniqueConstraint
 from django_choices_field import IntegerChoicesField
 from django_stubs_ext.db.models.manager import RelatedManager
 
@@ -49,7 +49,7 @@ class Question(UserResource):
     title = models.CharField[str, str](max_length=500)
     short_name = models.CharField[str, str](max_length=500)
     description = models.TextField[str, str](blank=True)
-    order = models.IntegerField[int, int](default=0, validators=[MinValueValidator(0)])
+    order = models.IntegerField[int, int](default=1, validators=[MinValueValidator(1)])
 
     # Ordinal-specific fields
     label_na = models.TextField[str, str](default="N/A", blank=True)
@@ -63,8 +63,8 @@ class Question(UserResource):
     get_question_type_display: typing.ClassVar[typing.Callable[[typing.Self], str]]
 
     class Meta(UserResource.Meta):
+        UniqueConstraint(fields=["catalog", "order"], name="unique_catalog_order")
         ordering = ["catalog", "order"]
-        unique_together = ["catalog", "order"]
 
     @typing.override
     def __str__(self) -> str:
@@ -80,11 +80,11 @@ class CheckboxOption(UserResource):
         related_name="options",
     )
     text = models.CharField[str, str](max_length=300)
-    order = models.IntegerField[int, int](default=0, validators=[MinValueValidator(0)])
+    order = models.IntegerField[int, int](default=1, validators=[MinValueValidator(1)])
 
     class Meta(UserResource.Meta):
         ordering = ["question", "order"]
-        unique_together = ["question", "order"]
+        UniqueConstraint(fields=["question", "order"], name="unique_question_order")
 
     @typing.override
     def __str__(self):
@@ -122,50 +122,55 @@ class Tool(UserResource):
 class OrdinalTypeEnum(models.IntegerChoices):
     """Enum representing scale of ordinal type question."""
 
-    NOT_AVAILABLE = 10, ("n/a")
-    ONE = 11, ("1")
-    TWO = 12, ("2")
-    THREE = 13, ("3")
-    FOUR = 14, ("4")
+    NOT_AVAILABLE = 10, ("N/A")
+    ONE = 11, ("One")
+    TWO = 12, ("Two")
+    THREE = 13, ("Three")
+    FOUR = 14, ("Four")
 
 
-class ToolAnswer(UserResource):
-    """Model representing tool's selection of question and its answer."""
+class BaseAnswer(models.Model):
+    """Base model for the Answer."""
 
-    tool = models.ForeignKey(
-        Tool,
-        on_delete=models.CASCADE,
-        related_name="answers",
-    )
-    description = models.TextField[str, str]()
-    question = models.ForeignKey(
+    question = models.ForeignKey[Question, Question](
         Question,
         on_delete=models.CASCADE,
-        related_name="tool_answers",
+        related_name="+",
     )
-
-    # For ordinal questions
     ordinal_value: int = IntegerChoicesField(  # type: ignore[reportAssignmentType]
         choices_enum=OrdinalTypeEnum,
         blank=True,
         null=True,
     )
-
-    # For checkbox questions
     selected_options = models.ManyToManyField(
         CheckboxOption,
-        related_name="tool_answers",
+        related_name="+",
         blank=True,
     )
+    get_ordinal_value_display: typing.ClassVar[typing.Callable[[typing.Self], str]]
 
-    class Meta(UserResource.Meta):
-        unique_together = ["tool", "question"]
+    class Meta:
+        abstract = True
+
+
+class ToolAnswer(BaseAnswer, UserResource):
+    """Model representing Tool Answer."""
+
+    tool = models.ForeignKey[Tool, Tool](
+        Tool,
+        on_delete=models.CASCADE,
+        related_name="tool_answer",
+    )
+    description = models.TextField()
+
+    class Meta:  # type: ignore[reportIncompatibleVariableOverride]
+        UniqueConstraint(fields=["tool", "question"], name="unique_tool_question")
         verbose_name = "Tool Answer"
         verbose_name_plural = "Tool Answers"
 
     @typing.override
     def __str__(self):
-        if self.question.question_type == "ordinal":
+        if self.question.question_type == QuestionTypeEnum.ORDINAL.value:
             return f"{self.tool.name} - {self.question.title}: {self.ordinal_value}"
         options = ", ".join(
             [opt.text for opt in self.selected_options.all()],
@@ -173,72 +178,22 @@ class ToolAnswer(UserResource):
         return f"{self.tool.name} - {self.question.title}: [{options}]"
 
 
-class UserSubmission(models.Model):
-    """Model representing a user's submission of answers for a catalog."""
+class UserAnswer(BaseAnswer):
+    """Model Representing User Answer."""
 
-    id = models.UUIDField[uuid.UUID, uuid.UUID](
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False,
-    )
-    created_at = models.DateTimeField(auto_now_add=True)
-    catalog = models.ForeignKey(
+    catalog = models.ForeignKey[Catalog, Catalog](
         Catalog,
         on_delete=models.CASCADE,
-        related_name="submissions",
+        related_name="catalog_answer",
     )
 
-    # type hints
-    answers: typing.ClassVar[RelatedManager["UserAnswer"]]
-    results: typing.ClassVar[RelatedManager["RecommendationResult"]]
-
-    class Meta(UserResource.Meta):
-        ordering = ["-created_at"]
-        verbose_name = "User Submission"
-        verbose_name_plural = "User Submissions"
-
-    @typing.override
-    def __str__(self):
-        return f"Submission {self.id} for {self.catalog.name} at {self.created_at}"
-
-
-class UserAnswer(models.Model):
-    """Model representing a user's answer to a specific question."""
-
-    submission = models.ForeignKey(
-        UserSubmission,
-        on_delete=models.CASCADE,
-        related_name="answers",
-    )
-    question = models.ForeignKey(
-        Question,
-        on_delete=models.CASCADE,
-        related_name="user_answers",
-    )
-
-    # For ordinal questions
-    ordinal_value: int = IntegerChoicesField(  # type: ignore[reportAssignmentType]
-        choices_enum=OrdinalTypeEnum,
-        blank=True,
-        null=True,
-    )
-
-    # For checkbox questions
-    selected_options = models.ManyToManyField(
-        CheckboxOption,
-        related_name="user_answers",
-        blank=True,
-    )
-
-    class Meta(UserResource.Meta):
-        unique_together = ["submission", "question"]
-        ordering = ["question__order"]
+    class Meta:  # type: ignore[reportIncompatibleVariableOverride]
         verbose_name = "User Answer"
         verbose_name_plural = "User Answers"
 
     @typing.override
     def __str__(self):
-        if self.question.question_type == QuestionTypeEnum.ORDINAL:
+        if self.question.question_type == QuestionTypeEnum.ORDINAL.value:
             return f"Answer to '{self.question.title}': {self.ordinal_value}"
         options = ", ".join([opt.text for opt in self.selected_options.all()])
         return f"Answer to '{self.question.title}': [{options}]"
@@ -247,15 +202,16 @@ class UserAnswer(models.Model):
 class RecommendationResult(models.Model):
     """Model representing recommended tools for a submission."""
 
-    submission = models.ForeignKey(
-        UserSubmission,
+    catalog = models.ForeignKey[Catalog, Catalog](
+        Catalog,
+        related_name="catalog_recommendation_result",
         on_delete=models.CASCADE,
-        related_name="results",
+        null=True,
     )
     tool = models.ForeignKey(
         Tool,
         on_delete=models.CASCADE,
-        related_name="recommendations",
+        related_name="tool_recommendation_result",
     )
     rank = models.IntegerField[int, int](
         validators=[MinValueValidator(1), MaxValueValidator(5)],
@@ -265,8 +221,7 @@ class RecommendationResult(models.Model):
     )
 
     class Meta(UserResource.Meta):
-        ordering = ["submission", "rank"]
-        unique_together = ["submission", "rank"]
+        ordering = ["rank"]
         verbose_name = "Recommendation Result"
         verbose_name_plural = "Recommendation Results"
 
