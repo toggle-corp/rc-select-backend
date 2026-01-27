@@ -18,6 +18,7 @@ type AppEnumCollectionQuestionTypeEnum {
 """Model representing case study of national society for specific tool."""
 input CaseStudyFilter {
   id: ID
+  tool: ToolFilter
   AND: CaseStudyFilter
   OR: CaseStudyFilter
   NOT: CaseStudyFilter
