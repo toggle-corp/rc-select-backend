@@ -1,10 +1,11 @@
-name: Pre-Commit checks
+name: Python check
 
 on:
   pull_request:
 
 jobs:
   pre_commit_checks:
+    name: Pre-commit checks
     runs-on: ubuntu-latest
 
     steps:
