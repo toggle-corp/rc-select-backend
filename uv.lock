@@ -253,6 +253,29 @@ wheels = [
 ]
 
 [[package]]
+name = "django-ranged-response"
+version = "0.2.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/70/e3/9372fcdca8e9c3205e7979528ccd1a14354a9a24d38efff11c1846ff8bf1/django-ranged-response-0.2.0.tar.gz", hash = "sha256:f71fff352a37316b9bead717fc76e4ddd6c9b99c4680cdf4783b9755af1cf985", size = 3021, upload-time = "2017-07-18T09:20:27.603Z" }
+
+[[package]]
+name = "django-simple-captcha"
+version = "0.6.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "django-ranged-response" },
+    { name = "pillow" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d3/12/dfcfd76d890c23bde772127647f4d61a6138e5e53453d7aa188e5aee0598/django_simple_captcha-0.6.3.tar.gz", hash = "sha256:6d295dac7213946631b88783b420e58d5d67bf2ff1c9704ac57986323e23bbef", size = 125646, upload-time = "2025-12-07T17:45:11.31Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/10/8c/d0d007820174922fbbaae98074d3a6ffc1b1f53f0c0f68302c5f1b4bb67f/django_simple_captcha-0.6.3-py2.py3-none-any.whl", hash = "sha256:822750ee91ac5bb74c86e785b9539ca22cba2c5d83c0bdf7b4eaaf20c0abff84", size = 94099, upload-time = "2025-12-07T17:45:09.734Z" },
+]
+
+[[package]]
 name = "django-storages"
 version = "1.14.6"
 source = { registry = "https://pypi.org/simple" }
@@ -861,7 +884,9 @@ dependencies = [
     { name = "django-health-check" },
     { name = "django-mdeditor" },
     { name = "django-premailer" },
+    { name = "django-simple-captcha" },
     { name = "django-storages", extra = ["s3"] },
+    { name = "django-stubs" },
     { name = "djangoql" },
     { name = "djangorestframework" },
     { name = "factory-boy" },
@@ -899,7 +924,9 @@ requires-dist = [
     { name = "django-health-check" },
     { name = "django-mdeditor", specifier = ">=0.1.20" },
     { name = "django-premailer" },
+    { name = "django-simple-captcha", specifier = ">=0.6.3" },
     { name = "django-storages", extras = ["s3"] },
+    { name = "django-stubs", specifier = ">=5.1.3" },
     { name = "djangoql" },
     { name = "djangorestframework" },
     { name = "factory-boy", specifier = "~=3.3.3" },

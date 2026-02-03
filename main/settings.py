@@ -105,6 +105,7 @@ INSTALLED_APPS = [
     "djangoql",
     "rest_framework",
     "mdeditor",
+    "captcha",
     # - Health-check
     "health_check",  # required
     "health_check.db",
@@ -351,7 +352,7 @@ CORS_ALLOWED_ORIGINS = TRUSTED_ORIGINS
 CSRF_TRUSTED_ORIGINS = TRUSTED_ORIGINS
 
 CORS_ALLOW_CREDENTIALS = True
-CORS_URLS_REGEX = r"(^/media/.*$)|(^/graphql/$)|(^/health-check/$)"
+CORS_URLS_REGEX = r"(^/media/.*$)|(^/graphql/$)|(^/health-check/$)|(^/captcha/.*$)"
 CORS_ALLOW_METHODS = (
     "DELETE",
     "GET",
