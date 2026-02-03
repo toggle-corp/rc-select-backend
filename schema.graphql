@@ -116,6 +116,8 @@ type ContactRequestTypeMutationResponseType {
 
 union CreateContactRequestPayload = ContactRequestTypeMutationResponseType | OperationInfo
 
+union CreateUserSubmissionPayload = UserSubmissionTypeMutationResponseType | OperationInfo
+
 """A generic type to return error messages"""
 scalar CustomErrorType
 
@@ -126,6 +128,10 @@ type DjangoFileType {
   name: String!
   size: Int!
   url: String!
+}
+
+type DjangoModelType {
+  pk: ID!
 }
 
 input IDBaseFilterLookup {
@@ -143,6 +149,7 @@ input IDBaseFilterLookup {
 
 type Mutation {
   createContactRequest(data: ContactRequestInput!): CreateContactRequestPayload!
+  createUserSubmission(data: UserSubmissionInput!): CreateUserSubmissionPayload!
 }
 
 type OffsetPaginationInfo {
@@ -206,6 +213,8 @@ type Query {
   catalog(id: ID!): CatalogType!
   tools(pagination: OffsetPaginationInput, filters: ToolFilter, order: ToolOrder): ToolTypeOffsetPaginated!
   tool(id: ID!): ToolType!
+  recommendationResults(pagination: OffsetPaginationInput, filters: RecommendationResultFilter, order: RecommendationResultOrder): RecommendationResultTypeOffsetPaginated!
+  recommendationResult(id: ID!): RecommendationResultType!
   caseStudies(pagination: OffsetPaginationInput, filters: CaseStudyFilter, order: CaseStudyOrder): CaseStudyTypeOffsetPaginated!
   caseStudy(id: ID!): CaseStudyType!
   me: UserMeType
@@ -231,6 +240,42 @@ type QuestionType {
 enum QuestionTypeEnum {
   ORDINAL
   CHECKBOX
+}
+
+"""Model representing recommended tools for a submission."""
+input RecommendationResultFilter {
+  id: ID
+  submission: UserSubmissionFilter
+  AND: RecommendationResultFilter
+  OR: RecommendationResultFilter
+  NOT: RecommendationResultFilter
+  DISTINCT: Boolean
+}
+
+input RecommendationResultOrder @oneOf {
+  id: Ordering
+  rank: Ordering
+}
+
+"""Model representing recommended tools for a submission."""
+type RecommendationResultType {
+  id: ID!
+  submission: DjangoModelType!
+  rank: Int!
+
+  """Proximity score - lower is better (closer match)"""
+  score: Float!
+  tool: ToolType!
+}
+
+type RecommendationResultTypeOffsetPaginated {
+  pageInfo: OffsetPaginationInfo!
+
+  """Total count of existing results."""
+  totalCount: Int!
+
+  """List of paginated results."""
+  results: [RecommendationResultType!]!
 }
 
 """Model representing tool's selection of question and its answer."""
@@ -280,6 +325,12 @@ type ToolTypeOffsetPaginated {
   results: [ToolType!]!
 }
 
+input UserAnswerInput {
+  question: ID!
+  ordinalValue: Int
+  selectedOptions: [ID!]
+}
+
 """Custom user model with email as unique identifier."""
 type UserMeType {
   id: ID!
@@ -288,4 +339,29 @@ type UserMeType {
   displayName: String!
   anonymizedEmail: String!
   email: String!
+}
+
+"""Model representing a user's submission of answers for a catalog."""
+input UserSubmissionFilter {
+  id: ID
+  AND: UserSubmissionFilter
+  OR: UserSubmissionFilter
+  NOT: UserSubmissionFilter
+  DISTINCT: Boolean
+}
+
+input UserSubmissionInput {
+  catalog: ID!
+  answers: [UserAnswerInput!]!
+}
+
+type UserSubmissionType {
+  id: ID!
+  catalogId: ID!
+}
+
+type UserSubmissionTypeMutationResponseType {
+  ok: Boolean!
+  errors: CustomErrorType
+  result: UserSubmissionType
 }

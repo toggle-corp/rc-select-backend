@@ -161,11 +161,11 @@ class Tool(UserResource):
 class OrdinalTypeEnum(models.IntegerChoices):
     """Enum representing scale of ordinal type question."""
 
-    NOT_AVAILABLE = 10, ("n/a")
-    ONE = 11, ("1")
-    TWO = 12, ("2")
-    THREE = 13, ("3")
-    FOUR = 14, ("4")
+    NOT_AVAILABLE = 100, ("n/a")
+    ONE = 1, ("One")
+    TWO = 2, ("Two")
+    THREE = 3, ("Three")
+    FOUR = 4, ("Four")
 
 
 class ToolAnswer(UserResource):
@@ -196,6 +196,10 @@ class ToolAnswer(UserResource):
         related_name="tool_answers",
         blank=True,
     )
+
+    # typing
+    question_id: typing.ClassVar[int]
+    ordinal_value: int | None
 
     class Meta(UserResource.Meta):
         unique_together = ["tool", "question"]
@@ -268,6 +272,9 @@ class UserAnswer(models.Model):
         related_name="user_answers",
         blank=True,
     )
+
+    # typing
+    question_id: typing.ClassVar[int]
 
     class Meta(UserResource.Meta):
         unique_together = ["submission", "question"]

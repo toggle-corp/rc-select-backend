@@ -5,6 +5,7 @@ from apps.tool_picker.models import (
     Catalog,
     CheckboxOption,
     Question,
+    RecommendationResult,
     Tool,
     ToolAnswer,
 )
@@ -65,3 +66,18 @@ class ToolType:
     tool_link: strawberry.auto
     logo: DjangoFileType | None
     answers: list[ToolAnswerType]
+
+
+@strawberry.type
+class UserSubmissionType:
+    id: strawberry.ID
+    catalog_id: strawberry.ID
+
+
+@strawberry_django.type(RecommendationResult)
+class RecommendationResultType:
+    id: strawberry.auto
+    submission: strawberry.auto
+    rank: strawberry.auto
+    score: strawberry.auto
+    tool: ToolType

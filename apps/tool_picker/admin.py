@@ -348,20 +348,31 @@ class UserSubmissionAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeAr
         return obj.results.count()
 
 
+@admin.register(CheckboxOption)
+class CheckboxOptionAdmin(admin.ModelAdmin):
+    search_fields = ["id"]
+
+
 @admin.register(UserAnswer)
 class UserAnswerAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
     list_display = ["submission_id", "question", "question_type", "get_answer"]
     list_filter = ["submission__catalog", "question__question_type"]
-    search_fields = ["submission__id", "question__title"]
+    search_fields = ["submission__id", "question__title", "selected_options__id"]
+    autocomplete_fields = ("selected_options",)
+    readonly_fields = ("selected_options",)
+
+    @typing.override
+    def get_queryset(self, request):  # type: ignore[reportMissingTypeArgument]
+        return super().get_queryset(request).prefetch_related("selected_options")
 
     def get_fields(self, request, obj=None):  # type: ignore[reportMissingTypeArgument]
         """Show only relevant fields based on question type."""
         base_fields = ["submission", "question"]
 
-        if obj and obj.question.question_type == "ordinal":
+        if obj and obj.question.question_type == QuestionTypeEnum.ORDINAL.value:
             return [*base_fields, "ordinal_value"]
 
-        if obj and obj.question.question_type == "checkbox":
+        if obj and obj.question.question_type == QuestionTypeEnum.CHECKBOX.value:
             return [*base_fields, "selected_options"]
 
         return [*base_fields, "ordinal_value", "selected_options"]
@@ -384,7 +395,7 @@ class UserAnswerAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgume
 
     @admin.display(description="Answer")
     def get_answer(self, obj: UserAnswer):
-        if obj.question.question_type == "ordinal":
+        if obj.question.question_type == QuestionTypeEnum.ORDINAL:
             return obj.ordinal_value or "-"
         options = obj.selected_options.all()
         return ", ".join([opt.text for opt in options]) if options else "(none)"

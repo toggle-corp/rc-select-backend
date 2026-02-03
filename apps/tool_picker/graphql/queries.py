@@ -2,9 +2,9 @@ import strawberry
 import strawberry_django
 from strawberry_django.pagination import OffsetPaginated
 
-from .filters import CatalogFilter, ToolFilter
-from .orders import CatalogOrder, ToolOrder
-from .types import CatalogType, ToolType
+from .filters import CatalogFilter, RecommendationResultFilter, ToolFilter
+from .orders import CatalogOrder, RecommendationResultOrder, ToolOrder
+from .types import CatalogType, RecommendationResultType, ToolType
 
 
 @strawberry.type
@@ -22,3 +22,9 @@ class Query:
     )
 
     tool: ToolType = strawberry_django.field()
+
+    recommendation_results: OffsetPaginated[RecommendationResultType] = strawberry_django.offset_paginated(
+        filters=RecommendationResultFilter,
+        order=RecommendationResultOrder,
+    )
+    recommendation_result: RecommendationResultType = strawberry_django.field()
