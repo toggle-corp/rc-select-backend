@@ -1,13 +1,16 @@
 app:
+  environment: prod
+  appTypeEnvName: "APP_TYPE"
   image:
-    name: SET-BY-CICD-IMAGE
-    tag: SET-BY-CICD-TAG
+    name: ""
+    tag: ""
 
   ingress:
     enabled: true
     className:
     annotations:
       nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+
   redis:
     enabled: false
     architecture:
@@ -69,10 +72,10 @@ app:
     enabled: true
     replicaCount: 1
     containerPort: 80
-    command: ["gunicorn", "main.wsgi:application", "--timeout=40", "--bind", "0.0.0.0:80"]
+    command: ["misc/prod/run_web.sh"]
     resources:
       requests:
-        cpu: "1"
+        cpu: "0.5"
         memory: 0.5Gi
       limits:
         cpu: "4"
@@ -97,6 +100,10 @@ app:
         enabled: true
         hook: PostSync
         command: ["/bin/bash", "-c", "./manage.py wait_for_resources --minio && ./manage.py collectstatic --noinput"]
+      load-data:
+        enabled: true
+        hook: PostSync
+        command: ["/bin/bash", "-c",  "./manage.py loaddata rc-select-data.json" ]
 
   worker:
     enabled: false
@@ -104,7 +111,6 @@ app:
   env:
     APP_RELEASE: "{{ $.Values.image.tag }}"
     APP_ENVIRONMENT: "{{ $.Values.environment }}"
-    TIME_ZONE: "Asia/Kathmandu"
     DJANGO_DEBUG: "false"
     # AWS
     AWS_S3_ENABLED: "false"
@@ -117,10 +123,6 @@ app:
     FRONTEND_DOMAIN: "{{ required \".app.env.FRONTEND_DOMAIN\" nil }}"
     SESSION_COOKIE_DOMAIN: "{{ required \".app.env.SESSION_COOKIE_DOMAIN\" nil }}"
     CSRF_COOKIE_DOMAIN: "{{ required \".app.env.CSRF_COOKIE_DOMAIN\" nil }}"
-    # Sentry
-    SENTRY_ENABLED: "false"
-    SENTRY_TRACES_SAMPLE_RATE: "0.2"
-    SENTRY_PROFILE_SAMPLE_RATE: "0.2"
 
   secrets:
     DJANGO_SECRET_KEY: "{{ required \".Values.secrets.DJANGO_SECRET_KEY\" nil }}"
@@ -136,5 +138,3 @@ app:
     AWS_S3_REGION_NAME: "us-east-1"
     AWS_S3_MEDIA_BUCKET_NAME: "rc-select-media"
     AWS_S3_STATIC_BUCKET_NAME: "rc-select-static"
-    # Misc
-    SENTRY_DSN: "{{ required \".app.secrets.SENTRY_DSN\" nil }}"
