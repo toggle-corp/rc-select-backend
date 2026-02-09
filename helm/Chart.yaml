@@ -1,15 +1,12 @@
 apiVersion: v2
-name: rc-select-backend
-description: "Helm chart for RC Select backend"
+name: rc-select-helm
+description: A Helm chart for rc select
 type: application
-version: 0.1.0-SET-BY-CICD
+version: 0.1.0
 appVersion: "1.16.0"
-sources:
-  - https://github.com/toggle-corp/rc-select-backend
-
 
 dependencies:
   - name: toggle-django-helm
     alias: app
-    version: 0.2.0
-    repository: "oci://ghcr.io/toggle-corp"
+    version: 0.2.5
+    repository: oci://ghcr.io/toggle-corp
