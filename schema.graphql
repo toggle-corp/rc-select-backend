@@ -8,11 +8,13 @@ type AppEnumCollection {
 type AppEnumCollectionOrdinalTypeEnum {
   key: OrdinalTypeEnum!
   label: String!
+  value: Int!
 }
 
 type AppEnumCollectionQuestionTypeEnum {
   key: QuestionTypeEnum!
   label: String!
+  value: Int!
 }
 
 """Model representing case study of national society for specific tool."""
