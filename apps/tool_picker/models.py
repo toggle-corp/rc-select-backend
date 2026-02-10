@@ -29,24 +29,6 @@ class Catalog(UserResource):
         return self.name
 
 
-# TODO: Should we rename DisplayCategory to ToolCategory?
-
-
-class DisplayCategory(models.Model):
-    """Model representing tool category."""
-
-    title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-
-    class Meta:
-        verbose_name = "DisplayCategory"
-        verbose_name_plural = "DisplayCategories"
-
-    @typing.override
-    def __str__(self):
-        return self.title
-
-
 class ToolFeature(models.Model):
     """Model representing a tool feature."""
 
@@ -165,7 +147,6 @@ class Tool(UserResource):
         blank=True,
     )
     tool_sectors = models.ManyToManyField(Sector, related_name="tool_sectors", blank=True)
-    display_categories = models.ManyToManyField(DisplayCategory, related_name="tool_display_categories", blank=True)
     tool_features = models.ManyToManyField(ToolFeature, related_name="tool_features", blank=True)
 
     class Meta(UserResource.Meta):

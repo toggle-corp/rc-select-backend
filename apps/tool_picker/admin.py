@@ -7,7 +7,6 @@ from apps.common.admin import UserResourceAdmin
 from .models import (
     Catalog,
     CheckboxOption,
-    DisplayCategory,
     OrdinalTypeEnum,
     Question,
     QuestionTypeEnum,
@@ -417,8 +416,3 @@ class ToolFeatureAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgum
     list_display = ["name", "feature_category"]
     list_filter = ["feature_category"]
     search_fields = ["name"]
-
-
-@admin.register(DisplayCategory)
-class DisplayCategoryAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
-    list_display = ["title"]
