@@ -145,7 +145,7 @@ class CheckboxQuestionBulkAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: i
     )
 
     @typing.override
-    def get_queryset(self, request):  # type: ignore[reportMissingTypeArgument]
+    def get_queryset(self, request: typing.Any):
         """Only show checkbox questions."""
         qs = super().get_queryset(request)
         return qs.filter(question_type=QuestionTypeEnum.CHECKBOX)
@@ -256,13 +256,26 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
                     "video_link",
                     "tool_link",
                     "tool_sectors",
-                    "display_categories",
+                    "tool_owners",
                     "tool_features",
                     "logo",
                 ),
             },
         ),
     )
+    autocomplete_fields = ("tool_sectors", "tool_owners", "tool_features")
+
+    @typing.override
+    def get_queryset(self, request: typing.Any):
+        return (
+            super()
+            .get_queryset(request)
+            .prefetch_related(
+                "tool_sectors",
+                "tool_owners",
+                "tool_features",
+            )
+        )
 
     inlines = [ToolAnswerOrdinalInline, ToolAnswerCheckboxInline]
 

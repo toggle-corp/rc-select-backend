@@ -148,6 +148,7 @@ class Tool(UserResource):
     )
     tool_sectors = models.ManyToManyField(Sector, related_name="tool_sectors", blank=True)
     tool_features = models.ManyToManyField(ToolFeature, related_name="tool_features", blank=True)
+    tool_owners = models.ManyToManyField(User, related_name="tool_owners", blank=True)
 
     class Meta(UserResource.Meta):
         ordering = ["catalog", "name"]
