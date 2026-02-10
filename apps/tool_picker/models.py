@@ -7,6 +7,7 @@ from django_choices_field import IntegerChoicesField
 from django_stubs_ext.db.models.manager import RelatedManager
 
 from apps.common.models import UserResource
+from apps.user.models import User
 
 
 class Catalog(UserResource):
@@ -22,6 +23,59 @@ class Catalog(UserResource):
 
     class Meta(UserResource.Meta):
         ordering = ["name"]
+
+    @typing.override
+    def __str__(self):
+        return self.name
+
+
+# TODO: Should we rename DisplayCategory to ToolCategory?
+
+
+class DisplayCategory(models.Model):
+    """Model representing tool category."""
+
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = "DisplayCategory"
+        verbose_name_plural = "DisplayCategories"
+
+    @typing.override
+    def __str__(self):
+        return self.title
+
+
+class ToolFeature(models.Model):
+    """Model representing a tool feature."""
+
+    class FeatureCategoryEnum(models.IntegerChoices):
+        """Enum representing feature category."""
+
+        CONFIGURATION = 10, ("Configuration")
+        BENEFICIARY_REGISTRATION = 20, ("Beneficiary Registration")
+        DISTRIBUTION_MANAGEMENT = 30, ("Distribution Management")
+        FEEDBACK_AND_SURVEYS = 40, ("Feedback and Surveys")
+        DATA_MANAGEMENT = 50, ("Data Management")
+        REPORTING_AND_ANALYTICS = 60, ("Reporting and Analytics")
+
+    name = models.CharField(max_length=200)
+    feature_category: int = IntegerChoicesField(choices_enum=FeatureCategoryEnum, default="None")  # type: ignore[reportAssignmentType]
+    description = models.TextField(null=True)
+    cash_RTM_code = models.CharField(null=True, max_length=40)
+
+    @typing.override
+    def __str__(self):
+        return f"{self.feature_category} - {self.name}"
+
+
+class Sector(models.Model):
+    """Model representing tool sector."""
+
+    name = models.CharField(max_length=100, unique=True)
+    description = models.TextField(blank=True)
+    sector_owners = models.ManyToManyField(User, related_name="sector_owners", blank=True)
 
     @typing.override
     def __str__(self):
@@ -110,6 +164,9 @@ class Tool(UserResource):
         null=True,
         blank=True,
     )
+    tool_sectors = models.ManyToManyField(Sector, related_name="tool_sectors", blank=True)
+    display_categories = models.ManyToManyField(DisplayCategory, related_name="tool_display_categories", blank=True)
+    tool_features = models.ManyToManyField(ToolFeature, related_name="tool_features", blank=True)
 
     class Meta(UserResource.Meta):
         ordering = ["catalog", "name"]

@@ -7,12 +7,15 @@ from apps.common.admin import UserResourceAdmin
 from .models import (
     Catalog,
     CheckboxOption,
+    DisplayCategory,
     OrdinalTypeEnum,
     Question,
     QuestionTypeEnum,
     RecommendationResult,
+    Sector,
     Tool,
     ToolAnswer,
+    ToolFeature,
     UserAnswer,
     UserSubmission,
 )
@@ -253,6 +256,9 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
                     "description",
                     "video_link",
                     "tool_link",
+                    "tool_sectors",
+                    "display_categories",
+                    "tool_features",
                     "logo",
                 ),
             },
@@ -398,3 +404,21 @@ class RecommendationResultAdmin(admin.ModelAdmin):  # type: ignore[reportMissing
     @admin.display(description="Catalog")
     def catalog(self, obj: RecommendationResult):
         return obj.submission.catalog.name
+
+
+@admin.register(Sector)
+class SectorAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
+    list_display = ["name"]
+    search_fields = ["name"]
+
+
+@admin.register(ToolFeature)
+class ToolFeatureAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
+    list_display = ["name", "feature_category"]
+    list_filter = ["feature_category"]
+    search_fields = ["name"]
+
+
+@admin.register(DisplayCategory)
+class DisplayCategoryAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
+    list_display = ["title"]
