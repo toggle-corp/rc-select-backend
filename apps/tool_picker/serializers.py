@@ -6,6 +6,7 @@ from rest_framework import serializers
 
 from apps.tool_picker.models import (
     CheckboxOption,
+    Question,
     QuestionTypeEnum,
     UserAnswer,
     UserSubmission,
@@ -63,32 +64,11 @@ class UserAnswerSerializer(serializers.ModelSerializer):
                 )
 
         elif question.question_type == QuestionTypeEnum.CHECKBOX:
-            if not selected_options:
-                raise serializers.ValidationError(
-                    {
-                        "selected_options": gettext(
-                            "Selected question is %s type question and requires selected options.",
-                        )
-                        % question.get_question_type_display(),
-                    },
-                )
-
             if ordinal_value:
                 raise serializers.ValidationError(
                     {
                         "ordinal_value": gettext(
                             "Selected question is %s and should not have an ordinal value.",
-                        )
-                        % question.get_question_type_display(),
-                    },
-                )
-
-            invalid_options = [opt for opt in selected_options if opt.question_id != question.id]
-            if invalid_options:
-                raise serializers.ValidationError(
-                    {
-                        "non_field_errors": gettext(
-                            "Some selected options do not belong to the %s question.",
                         )
                         % question.get_question_type_display(),
                     },
@@ -116,6 +96,53 @@ class UserSubmissionSerializer(serializers.ModelSerializer):
             "catalog",
             "answers",
         )
+
+    @typing.override
+    def validate(self, attrs: dict[str, typing.Any]):
+        catalog = attrs["catalog"]
+        answers = attrs.get("answers", [])
+
+        if not answers:
+            raise serializers.ValidationError(
+                {"answer": gettext("At least one answer is required.")},
+            )
+
+        # All the question related to the selected catalog catalog.
+        catalog_questions = set(
+            catalog.questions.values_list("id", flat=True),
+        )
+
+        # All the question answered by user.
+        answered_questions = {ans["question"].id for ans in answers}
+
+        # Diff of related catalog question and user answered questions.
+        missing_question = catalog_questions - answered_questions
+        extra_question = answered_questions - catalog_questions
+
+        if missing_question:
+            missing_question_titles = list(Question.objects.filter(id__in=missing_question).values_list("title", flat=True))
+            raise serializers.ValidationError(
+                {
+                    "question": gettext(
+                        "You must answer all questions related to the selected catalog. Missing questions are: %(missing)s",
+                    )
+                    % {"missing": (missing_question_titles)},
+                },
+            )
+
+        if extra_question:
+            extra_question_titles = list(Question.objects.filter(id__in=extra_question).values_list("title", flat=True))
+            raise serializers.ValidationError(
+                {
+                    "question": gettext(
+                        "Some of the selected question are not belongs to the selected catalog. "
+                        "Extra questions are: %(extra)s",
+                    )
+                    % {"extra": (extra_question_titles)},
+                },
+            )
+
+        return attrs
 
     @transaction.atomic
     @typing.override

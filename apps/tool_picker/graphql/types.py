@@ -51,7 +51,14 @@ class ToolAnswerType:
     tool_id: strawberry.ID
     question_id: strawberry.ID
     description: strawberry.auto
-    ordinal_value: strawberry.auto
+    ordinal_value: int
+    selected_options: list[CheckboxOptionType]
+
+
+@strawberry_django.type(UserAnswer)
+class UserAnswerType:
+    question: strawberry.auto
+    ordinal_value: int
     selected_options: list[CheckboxOptionType]
 
 

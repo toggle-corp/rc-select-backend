@@ -286,7 +286,7 @@ type ToolAnswerType {
   toolId: ID!
   questionId: ID!
   description: String!
-  ordinalValue: OrdinalTypeEnum
+  ordinalValue: Int!
   selectedOptions: [CheckboxOptionType!]!
 }
 
@@ -331,6 +331,13 @@ input UserAnswerInput {
   question: ID!
   ordinalValue: Int
   selectedOptions: [ID!]
+}
+
+"""Model representing a user's answer to a specific question."""
+type UserAnswerType {
+  question: DjangoModelType!
+  ordinalValue: Int!
+  selectedOptions: [CheckboxOptionType!]!
 }
 
 """Custom user model with email as unique identifier."""

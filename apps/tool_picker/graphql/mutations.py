@@ -6,7 +6,7 @@ from apps.tool_picker.graphql.types import UserSubmissionType
 from apps.tool_picker.serializers import UserSubmissionSerializer
 from main.graphql.context import Info
 from utils.graphql.mutations import ModelMutation
-from utils.graphql.types import CustomErrorType, MutationResponseType
+from utils.graphql.types import MutationResponseType
 
 
 @strawberry.type
@@ -17,14 +17,6 @@ class Mutation:
         info: Info,
         data: UserSubmissionInput,
     ) -> MutationResponseType[UserSubmissionType]:
-        if not data.answers:
-            return MutationResponseType(
-                ok=False,
-                errors=CustomErrorType(
-                    "At least one answer is required",
-                ),
-            )
-
         return await ModelMutation(UserSubmissionSerializer).handle_create_mutation(
             data,
             info,
