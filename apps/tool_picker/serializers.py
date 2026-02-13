@@ -20,7 +20,6 @@ class UserAnswerSerializer(serializers.ModelSerializer):
         many=True,
         queryset=CheckboxOption.objects.all(),
         required=False,
-        allow_null=True,
     )
 
     class Meta:
@@ -131,14 +130,11 @@ class UserSubmissionSerializer(serializers.ModelSerializer):
             )
 
         if extra_question:
-            extra_question_titles = list(Question.objects.filter(id__in=extra_question).values_list("title", flat=True))
             raise serializers.ValidationError(
                 {
                     "question": gettext(
-                        "Some of the selected question are not belongs to the selected catalog. "
-                        "Extra questions are: %(extra)s",
-                    )
-                    % {"extra": (extra_question_titles)},
+                        "Some of the selected question are not belongs to the selected catalog.",
+                    ),
                 },
             )
 
