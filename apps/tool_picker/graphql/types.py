@@ -8,14 +8,23 @@ from apps.tool_picker.models import (
     RecommendationResult,
     Tool,
     ToolAnswer,
+    UserAnswer,
 )
 from utils.graphql.types import DjangoFileType
+
+
+@strawberry_django.type(Question)
+class QuestionTitleType:
+    id: strawberry.ID
+    title: strawberry.auto
+    question_type: strawberry.auto
+    description: strawberry.auto
 
 
 @strawberry_django.type(CheckboxOption)
 class CheckboxOptionType:
     id: strawberry.ID
-    question_id: strawberry.ID
+    question: QuestionTitleType
     order: strawberry.auto
     text: strawberry.auto
 
@@ -49,16 +58,16 @@ class CatalogType:
 class ToolAnswerType:
     id: strawberry.ID
     tool_id: strawberry.ID
-    question_id: strawberry.ID
+    question: QuestionTitleType
     description: strawberry.auto
-    ordinal_value: int
+    ordinal_value: int | None
     selected_options: list[CheckboxOptionType]
 
 
 @strawberry_django.type(UserAnswer)
 class UserAnswerType:
-    question: strawberry.auto
-    ordinal_value: int
+    question: QuestionTitleType
+    ordinal_value: int | None
     selected_options: list[CheckboxOptionType]
 
 
@@ -79,12 +88,13 @@ class ToolType:
 class UserSubmissionType:
     id: strawberry.ID
     catalog_id: strawberry.ID
+    answers: list[UserAnswerType]
 
 
 @strawberry_django.type(RecommendationResult)
 class RecommendationResultType:
     id: strawberry.auto
-    submission: strawberry.auto
+    submission: UserSubmissionType
     rank: strawberry.auto
     score: strawberry.auto
     tool: ToolType

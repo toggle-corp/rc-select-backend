@@ -56,7 +56,10 @@ class TestToolQueries(TestCase):
                 answers {
                     id
                     description
-                    questionId
+                    question {
+                        id
+                        title
+                    }
                     toolId
                 }
                 }
@@ -91,7 +94,10 @@ class TestToolQueries(TestCase):
                     labelNa
                     options {
                       id
-                      questionId
+                      question{
+                          id
+                          title
+                      }
                       text
                       order
                     }
@@ -179,7 +185,10 @@ class TestToolQueries(TestCase):
                                 options=[
                                     dict(
                                         id=self.gID(self.options.pk),
-                                        questionId=self.gID(self.question.pk),
+                                        question=dict(
+                                            id=self.gID(self.question.pk),
+                                            title=self.question.title,
+                                        ),
                                         text=self.options.text,
                                         order=self.options.order,
                                     ),
@@ -252,7 +261,10 @@ class TestToolQueries(TestCase):
                             dict(
                                 id=self.gID(self.tool_answer.pk),
                                 description=self.tool_answer.description,
-                                questionId=self.gID(self.question.pk),
+                                question=dict(
+                                    id=self.gID(self.question.pk),
+                                    title=self.question.title,
+                                ),
                                 toolId=self.gID(self.tool.pk),
                             ),
                         ],

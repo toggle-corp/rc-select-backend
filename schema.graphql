@@ -86,7 +86,7 @@ type CatalogTypeOffsetPaginated {
 """Model representing option of checkbox question."""
 type CheckboxOptionType {
   id: ID!
-  questionId: ID!
+  question: QuestionTitleType!
   order: Int!
   text: String!
 }
@@ -130,10 +130,6 @@ type DjangoFileType {
   name: String!
   size: Int!
   url: String!
-}
-
-type DjangoModelType {
-  pk: ID!
 }
 
 input IDBaseFilterLookup {
@@ -224,6 +220,14 @@ type Query {
 }
 
 """Model representing question within a catalog."""
+type QuestionTitleType {
+  id: ID!
+  title: String!
+  questionType: QuestionTypeEnum!
+  description: String!
+}
+
+"""Model representing question within a catalog."""
 type QuestionType {
   id: ID!
   catalogId: ID!
@@ -262,7 +266,7 @@ input RecommendationResultOrder @oneOf {
 """Model representing recommended tools for a submission."""
 type RecommendationResultType {
   id: ID!
-  submission: DjangoModelType!
+  submission: UserSubmissionType!
   rank: Int!
 
   """Proximity score - lower is better (closer match)"""
@@ -284,9 +288,9 @@ type RecommendationResultTypeOffsetPaginated {
 type ToolAnswerType {
   id: ID!
   toolId: ID!
-  questionId: ID!
+  question: QuestionTitleType!
   description: String!
-  ordinalValue: Int!
+  ordinalValue: Int
   selectedOptions: [CheckboxOptionType!]!
 }
 
@@ -335,8 +339,8 @@ input UserAnswerInput {
 
 """Model representing a user's answer to a specific question."""
 type UserAnswerType {
-  question: DjangoModelType!
-  ordinalValue: Int!
+  question: QuestionTitleType!
+  ordinalValue: Int
   selectedOptions: [CheckboxOptionType!]!
 }
 
@@ -367,6 +371,7 @@ input UserSubmissionInput {
 type UserSubmissionType {
   id: ID!
   catalogId: ID!
+  answers: [UserAnswerType!]!
 }
 
 type UserSubmissionTypeMutationResponseType {

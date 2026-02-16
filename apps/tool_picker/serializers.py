@@ -6,6 +6,7 @@ from rest_framework import serializers
 
 from apps.tool_picker.models import (
     CheckboxOption,
+    OrdinalTypeEnum,
     Question,
     QuestionTypeEnum,
     UserAnswer,
@@ -72,16 +73,6 @@ class UserAnswerSerializer(serializers.ModelSerializer):
                         % question.get_question_type_display(),
                     },
                 )
-
-        else:
-            raise serializers.ValidationError(
-                {
-                    "non_field_errors": gettext(
-                        "Unsupported question type",
-                    ),
-                },
-            )
-
         return attrs
 
 
@@ -105,11 +96,16 @@ class UserSubmissionSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 {"answer": gettext("At least one answer is required.")},
             )
-
         # All the question related to the selected catalog catalog.
         catalog_questions = set(
             catalog.questions.values_list("id", flat=True),
         )
+
+        ordinal_answers = [ans for ans in answers if ans["question"].question_type == QuestionTypeEnum.ORDINAL]
+        if ordinal_answers and all(ans["ordinal_value"] == OrdinalTypeEnum.NOT_AVAILABLE for ans in ordinal_answers):
+            raise serializers.ValidationError(
+                gettext("All ordinal answers should not be N/A. please choose one must be a different value."),
+            )
 
         # All the question answered by user.
         answered_questions = {ans["question"].id for ans in answers}
