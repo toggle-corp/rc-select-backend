@@ -32,6 +32,7 @@ dependencies = [
     "django-mdeditor>=0.1.20",
     "django-simple-captcha>=0.6.3",
     "django-stubs>=5.1.3",
+    "vulture>=2.14",
 ]
 
 [dependency-groups]
@@ -218,3 +219,44 @@ exclude_also = [
 partial_branches = [
     "if typing.TYPE_CHECKING:",
 ]
+
+[tool.vulture]
+# Exclude specific files and directories from being scanned
+paths = ["."]
+exclude = [
+    "venv",
+    ".venv/*",
+    "*/migrations/*",
+    "*/tests/*",
+    "*/__pycache__/*",
+    "*/static/*",
+    "*/media/*",
+    "data/*",
+    "deploy/*",
+    "helm/*",
+    "typings/*"
+]
+
+# Ignore decorators commonly used in Django
+ignore_decorators = [
+  "@receiver",
+  "@register.filter",
+  "@register.inclusion_tag",
+  "@register.simple_tag",
+  "@admin.action",
+  "@admin.display",
+  "@admin.register",
+  "@pytest.fixture",
+]
+
+# Ignore common Django-related object names
+ignore_names = [
+  "*Config",  # AppConfig subclasses
+  "*Middleware",
+  "clean_*",
+  "Meta",
+  "urlpatterns",
+]
+min_confidence = 90
+# Sort results in size-ascending order
+sort_by_size = true

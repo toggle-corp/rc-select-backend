@@ -73,3 +73,9 @@ repos:
             typing_extensions,
             wadler_lindig,
           ]
+
+  # Dead code https://github.com/jendrikseipp/vulture
+  - repo: https://github.com/jendrikseipp/vulture
+    rev: 'v2.14'
+    hooks:
+      - id: vulture
