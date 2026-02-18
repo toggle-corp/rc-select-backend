@@ -55,7 +55,7 @@ class CatalogAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportM
 
     @admin.display(description="Tools")
     def tool_count(self, obj: Catalog):
-        return obj.tools.count()
+        return obj.tool_catalogs.count()
 
 
 @admin.register(Question)
@@ -192,11 +192,11 @@ class ToolAnswerOrdinalInline(admin.TabularInline):  # type: ignore[reportMissin
     @typing.override
     def formfield_for_foreignkey(self, db_field, request, **kwargs):  # type: ignore[reportMissingTypeArgument]
         if db_field.name == "question":
-            # Only show ordinal questions from the tool's catalog
+            # Only show ordinal questions from the tool's catalogs
             _tool_obj = typing.cast(Tool | None, getattr(request, "_tool_obj", None))
             if _tool_obj is not None:
                 kwargs["queryset"] = Question.objects.filter(
-                    catalog=_tool_obj.catalog,
+                    catalog__in=_tool_obj.catalogs.all(),
                     question_type=QuestionTypeEnum.ORDINAL,
                 )
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
@@ -220,11 +220,11 @@ class ToolAnswerCheckboxInline(admin.StackedInline):  # type: ignore[reportMissi
     @typing.override
     def formfield_for_foreignkey(self, db_field, request, **kwargs):  # type: ignore[reportMissingTypeArgument]
         if db_field.name == "question":
-            # Only show checkbox questions from the tool's catalog
+            # Only show checkbox questions from the tool's catalogs
             _tool_obj = typing.cast(Tool | None, getattr(request, "_tool_obj", None))
             if _tool_obj is not None:
                 kwargs["queryset"] = Question.objects.filter(
-                    catalog=_tool_obj.catalog,
+                    catalog__in=_tool_obj.catalogs.all(),
                     question_type=QuestionTypeEnum.CHECKBOX,
                 )
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
@@ -240,16 +240,16 @@ class ToolAnswerCheckboxInline(admin.StackedInline):  # type: ignore[reportMissi
 
 @admin.register(Tool)
 class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
-    list_display = ["name", "catalog", "tagline"]
-    list_filter = ["catalog"]
+    list_display = ["name", "tagline"]
+    list_filter = ["catalogs"]
     search_fields = ["name", "tagline", "description"]
-
+    autocomplete_fields = ["catalogs"]
     fieldsets = (
         (
             "Basic Information",
             {
                 "fields": (
-                    "catalog",
+                    "catalogs",
                     "name",
                     "tagline",
                     "description",
@@ -291,18 +291,19 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
         super().save_model(request, obj, form, change)
 
         if not change:
-            for question in obj.catalog.questions.all():
-                ToolAnswer.objects.get_or_create(
-                    tool=obj,
-                    created_by=request.user,
-                    modified_by=request.user,
-                    question=question,
-                    defaults={
-                        "ordinal_value": OrdinalTypeEnum.NOT_AVAILABLE
-                        if question.question_type == QuestionTypeEnum.ORDINAL
-                        else None,
-                    },
-                )
+            for catalog in obj.catalogs.all():
+                for question in catalog.questions.all():
+                    ToolAnswer.objects.get_or_create(
+                        tool=obj,
+                        created_by=request.user,
+                        modified_by=request.user,
+                        question=question,
+                        defaults={
+                            "ordinal_value": OrdinalTypeEnum.NOT_AVAILABLE
+                            if question.question_type == QuestionTypeEnum.ORDINAL
+                            else None,
+                        },
+                    )
 
 
 # ============================================================================

@@ -19,7 +19,7 @@ class Catalog(UserResource):
 
     # type hints
     questions: typing.ClassVar[RelatedManager["Question"]]
-    tools: typing.ClassVar[RelatedManager["Tool"]]
+    tool_catalogs: typing.ClassVar[RelatedManager["Tool"]]
 
     class Meta(UserResource.Meta):
         ordering = ["name"]
@@ -100,7 +100,12 @@ class Question(UserResource):
 
     class Meta(UserResource.Meta):
         ordering = ["catalog", "order"]
-        unique_together = ["catalog", "order"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["catalog", "order"],
+                name="unique_catalog_order",
+            ),
+        ]
 
     @typing.override
     def __str__(self) -> str:
@@ -120,7 +125,12 @@ class CheckboxOption(UserResource):
 
     class Meta(UserResource.Meta):
         ordering = ["question", "order"]
-        unique_together = ["question", "order"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["question", "order"],
+                name="unique_question_order",
+            ),
+        ]
 
     @typing.override
     def __str__(self):
@@ -130,10 +140,9 @@ class CheckboxOption(UserResource):
 class Tool(UserResource):
     """Model representing tool."""
 
-    catalog = models.ForeignKey(
+    catalogs = models.ManyToManyField(
         Catalog,
-        on_delete=models.CASCADE,
-        related_name="tools",
+        related_name="tool_catalogs",
     )
     name = models.CharField[str, str](max_length=200)
     tagline = models.CharField[str, str](max_length=300, blank=True)
@@ -151,11 +160,11 @@ class Tool(UserResource):
     tool_owners = models.ManyToManyField(User, related_name="tool_owners", blank=True)
 
     class Meta(UserResource.Meta):
-        ordering = ["catalog", "name"]
+        ordering = ["name"]
 
     @typing.override
     def __str__(self):
-        return f"{self.name} ({self.catalog.name})"
+        return f"{self.name}"
 
 
 class OrdinalTypeEnum(models.IntegerChoices):
@@ -202,9 +211,14 @@ class ToolAnswer(UserResource):
     ordinal_value: int | None
 
     class Meta(UserResource.Meta):
-        unique_together = ["tool", "question"]
         verbose_name = "Tool Answer"
         verbose_name_plural = "Tool Answers"
+        constraints = [
+            models.UniqueConstraint(
+                fields=["tool", "question"],
+                name="unique_tool_question",
+            ),
+        ]
 
     @typing.override
     def __str__(self):
@@ -277,7 +291,12 @@ class UserAnswer(models.Model):
     question_id: typing.ClassVar[int]
 
     class Meta(UserResource.Meta):
-        unique_together = ["submission", "question"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["submission", "question"],
+                name="unique_submission_question",
+            ),
+        ]
         ordering = ["question__order"]
         verbose_name = "User Answer"
         verbose_name_plural = "User Answers"
@@ -311,8 +330,13 @@ class RecommendationResult(models.Model):
     )
 
     class Meta(UserResource.Meta):
+        constraints = [
+            models.UniqueConstraint(
+                fields=["submission", "rank"],
+                name="unique_submission_rank",
+            ),
+        ]
         ordering = ["submission", "rank"]
-        unique_together = ["submission", "rank"]
         verbose_name = "Recommendation Result"
         verbose_name_plural = "Recommendation Results"
 

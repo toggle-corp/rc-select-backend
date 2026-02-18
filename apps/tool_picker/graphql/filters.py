@@ -13,7 +13,7 @@ class CatalogFilter:
 @strawberry_django.filters.filter(Tool, lookups=True)
 class ToolFilter:
     id: strawberry.ID | None
-    catalog_id: strawberry.auto
+    catalogs: strawberry.auto
 
 
 @strawberry_django.filters.filter(UserSubmission, lookups=True)

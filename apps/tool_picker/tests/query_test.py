@@ -34,7 +34,7 @@ class TestToolQueries(TestCase):
                     size
                     url
                 }
-                catalog {
+                catalogs {
                     id
                     name
                     description
@@ -120,7 +120,7 @@ class TestToolQueries(TestCase):
         )
 
         cls.tool = ToolFactory.create(
-            catalog=cls.catalog,
+            catalogs=[cls.catalog],
             created_by=cls.user,
             modified_by=cls.user,
         )
@@ -236,7 +236,7 @@ class TestToolQueries(TestCase):
                             if self.tool.logo
                             else None
                         ),
-                        catalog=dict(
+                        catalogs=dict(
                             id=self.gID(self.catalog.pk),
                             name=self.catalog.name,
                             description=self.catalog.description,

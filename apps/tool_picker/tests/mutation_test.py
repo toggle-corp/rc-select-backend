@@ -84,7 +84,7 @@ class TestToolMutation(TestCase):
         )
 
         cls.tool = ToolFactory.create(
-            catalog=cls.catalog2,
+            catalogs=[cls.catalog2, cls.catalog1],
             name="Tool A",
         )
 

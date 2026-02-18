@@ -1,3 +1,4 @@
+import factory
 from factory.declarations import Sequence, SubFactory
 from factory.django import DjangoModelFactory
 
@@ -60,8 +61,6 @@ class ToolFactory(DjangoModelFactory[Tool]):
     class Meta:  # type: ignore[reportMissingTypeArgument]
         model = Tool
 
-    catalog = SubFactory(CatalogFactory)
-
     name = Sequence(lambda n: f"Tool {n}")
     tagline = Sequence(lambda n: f"Tagline {n}")
     description = "Tool description"
@@ -72,6 +71,14 @@ class ToolFactory(DjangoModelFactory[Tool]):
 
     created_by = SubFactory(UserFactory)
     modified_by = SubFactory(UserFactory)
+
+    @factory.post_generation  # type: ignore[reportMissingTypeArgument]
+    def catalogs(self, create, extracted, **kwargs):
+        if not create:
+            return
+        if extracted:
+            for catalog in extracted:
+                self.catalogs.add(catalog)  # type: ignore[reportMissingTypeArgument]
 
 
 class ToolAnswerFactory(DjangoModelFactory[ToolAnswer]):

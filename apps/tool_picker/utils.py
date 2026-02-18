@@ -75,7 +75,7 @@ def calculate_recommendations(submission: UserSubmission):
     }
 
     tools = Tool.objects.filter(
-        catalog=submission.catalog,
+        catalogs=submission.catalog,
     ).prefetch_related(
         Prefetch(
             "answers",
