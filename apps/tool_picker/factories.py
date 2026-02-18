@@ -8,6 +8,7 @@ from apps.tool_picker.models import (
     Question,
     Tool,
     ToolAnswer,
+    UserAnswer,
 )
 from apps.user.factories import UserFactory
 
@@ -87,3 +88,8 @@ class ToolAnswerFactory(DjangoModelFactory[ToolAnswer]):
 
     created_by = SubFactory(UserFactory)
     modified_by = SubFactory(UserFactory)
+
+
+class UserAnswerFactory(DjangoModelFactory[UserAnswer]):
+    class Meta:  # type: ignore[reportMissingTypeArgument]
+        model = UserAnswer

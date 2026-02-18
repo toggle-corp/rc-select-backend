@@ -236,27 +236,29 @@ class TestToolQueries(TestCase):
                             if self.tool.logo
                             else None
                         ),
-                        catalogs=dict(
-                            id=self.gID(self.catalog.pk),
-                            name=self.catalog.name,
-                            description=self.catalog.description,
-                            showInHelpMeChoose=self.catalog.show_in_help_me_choose,
-                            questions=[
-                                dict(
-                                    id=self.gID(self.question.pk),
-                                    catalogId=self.gID(self.catalog.pk),
-                                    title=self.question.title,
-                                    description=self.question.description,
-                                    order=self.question.order,
-                                    questionType=(self.question.get_question_type_display().upper()),
-                                    label1=self.question.label_1,
-                                    label2=self.question.label_2,
-                                    label3=self.question.label_3,
-                                    label4=self.question.label_4,
-                                    labelNa=self.question.label_na,
-                                ),
-                            ],
-                        ),
+                        catalogs=[
+                            dict(
+                                id=self.gID(self.catalog.pk),
+                                name=self.catalog.name,
+                                description=self.catalog.description,
+                                showInHelpMeChoose=self.catalog.show_in_help_me_choose,
+                                questions=[
+                                    dict(
+                                        id=self.gID(self.question.pk),
+                                        catalogId=self.gID(self.catalog.pk),
+                                        title=self.question.title,
+                                        description=self.question.description,
+                                        order=self.question.order,
+                                        questionType=(self.question.get_question_type_display().upper()),
+                                        label1=self.question.label_1,
+                                        label2=self.question.label_2,
+                                        label3=self.question.label_3,
+                                        label4=self.question.label_4,
+                                        labelNa=self.question.label_na,
+                                    ),
+                                ],
+                            ),
+                        ],
                         answers=[
                             dict(
                                 id=self.gID(self.tool_answer.pk),

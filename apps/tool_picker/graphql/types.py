@@ -74,7 +74,7 @@ class UserAnswerType:
 @strawberry_django.type(Tool)
 class ToolType:
     id: strawberry.ID
-    catalogs: CatalogType
+    catalogs: list[CatalogType]
     name: strawberry.auto
     tagline: strawberry.auto
     description: strawberry.auto

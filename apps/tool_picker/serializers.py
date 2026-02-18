@@ -77,7 +77,7 @@ class UserAnswerSerializer(serializers.ModelSerializer):
 
 
 class UserSubmissionSerializer(serializers.ModelSerializer):
-    answers = UserAnswerSerializer(many=True, write_only=True)
+    answers = UserAnswerSerializer(many=True, write_only=True, required=True)
 
     class Meta:
         model = UserSubmission
@@ -92,10 +92,6 @@ class UserSubmissionSerializer(serializers.ModelSerializer):
         catalog = attrs["catalog"]
         answers = attrs.get("answers", [])
 
-        if not answers:
-            raise serializers.ValidationError(
-                {"answer": gettext("At least one answer is required.")},
-            )
         # All the question related to the selected catalog catalog.
         catalog_questions = set(
             catalog.questions.values_list("id", flat=True),
@@ -112,8 +108,6 @@ class UserSubmissionSerializer(serializers.ModelSerializer):
 
         # Diff of related catalog question and user answered questions.
         missing_question = catalog_questions - answered_questions
-        extra_question = answered_questions - catalog_questions
-
         if missing_question:
             missing_question_titles = list(Question.objects.filter(id__in=missing_question).values_list("title", flat=True))
             raise serializers.ValidationError(
@@ -122,15 +116,6 @@ class UserSubmissionSerializer(serializers.ModelSerializer):
                         "You must answer all questions related to the selected catalog. Missing questions are: %(missing)s",
                     )
                     % {"missing": (missing_question_titles)},
-                },
-            )
-
-        if extra_question:
-            raise serializers.ValidationError(
-                {
-                    "question": gettext(
-                        "Some of the selected question are not belongs to the selected catalog.",
-                    ),
                 },
             )
 
