@@ -44,7 +44,7 @@ docker compose exec web python manage.py migrate
 docker compose exec web python manage.py createsuperuser
 
 # Load sample data (optional)
-docker compose exec web python manage.py loaddata seed_data/db_seed.json
+docker compose exec web python manage.py loaddata seed-data/db_seed.json
 ```
 
 ### Common Docker Commands
@@ -76,19 +76,6 @@ docker compose down
 docker compose down && docker compose build && docker compose up -d
 ```
 
-### Running Tests
-
-```bash
-# Run all tests
-docker compose exec web python manage.py test
-
-# Run specific test
-docker compose exec web python manage.py test tool_picker.tests.test_field_alignment
-
-# Run with coverage
-docker compose exec web python -m pytest --cov=tool_picker
-```
-
 ## 📊 Database Management
 
 ### Sample Data
@@ -96,5 +83,5 @@ docker compose exec web python -m pytest --cov=tool_picker
 Load the provided sample dataset:
 
 ```bash
-docker compose exec web python manage.py loaddata seed_data/db_seed.json
+docker compose exec web python manage.py loaddata seed-data/db_seed.json
 ```

@@ -103,7 +103,7 @@ app:
       load-data:
         enabled: true
         hook: PostSync
-        command: ["/bin/bash", "-c",  "./manage.py loaddata rc-select-data.json" ]
+        command: ["/bin/bash", "-c",  "./manage.py loaddata seed-data/db_seed.json" ]
 
   worker:
     enabled: false

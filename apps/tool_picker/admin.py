@@ -243,7 +243,7 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
     list_display = ["name", "tagline"]
     list_filter = ["catalogs"]
     search_fields = ["name", "tagline", "description"]
-    autocomplete_fields = ["catalogs"]
+    autocomplete_fields = ["catalogs", "tool_sectors", "tool_owners", "tool_features"]
     fieldsets = (
         (
             "Basic Information",
@@ -263,7 +263,6 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
             },
         ),
     )
-    autocomplete_fields = ("tool_sectors", "tool_owners", "tool_features")
 
     @typing.override
     def get_queryset(self, request: typing.Any):

@@ -32,7 +32,7 @@ def calculate_score_from_diff(diff: int) -> int:
 
 
 def is_checkbox_compatible(tool: Tool, user_checkbox_answers: dict[int, set[int]]) -> bool:
-    for tool_answer in tool.answers.all():
+    for tool_answer in tool.answers.all():  # type: ignore[reportMissingTypeArgument]
         if tool_answer.question.question_type != QuestionTypeEnum.CHECKBOX:
             continue
 
@@ -96,7 +96,7 @@ def calculate_recommendations(submission: UserSubmission):
 
         total_point = 0
 
-        for tool_answer in tool.answers.all():
+        for tool_answer in tool.answers.all():  # type: ignore[reportMissingTypeArgument]
             if tool_answer.question_id not in user_ordinal_answers:
                 continue
 
