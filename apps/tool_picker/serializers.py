@@ -100,7 +100,11 @@ class UserSubmissionSerializer(serializers.ModelSerializer):
         ordinal_answers = [ans for ans in answers if ans["question"].question_type == QuestionTypeEnum.ORDINAL]
         if ordinal_answers and all(ans["ordinal_value"] == OrdinalTypeEnum.NOT_AVAILABLE for ans in ordinal_answers):
             raise serializers.ValidationError(
-                gettext("All ordinal answers should not be N/A. please choose one must be a different value."),
+                {
+                    "ordinal_value": (
+                        gettext("All ordinal answers should not be N/A. please choose one must be a different value."),
+                    ),
+                },
             )
 
         # All the question answered by user.

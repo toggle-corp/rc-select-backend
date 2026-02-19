@@ -1,6 +1,8 @@
+import re
 import typing
 import uuid
 
+from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django_choices_field import IntegerChoicesField
@@ -8,6 +10,26 @@ from django_stubs_ext.db.models.manager import RelatedManager
 
 from apps.common.models import UserResource
 from apps.user.models import User
+
+# NOTE: regex source https://gist.github.com/Mecanik/b339e629c1020fcddbf7df5fadf305b1
+
+REGEX_PATTERN = re.compile(r"^((?:https?:)?\/\/)?((?:www|player|m)\.)?(vimeo\.com|youtube\.com|youtu\.be).*$")
+
+
+def validate_url(url: str) -> None:
+    """Validates that the URL is a YouTube or Vimeo video link.
+
+    Args:
+        url: The video URL to check.
+
+    Raises:
+        ValidationError: If the URL is any link other than YouTube or Vimeo.
+
+    """
+    if not REGEX_PATTERN.match(url):
+        raise ValidationError(
+            "Only YouTube or Vimeo video links are allowed.",
+        )
 
 
 class Catalog(UserResource):
@@ -147,7 +169,7 @@ class Tool(UserResource):
     name = models.CharField[str, str](max_length=200)
     tagline = models.CharField[str, str](max_length=300, blank=True)
     description = models.TextField[str, str]()
-    video_link = models.CharField[str, str](blank=True, null=True)
+    video_link = models.URLField[str, str](blank=True, null=True, validators=[validate_url])
     tool_link = models.CharField[str, str](blank=True, null=True)
     logo = models.ImageField(
         upload_to="logos/",
