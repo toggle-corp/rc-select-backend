@@ -265,24 +265,30 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
         return super().get_form(request, obj, **kwargs)
 
     @typing.override
-    def save_model(self, request, obj, form, change):  # type: ignore[reportMissingTypeArgument]
-        """After saving tool, auto-create answer entries for all questions in the catalog."""
-        super().save_model(request, obj, form, change)
+    def save_related(self, request, form, formsets, change):  # type: ignore[reportMissingTypeArgument]
+        super().save_related(request, form, formsets, change)
 
-        if not change:
-            for catalog in obj.catalogs.all():
-                for question in catalog.questions.all():
-                    ToolAnswer.objects.get_or_create(
-                        tool=obj,
-                        created_by=request.user,
-                        modified_by=request.user,
-                        question=question,
-                        defaults={
-                            "ordinal_value": OrdinalTypeEnum.NOT_AVAILABLE
-                            if question.question_type == QuestionTypeEnum.ORDINAL
-                            else None,
-                        },
-                    )
+        obj = form.instance
+
+        # Ensure answers exist for ALL questions in ALL selected catalogs
+        for catalog in obj.catalogs.all():
+            for question in catalog.questions.all():
+                tool_answer, created = ToolAnswer.objects.get_or_create(
+                    tool=obj,
+                    question=question,
+                    defaults={
+                        "created_by": request.user,
+                        "modified_by": request.user,
+                        "ordinal_value": (
+                            OrdinalTypeEnum.NOT_AVAILABLE if question.question_type == QuestionTypeEnum.ORDINAL else None
+                        ),
+                    },
+                )
+
+                # If it already exists, just update modified_by
+                if not created:
+                    tool_answer.modified_by = request.user  # type: ignore[reportMissingTypeArgument]
+                    tool_answer.save(update_fields=["modified_by"])
 
 
 # ============================================================================
