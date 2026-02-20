@@ -1,6 +1,9 @@
 import typing
 
+from django import forms
 from django.contrib import admin
+from django.urls import reverse
+from django.utils.html import format_html
 
 from apps.common.admin import UserResourceAdmin
 
@@ -20,7 +23,7 @@ from .models import (
 )
 
 
-# Inline for CheckboxOptions within Question
+# Inline for Checkbox Options within Question
 class CheckboxOptionInline(admin.TabularInline):  # type: ignore[reportMissingTypeArgument]
     model = CheckboxOption
     extra = 0
@@ -28,20 +31,57 @@ class CheckboxOptionInline(admin.TabularInline):  # type: ignore[reportMissingTy
     ordering = ["order"]
 
 
-# Inline for Questions within Catalog
-class QuestionInline(admin.StackedInline):  # type: ignore[reportMissingTypeArgument]
+# Inline for Ordinal Questions within Catalog
+class OrdinalQuestionInline(admin.StackedInline):  # type: ignore[reportMissingTypeArgument]
     model = Question
     extra = 0
-    fields = ["order", "question_type", "title", "description", ("label_na", "label_1", "label_2", "label_3", "label_4")]
+    fields = ["order", "title", "description", "question_type", ("label_na", "label_1", "label_2", "label_3", "label_4")]
     ordering = ["order"]
-    show_change_link = True
+    verbose_name = "Ordinal Question"
+    verbose_name_plural = "Ordinal Questions"
+
+    def get_queryset(self, request):  # type: ignore[reportMissingTypeArgument]
+        qs = super().get_queryset(request)
+        return qs.filter(question_type=QuestionTypeEnum.ORDINAL)
+
+
+# Inline for Checkbox Questions within Catalog
+class CheckboxQuestionInline(admin.StackedInline):  # type: ignore[reportMissingTypeArgument]
+    model = Question
+    extra = 0
+    fields = ["order", "title", "description", "question_type", "edit_options_link"]
+    readonly_fields = ["edit_options_link"]
+    ordering = ["order"]
+    verbose_name = "Checkbox Question"
+    verbose_name_plural = "Checkbox Questions"
+
+    def get_queryset(self, request):  # type: ignore[reportMissingTypeArgument]
+        qs = super().get_queryset(request)
+        return qs.filter(question_type=QuestionTypeEnum.CHECKBOX)
+
+    def formfield_for_dbfield(self, db_field, request, **kwargs) -> forms.Field | None:  # type: ignore[reportMissingTypeArgument]
+        formfield = super().formfield_for_dbfield(db_field, request, **kwargs)
+        if formfield is not None and db_field.name == "title":
+            formfield.help_text = (
+                "Note: To add checkbox options, save this question first, "
+                "then click the edit link next to the question to add options."
+            )
+        return formfield
+
+    @admin.display(description="Add Options")
+    def edit_options_link(self, obj):
+        """Provide a link to edit options in the bulk admin."""
+        if obj and obj.pk:
+            url = reverse("admin:tool_picker_checkboxquestionproxy_change", args=[obj.pk])
+            return format_html('<a href="{}" target="_blank">Edit Options →</a>', url)
+        return "Save question first to add options"
 
 
 @admin.register(Catalog)
 class CatalogAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
     list_display = ["name", "question_count", "tool_count", "show_in_help_me_choose"]
     search_fields = ["name", "description"]
-    inlines = [QuestionInline]
+    inlines = [OrdinalQuestionInline, CheckboxQuestionInline]
 
     @admin.display(description="Questions")
     def question_count(self, obj: Catalog):
@@ -55,67 +95,7 @@ class CatalogAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportM
 
     @admin.display(description="Tools")
     def tool_count(self, obj: Catalog):
-        return obj.tools.count()
-
-
-@admin.register(Question)
-class QuestionAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
-    list_display = [
-        "title",
-        "catalog",
-        "question_type",
-        "order",
-        "option_count",
-    ]
-    list_filter = ["catalog", "question_type"]
-    search_fields = ["title", "description"]
-    ordering = ["catalog", "order"]
-
-    fieldsets = (
-        (
-            "Basic Information",
-            {
-                "fields": (
-                    "catalog",
-                    "order",
-                    "question_type",
-                    "title",
-                    "description",
-                ),
-            },
-        ),
-        (
-            "Ordinal Scale Labels (for ordinal questions only)",
-            {
-                "fields": (("label_na", "label_1", "label_2", "label_3", "label_4"),),
-                "classes": ("collapse",),
-                "description": 'These fields are only \
-                used when question_type is "ordinal"',
-            },
-        ),
-    )
-    inlines = [CheckboxOptionInline]
-
-    @admin.display(description="Options")
-    def option_count(self, obj: Question):
-        if obj.question_type == QuestionTypeEnum.CHECKBOX:
-            return obj.options.count()
-        return "-"
-
-    @typing.override
-    def get_inline_instances(self, request, obj=None):  # type: ignore[reportMissingTypeArgument]
-        """Only show CheckboxOptionInline for checkbox questions."""
-        if obj and obj.question_type == QuestionTypeEnum.CHECKBOX:
-            return super().get_inline_instances(request, obj)
-        return []
-
-    @typing.override
-    def save_model(self, request, obj, form, change):  # type: ignore[reportMissingTypeArgument]
-        """Automatically set created_by and modified_by in admin."""
-        if not obj.pk:  # new object
-            obj.created_by = request.user
-            obj.modified_by = request.user
-        super().save_model(request, obj, form, change)
+        return obj.tool_catalogs.count()
 
 
 # Proxy model for checkbox-only view
@@ -178,7 +158,7 @@ class CheckboxQuestionBulkAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: i
 class ToolAnswerOrdinalInline(admin.TabularInline):  # type: ignore[reportMissingTypeArgument]
     model = ToolAnswer
     extra = 0
-    fields = ["question", "ordinal_value"]
+    fields = ["question", "ordinal_value", "description"]
     ordering = ["question__order"]
     can_delete = False
     verbose_name = "Ordinal Answer"
@@ -192,11 +172,11 @@ class ToolAnswerOrdinalInline(admin.TabularInline):  # type: ignore[reportMissin
     @typing.override
     def formfield_for_foreignkey(self, db_field, request, **kwargs):  # type: ignore[reportMissingTypeArgument]
         if db_field.name == "question":
-            # Only show ordinal questions from the tool's catalog
-            _tool_obj = typing.cast(Tool | None, getattr(request, "_tool_obj", None))
+            # Only show ordinal questions from the tool's catalogs
+            _tool_obj = typing.cast("Tool | None", getattr(request, "_tool_obj", None))
             if _tool_obj is not None:
                 kwargs["queryset"] = Question.objects.filter(
-                    catalog=_tool_obj.catalog,
+                    catalog__in=_tool_obj.catalogs.all(),
                     question_type=QuestionTypeEnum.ORDINAL,
                 )
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
@@ -220,11 +200,11 @@ class ToolAnswerCheckboxInline(admin.StackedInline):  # type: ignore[reportMissi
     @typing.override
     def formfield_for_foreignkey(self, db_field, request, **kwargs):  # type: ignore[reportMissingTypeArgument]
         if db_field.name == "question":
-            # Only show checkbox questions from the tool's catalog
-            _tool_obj = typing.cast(Tool | None, getattr(request, "_tool_obj", None))
+            # Only show checkbox questions from the tool's catalogs
+            _tool_obj = typing.cast("Tool | None", getattr(request, "_tool_obj", None))
             if _tool_obj is not None:
                 kwargs["queryset"] = Question.objects.filter(
-                    catalog=_tool_obj.catalog,
+                    catalog__in=_tool_obj.catalogs.all(),
                     question_type=QuestionTypeEnum.CHECKBOX,
                 )
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
@@ -240,16 +220,16 @@ class ToolAnswerCheckboxInline(admin.StackedInline):  # type: ignore[reportMissi
 
 @admin.register(Tool)
 class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
-    list_display = ["name", "catalog", "tagline"]
-    list_filter = ["catalog"]
+    list_display = ["name", "tagline"]
+    list_filter = ["catalogs"]
     search_fields = ["name", "tagline", "description"]
-
+    autocomplete_fields = ["catalogs", "tool_sectors", "tool_owners", "tool_features"]
     fieldsets = (
         (
             "Basic Information",
             {
                 "fields": (
-                    "catalog",
+                    "catalogs",
                     "name",
                     "tagline",
                     "description",
@@ -263,7 +243,6 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
             },
         ),
     )
-    autocomplete_fields = ("tool_sectors", "tool_owners", "tool_features")
 
     @typing.override
     def get_queryset(self, request: typing.Any):
@@ -282,27 +261,34 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
     @typing.override
     def get_form(self, request, obj=None, change=False, **kwargs):  # type: ignore[reportMissingTypeArgument]
         # Store the tool object in request for use in inlines
-        typing.cast(typing.Any, request)._tool_obj = obj
+        typing.cast("typing.Any", request)._tool_obj = obj
         return super().get_form(request, obj, **kwargs)
 
     @typing.override
-    def save_model(self, request, obj, form, change):  # type: ignore[reportMissingTypeArgument]
-        """After saving tool, auto-create answer entries for all questions in the catalog."""
-        super().save_model(request, obj, form, change)
+    def save_related(self, request, form, formsets, change):  # type: ignore[reportMissingTypeArgument]
+        super().save_related(request, form, formsets, change)
 
-        if not change:
-            for question in obj.catalog.questions.all():
-                ToolAnswer.objects.get_or_create(
+        obj = form.instance
+
+        # Ensure answers exist for ALL questions in ALL selected catalogs
+        for catalog in obj.catalogs.all():
+            for question in catalog.questions.all():
+                tool_answer, created = ToolAnswer.objects.get_or_create(
                     tool=obj,
-                    created_by=request.user,
-                    modified_by=request.user,
                     question=question,
                     defaults={
-                        "ordinal_value": OrdinalTypeEnum.NOT_AVAILABLE
-                        if question.question_type == QuestionTypeEnum.ORDINAL
-                        else None,
+                        "created_by": request.user,
+                        "modified_by": request.user,
+                        "ordinal_value": (
+                            OrdinalTypeEnum.NOT_AVAILABLE if question.question_type == QuestionTypeEnum.ORDINAL else None
+                        ),
                     },
                 )
+
+                # If it already exists, just update modified_by
+                if not created:
+                    tool_answer.modified_by = request.user  # type: ignore[reportMissingTypeArgument]
+                    tool_answer.save(update_fields=["modified_by"])
 
 
 # ============================================================================
@@ -352,16 +338,21 @@ class UserSubmissionAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeAr
 class UserAnswerAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
     list_display = ["submission_id", "question", "question_type", "get_answer"]
     list_filter = ["submission__catalog", "question__question_type"]
-    search_fields = ["submission__id", "question__title"]
+    search_fields = ["submission__id", "question__title", "selected_options__id"]
+    readonly_fields = ("selected_options",)
+
+    @typing.override
+    def get_queryset(self, request):  # type: ignore[reportMissingTypeArgument]
+        return super().get_queryset(request).prefetch_related("selected_options")
 
     def get_fields(self, request, obj=None):  # type: ignore[reportMissingTypeArgument]
         """Show only relevant fields based on question type."""
         base_fields = ["submission", "question"]
 
-        if obj and obj.question.question_type == "ordinal":
+        if obj and obj.question.question_type == QuestionTypeEnum.ORDINAL.value:
             return [*base_fields, "ordinal_value"]
 
-        if obj and obj.question.question_type == "checkbox":
+        if obj and obj.question.question_type == QuestionTypeEnum.CHECKBOX.value:
             return [*base_fields, "selected_options"]
 
         return [*base_fields, "ordinal_value", "selected_options"]
@@ -384,7 +375,7 @@ class UserAnswerAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgume
 
     @admin.display(description="Answer")
     def get_answer(self, obj: UserAnswer):
-        if obj.question.question_type == "ordinal":
+        if obj.question.question_type == QuestionTypeEnum.ORDINAL:
             return obj.ordinal_value or "-"
         options = obj.selected_options.all()
         return ", ".join([opt.text for opt in options]) if options else "(none)"

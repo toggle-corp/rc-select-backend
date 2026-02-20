@@ -810,11 +810,11 @@
       "modified_at": "2026-01-08T00:00:00Z",
       "created_by": 1,
       "modified_by": 1,
-      "catalog": 1,
+      "catalogs": [1],
       "name": "RedRose",
       "tagline": "A comprehensive cash operations solution that has been widely used across the Movement.",
-      "description": "Since 2015, RedRose has been widely used by numerous international organisations in over 55 countries worldwide and reached over 155 Million people. It provides a flexible and scalable system to manage all aspects of both CVA and in-kind programmes. It has been used in numerous contexts by the IFRC and ICRC since 2018.  \r\n\r\n[youtube:https://player.vimeo.com/video/391965448?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479]  \r\n\r\n\r\n### Resources\r\n\r\n- [Homepage](https://www.redrose.io/)\r\n\r\n### National Societies Using Red Rose\r\n\r\nThese National Societies signed agreements under the first Global Framework Agreement with RedRose:\r\n\r\n- Belgian Red Cross, British Red Cross, Burkinabe Red Cross Society, Burundi Red Cross, Red Cross of Chad, Danish Red Cross, German Red Cross, Kenya Red Cross Society, Lebanese Red Cross, Netherlands Red Cross, Philippine Red Cross, Swiss Red Cross  \r\n\r\n\r\nThese National Societies have also implemented RedRose:\r\n\r\n- Gambia, Rwanda, Tanzania, Uganda, Zambia, Pakistan, DRC (Democratic Republic of Congo), Mozambique, Vietnam  \r\n\r\n\r\nIn addition, the ICRC used RedRose in different contexts under a separate agreement.\r\n\r\n\r\n### Contact\r\n\r\n**Arturo Garcia Fernandez**  \r\nIFRC Cash Data Management Officer  \r\narturo.garcia@ifrc.org",
-      "video_link": null,
+      "description": "Since 2015, RedRose has been widely used by numerous international organisations in over 55 countries worldwide and reached over 155 Million people. It provides a flexible and scalable system to manage all aspects of both CVA and in-kind programmes. It has been used in numerous contexts by the IFRC and ICRC since 2018.  \r\n\r\n\r\n### Resources\r\n\r\n- [Homepage](https://www.redrose.io/)\r\n\r\n### National Societies Using Red Rose\r\n\r\nThese National Societies signed agreements under the first Global Framework Agreement with RedRose:\r\n\r\n- Belgian Red Cross, British Red Cross, Burkinabe Red Cross Society, Burundi Red Cross, Red Cross of Chad, Danish Red Cross, German Red Cross, Kenya Red Cross Society, Lebanese Red Cross, Netherlands Red Cross, Philippine Red Cross, Swiss Red Cross  \r\n\r\n\r\nThese National Societies have also implemented RedRose:\r\n\r\n- Gambia, Rwanda, Tanzania, Uganda, Zambia, Pakistan, DRC (Democratic Republic of Congo), Mozambique, Vietnam  \r\n\r\n\r\nIn addition, the ICRC used RedRose in different contexts under a separate agreement.\r\n\r\n\r\n### Contact\r\n\r\n**Arturo Garcia Fernandez**  \r\nIFRC Cash Data Management Officer  \r\narturo.garcia@ifrc.org",
+      "video_link": "https://player.vimeo.com/video/391965448?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
       "tool_link": "https://www.redrose.io/",
       "logo": "",
     "tool_sectors": [
@@ -876,11 +876,11 @@
       "modified_at": "2026-01-08T00:00:00Z",
       "created_by": 1,
       "modified_by": 1,
-      "catalog": 1,
+      "catalogs": [1],
       "name": "121 Platform",
       "tagline": "The 121 Platform is a user-friendly tool designed to streamline the Cash & Voucher Assistance (CVA) process, making it easy, safe, and fast for disaster-affected individuals to meet their own needs.",
-      "description": "The 121 Platform is a user-friendly tool designed to streamline the Cash & Voucher Assistance (CVA) process, making it easy, safe, and fast. It will allow you to distribute cash in days, rather than weeks. The 121 platform is created by the Netherlands Red Cross: a platform for the movement, by the movement.  \r\n\r\n[youtube:https://player.vimeo.com/video/1060458500?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479]  \r\n\r\n\r\n### Resources\r\n\r\n- [Homepage](https://510.global/product/121-platform/)\r\n\r\n### National Societies using 121 Platform\r\n\r\nBenin, DRC, Eswatini, Ethiopia, Ivory Coast, Kenya, Nigeria, Netherlands, Slovakia, Somalia, South Africa, Sudan, Togo, Zambia\r\n\r\n### Contact\r\n\r\nsupport@121.global",
-      "video_link": null,
+      "description": "The 121 Platform is a user-friendly tool designed to streamline the Cash & Voucher Assistance (CVA) process, making it easy, safe, and fast. It will allow you to distribute cash in days, rather than weeks. The 121 platform is created by the Netherlands Red Cross: a platform for the movement, by the movement.  \r\n\r\n\r\n### Resources\r\n\r\n- [Homepage](https://510.global/product/121-platform/)\r\n\r\n### National Societies using 121 Platform\r\n\r\nBenin, DRC, Eswatini, Ethiopia, Ivory Coast, Kenya, Nigeria, Netherlands, Slovakia, Somalia, South Africa, Sudan, Togo, Zambia\r\n\r\n### Contact\r\n\r\nsupport@121.global",
+      "video_link": "https://player.vimeo.com/video/1060458500?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
       "tool_link": "https://510.global/product/121-platform/",
       "logo": "",
     "tool_sectors": [
@@ -942,7 +942,7 @@
       "modified_at": "2026-01-08T00:00:00Z",
       "created_by": 1,
       "modified_by": 1,
-      "catalog": 1,
+      "catalogs": [1],
       "name": "EspoCRM - Cloud",
       "tagline": "An open source CRM that National Societies can use to manage interactions with clients, partners, suppliers and others.",
       "description": "EspoCRM is a secure, easy-to-use, and quick-to-set-up data management tool that has been effectively adapted for cash and voucher assistance (CVA) programs by over 15 National Societies. Its low-code customization capabilities allow it to be tailored to the specific needs of each National Society.\r\n\r\n### Resources\r\n\r\n- [Documentation](https://docs.espocrm.com)\r\n- [Support forum](https://forum.espocrm.com)\r\n- [Knowledge base](https://github.com/rodekruis/EspoCRM-knowledge-base/wiki)\r\n- [People Affected Management setup template](https://github.com/rodekruis/espocrm-template-pam)\r\n\r\n### National Societies using EspoCRM - Cloud\r\n\r\nMali Red Cross, Cameroon Red Cross, Malagasy Red Cross, Ukraine Red Cross, Slovakia Red Cross, Estonia Red Cross, Lithuanian Red Cross, Polish Red Cross, Romanian Red Cross, Hungarian Red Cross, Red Cross Society of the Republic of Moldova, Bulgarian Red Cross, Slovenian Red Cross, Red Cross of Montenegro, Croatian Red Cross, Latvian Red Cross, Netherlands Red Cross, Syrian Arab Red Crescent, Uganda Red Cross, Lebanese Red Cross, Hellenic Red Cross, Kenya Red Cross, Zambia Red Cross, IFRC\r\n\r\n### Contact\r\n\r\nwdejong@redcross.nl",
@@ -1008,7 +1008,7 @@
       "modified_at": "2026-01-08T00:00:00Z",
       "created_by": 1,
       "modified_by": 1,
-      "catalog": 1,
+      "catalogs": [1],
       "name": "Excel and Kobo",
       "tagline": "KoboTollbox is a free toolkit for collecting and managing data in challenging environments and is the most widely-used tool in humanitarian emergencies.",
       "description": "KoboTollbox is a free toolkit for collecting and managing data in challenging environments and is the most widely-used tool in humanitarian emergencies. The combination of kobotoolbox and Excel provide a basic system with complete data management features.\r\n\r\n### Resources\r\n\r\n- [IFRC FAQ](https://www.ifrc.org/ifrc-kobo)\r\n- [Kobo forum](https://community.kobotoolbox.org)\r\n- [ODK forum](https://forum.getodk.org) (can be used for XLSForm related questions and case studies)\r\n\r\n### National Societies using Excel and Kobo\r\n\r\nA number of National Societies have used, and still use, the combination of Excel and Kobo for their cash programs. \r\n\r\n### Contact\r\n\r\n**Arturo Garcia Fernandez**  \r\nIFRC Cash Data Management Officer  \r\narturo.garcia@ifrc.org",
@@ -1074,11 +1074,11 @@
       "modified_at": "2026-01-08T00:00:00Z",
       "created_by": 1,
       "modified_by": 1,
-      "catalog": 1,
+      "catalogs": [1],
       "name": "AccessRC",
       "tagline": "AccessRC: The mobile app for humanitarian aid",
-      "description": "AccessRC is a comprehensive digital self-enrollment and program management platform that accelerates humanitarian response by providing a set of integrated tools to help a national society. With the public app, affected individuals are empowered to register, verify their eligibility, and request assistance directly through a responsive mobile app. For national societies, they utilize a web based portal for National Society staff to create programs, review and manage assistance. AccessRC enhances transparency, data quality, and operational scalability across surge operations and routine programming.  \r\n\r\n[youtube:https://www.youtube.com/embed/wdj--Dm-oyw?si=2OU2op_CuzzA8W3C]  \r\n\r\n\r\n### Resources\r\n\r\n- [Homepage](https://accessrc.org/) \r\n\r\n### National Societies using AccessRC\r\n\r\nBulgaria, Colombia, Ecuador, Honduras, Latvia, Lithuania, Moldova, Peru, Romania\r\n\r\n### Contact\r\n\r\n**Stephen Hagerich**  \r\nCoordinator, Integrated Assistance  \r\nstephen.hagerich@ifrc.org",
-      "video_link": null,
+      "description": "AccessRC is a comprehensive digital self-enrollment and program management platform that accelerates humanitarian response by providing a set of integrated tools to help a national society. With the public app, affected individuals are empowered to register, verify their eligibility, and request assistance directly through a responsive mobile app. For national societies, they utilize a web based portal for National Society staff to create programs, review and manage assistance. AccessRC enhances transparency, data quality, and operational scalability across surge operations and routine programming.  \r\n\r\n\r\n### Resources\r\n\r\n- [Homepage](https://accessrc.org/) \r\n\r\n### National Societies using AccessRC\r\n\r\nBulgaria, Colombia, Ecuador, Honduras, Latvia, Lithuania, Moldova, Peru, Romania\r\n\r\n### Contact\r\n\r\n**Stephen Hagerich**  \r\nCoordinator, Integrated Assistance  \r\nstephen.hagerich@ifrc.org",
+      "video_link": "https://www.youtube.com/embed/wdj--Dm-oyw?si=2OU2op_CuzzA8W3C",
       "tool_link": "https://accessrc.org/",
       "logo": ""
     }
@@ -1094,7 +1094,7 @@
       "tool": 1,
       "question": 1,
       "description": "Costs are calculated as a percentage of the CVA distributed. Setup costs are very low and as CVA programmes scale-up the costs reduce as a percentage. Helpdesk and Technical Support costs are included within the package, as well as software backups, maintenance, updates and disaster recovery.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1109,7 +1109,7 @@
       "tool": 1,
       "question": 2,
       "description": "SMEs for RedRose report that the setup process takes about two full weeks for the basic installation. Setup is usually scheduled as part of a CVA or in-kind programme. During the first week the NS receives training and the RedRose system is configured and tested. During the second week an actual distribution is carried out (CVA or in-kind) by the NS. The RedRose team provide hand-holding and support during this week to ensure that the distribution is carried out correctly.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1124,7 +1124,7 @@
       "tool": 1,
       "question": 3,
       "description": "The NS receives a questionnaire to complete with details of the CVA or in-kind programme that is needed e.g. currency, fund amount, eligibiloty criteria etc. The RedRose team then configure the system based on the answers received from the NS. This simplifies the setup process for the NS, as the RedRose team provide a pre-configured system, based on the requirements of the NS.",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1139,7 +1139,7 @@
       "tool": 1,
       "question": 4,
       "description": "There is no additional charge for the maintenance of the RedRose system. This includes all software updates, backups and bug-fixes.",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1154,7 +1154,7 @@
       "tool": 1,
       "question": 5,
       "description": "General online training resources are available but specific training is strongly recommended for NSs.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1169,7 +1169,7 @@
       "tool": 1,
       "question": 6,
       "description": "RedRose is a highly scalable system and is capable of storing and managing millions of registration and distribution records. It performs well at scale and has been used at-scale within the RCRCM.",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1184,7 +1184,7 @@
       "tool": 1,
       "question": 7,
       "description": "The RedRose OneApp (data collection and registration App) can be used offline and later synced with the main system when a connection is available. This allows for registrations and feedback forms to be completed in remote locations where there is no internet connectivity.RedRose has built-in controls for duplicate registrations/updates when used offline, to mitigate the risk of the same individual being registered multiple times when used offline.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1199,7 +1199,7 @@
       "tool": 1,
       "question": 8,
       "description": "RedRose contains various tools to help with data cleaning. Registration data is checked at the point of registration to minimise incorrect information being provided. For example, the format of phone numbers, addresses etc. are checked. There is also a duplicate checker that indicates when possible registration duplications have been entered.\r\nThere are many tools available within RedRose to filter, sort ad segment information to help with data cleansing.",
-      "ordinal_value":12,
+      "ordinal_value":2,
       "selected_options": []
     }
   },
@@ -1214,7 +1214,7 @@
       "tool": 1,
       "question": 9,
       "description": "Flexible data extraction. Data can be exported to a spreadsheet and also made available through an API for direct connectivity. Data can also be imported into RedRose through a very useful tool that checks for data errors when importing.\r\nWithin the RCRCM there are numerous examples of  data being imported and exported into RedRose.",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1229,7 +1229,7 @@
       "tool": 1,
       "question": 10,
       "description": "A basic visual dashboard is available out-of-the-box that shows programmatic information (e.g. amount distributed, amount remaining in fund, demographic visualisations, map/geographic indicators for registrations). \r\nFor more complete visualisations, it is recommended that the data in RedRose is integrated with PowerBI for bespoke reporting and visualisations. This has been done for various programmes within the RCRCM.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1244,7 +1244,7 @@
       "tool": 1,
       "question": 11,
       "description": "Red Rose complies with the GDPR - a legal framework that protects the fundamental rights and freedoms of natural persons with regard to the processing of personal data in the EU. GDPR compliance requires stronger protections than many other legal frameworks. Red Rose provides features that help safeguard data such as: ability to disable data exports for different users, detailed timestamped audit trails available for data creation/edits, secure backup/restore of data, and permission-based user roles/access.",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1259,7 +1259,7 @@
       "tool": 2,
       "question": 1,
       "description": "The first pilot project with 121 is completely free. After that, costs are calculated as a percentage of the CVA distributed. There are no setup costs. As CVA programmes scale-up the costs reduce as a percentage. Helpdesk and Technical Support costs are included within the package, as well as software backups, maintenance, updates and disaster recovery.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1274,7 +1274,7 @@
       "tool": 2,
       "question": 2,
       "description": "Setup of a new instance will take a few hours. Configuring the instance depends on information that is shared with us by the National Society. If their registration forms and program design are ready and shared ánd they are available for potential questions, we can set up the instance in a day.",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1289,7 +1289,7 @@
       "tool": 2,
       "question": 3,
       "description": "Either the project is setup by the 121 support team or users can do this themselves on the platform directly. The project will be created by importing the kobo form or the excel file used in the project. This takes no longer then 10 minutes if the kobo form or excel file is ready.",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1304,7 +1304,7 @@
       "tool": 2,
       "question": 4,
       "description": "There is no additional charge for the maintenance of the 121 Platform. This includes all software updates, backups and bug-fixes. On customisation of the current tool: The 121 platform team has a close collaboration with all their partners. Since it is a movement product, users have the ability to influence the roadmap. Customisations and enhancements will be taken into account if multiple partners can benefit from it, free of charge.",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1319,7 +1319,7 @@
       "tool": 2,
       "question": 5,
       "description": "The training format is a comprehensive format including 1 day how to use the platform. 1 day suffice to know how to use 121.  An additional day about CVA IM, digitalization and workflow, and finally half a day is used for practice sessions. A total of 2.5 days is required to fully adopt the 121 Platform. \r\nTraining materials are provided at the end of the training. Most trainings are adjusted to the local team. \r\nAn online user manual is available via the platform. \r\nIn addition, the team can provide CVA IM trainings on Kobo and PowerBI to build further the team capacities.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1334,7 +1334,7 @@
       "tool": 2,
       "question": 6,
       "description": "The 121 platform supports projects up to 250.000 households per project. Over 15 NS have already used the 121 platform at scale!",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1349,7 +1349,7 @@
       "tool": 2,
       "question": 7,
       "description": "Because the 121 platform integrates effortlessly with kobo toolbox, the offline capabilities of kobo are leveraged. The added benefit is that volunteers don't have to be re-trained.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1364,7 +1364,7 @@
       "tool": 2,
       "question": 8,
       "description": "The 121 platform supports automatic (and real-time) flagging of duplicates. Because this is clearly indicated in the platform, users can make sure to handle these duplicates before starting payments.\r\nIt further supports advanced filtering to identify missing or wrong data.\r\nLastly, there are automatic checks on the phoneNumber to make sure that these are entered correctly",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1379,7 +1379,7 @@
       "tool": 2,
       "question": 9,
       "description": "Data can be exported (if the user role allows it) in both xlsx and csv formats.\r\nFurther; the 121 Platform API allows for integration with PowerBI and other 3rd party tools (like DEH and EspoCRM).",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1394,7 +1394,7 @@
       "tool": 2,
       "question": 10,
       "description": "Data visualization is built into the 121 Platform.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1409,7 +1409,7 @@
       "tool": 2,
       "question": 11,
       "description": "The 121 platform complies with the GDPR - a legal framework that protects the fundamental rights and freedoms of natural persons with regard to the processing of personal data in the EU. GDPR compliance requires stronger protections than many other legal frameworks. The 121 Platform is checked on security by a 3rd party expert twice a year.\r\nAccess to data (and exports) can be limited based on a user role. Data protection is always part of a 121 training.\r\nAll actions performed on a profile (data changes, status changes, messages, etc.) are logged, visible in the platform and can be exported for audit purposes.",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1424,7 +1424,7 @@
       "tool": 3,
       "question": 1,
       "description": "EspoCRM Cloud offers a flexible pricing model where costs are based on a fixed price per user. There are no setup costs. EspoCRM Cloud support is included in the price per user. Price per user depends on the storage size of the system.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1439,7 +1439,7 @@
       "tool": 3,
       "question": 2,
       "description": "Activation can be done quickly by the vendor. Total set up time depends on complexity of the operation, but requires manual mapping of relationships between fields, establishing field types, setting user groups and permissions. All of this can be done directly in the browser and is not difficult. More complex needs, like FSP API linkages, will take time from someone with technical experience in that process.",
-      "ordinal_value": 13,
+      "ordinal_value": 3,
       "selected_options": []
     }
   },
@@ -1454,7 +1454,7 @@
       "tool": 3,
       "question": 3,
       "description": "Cloud based hosting is set up by the company as part of a subscription.",
-      "ordinal_value": 13,
+      "ordinal_value": 3,
       "selected_options": []
     }
   },
@@ -1469,7 +1469,7 @@
       "tool": 3,
       "question": 4,
       "description": "Upgrades to the system are done automatically by the developer.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1484,7 +1484,7 @@
       "tool": 3,
       "question": 5,
       "description": "Paid cloud hosting plans include dedicated email support from the developer, available during workday business hours. As a less popular tool, self-service documentation and forum support is limited.",
-      "ordinal_value": 13,
+      "ordinal_value": 3,
       "selected_options": []
     }
   },
@@ -1499,7 +1499,7 @@
       "tool": 3,
       "question": 6,
       "description": "Though not validated by the data management framework team, interviews with users of this tool report that it can slow down when record counts and cross-table queries add up. It should not be seen as a barrier, but local hosting requires consideration of your project scope as it can impact very large datasets.",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1514,7 +1514,7 @@
       "tool": 3,
       "question": 7,
       "description": "Data is stored in the cloud, which means an active connection is required to access. However, the export functionality means you could download snapshots of the data to work with, so full connectivity isn't completely necessary.",
-      "ordinal_value": 13,
+      "ordinal_value": 3,
       "selected_options": []
     }
   },
@@ -1529,7 +1529,7 @@
       "tool": 3,
       "question": 8,
       "description": "No native data cleaning tools present. A reporting tool can be used for specific queries, so looking for duplicate entries is possible via a simple search, but large scale data validation and find/replace features not present without more complex workflows that either involve usage of other tools (e.g. Excel) or technical expertise.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1544,7 +1544,7 @@
       "tool": 3,
       "question": 9,
       "description": "Data is stored in CSV format and can be exported like that or in XLSX format. APIs can be connected in JSON format. Delimiters on exported data can be customized.\r\n\r\nShould you choose to cancel EspoCRM-based Cloud hosting, you can switch to on-premise setups without any additional cost.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1559,7 +1559,7 @@
       "tool": 3,
       "question": 10,
       "description": "Good reporting functionality but limited native visualization features.",
-      "ordinal_value": 13,
+      "ordinal_value": 3,
       "selected_options": []
     }
   },
@@ -1574,7 +1574,7 @@
       "tool": 3,
       "question": 11,
       "description": "Servers are only available in Germany and Canada, so any policies related to location of servers or the transfer of PII across national borders will need to consider with that possible limitation. LDAP authentication ensures users’ permissions can be controlled, and sensitive fields can be hidden for certain user groups. Logs are maintained of all user activity. SSL Encryption (HTTPS Support) for all cloud hosted accounts.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1589,7 +1589,7 @@
       "tool": 4,
       "question": 1,
       "description": "A National Society might have access to Excel through a Microsoft subscription. If not, LibreOffice may be used at no cost. The IFRC provides all National Societies with free access to a Kobo server.",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1604,7 +1604,7 @@
       "tool": 4,
       "question": 2,
       "description": "Files can be created and customized quickly with no bottlenecks.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1619,7 +1619,7 @@
       "tool": 4,
       "question": 3,
       "description": "Getting an Excel file up and running obviously requires very little technical capacity, but while the barrier to entry is low, the learning curve for taking advantage of more advanced features as a data management tool can be steep.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1634,7 +1634,7 @@
       "tool": 4,
       "question": 4,
       "description": "Assuming the file or files have been set up properly, making changes to large datasets is not difficult in Excel.",
-      "ordinal_value": 13,
+      "ordinal_value": 3,
       "selected_options": []
     }
   },
@@ -1649,7 +1649,7 @@
       "tool": 4,
       "question": 5,
       "description": "As one of the most widely used spreadsheet tools in the world, there is an abundance of available resources online, including support forums.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1664,7 +1664,7 @@
       "tool": 4,
       "question": 6,
       "description": "No description provided.",
-      "ordinal_value": 14,
+      "ordinal_value": 4,
       "selected_options": []
     }
   },
@@ -1679,7 +1679,7 @@
       "tool": 4,
       "question": 7,
       "description": "Excel files can be accessed and edited both offline and online (when stored in a cloud service like Dropbox, SharePoint, or similar).",
-      "ordinal_value": 13,
+      "ordinal_value": 3,
       "selected_options": []
     }
   },
@@ -1694,7 +1694,7 @@
       "tool": 4,
       "question": 8,
       "description": "Excel has robust features for cleaning data, but more advanced processes require a deeper understanding of the process (i.e. no \"out-of-the-box\" data cleaning)",
-      "ordinal_value": 13,
+      "ordinal_value": 3,
       "selected_options": []
     }
   },
@@ -1709,7 +1709,7 @@
       "tool": 4,
       "question": 9,
       "description": "The format of data stored in Excel is very interoperable and supports conversion to many other popular formats with very little skill required. When the file is stored in a cloud service like Dropbox, third party tools can be granted access to parts of—or the entire—file. However, without utilization of a cloud hosting service to store the file, creating live connections directly to the data requires a high degree of technical ability.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1724,7 +1724,7 @@
       "tool": 4,
       "question": 10,
       "description": "Tool offers decent visualization options. Essentially limitless ways to analyze the data, but like data cleaning, requires user to understand the process (i.e. does not provide automatic analysis)",
-      "ordinal_value": 13,
+      "ordinal_value": 3,
       "selected_options": []
     }
   },
@@ -1739,7 +1739,7 @@
       "tool": 4,
       "question": 11,
       "description": "No description provided.",
-      "ordinal_value": 10,
+      "ordinal_value": 100,
       "selected_options": []
     }
   },
@@ -1754,7 +1754,7 @@
       "tool": 5,
       "question": 1,
       "description": "\"Core features such as launching needs assessments, PDMs, creating information only programs, and creating voucher programs are free.\r\n\r\nConsumption based pricing occurs when launching a cash program and includes transaction fees, identity verification and other fees)\"",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1769,7 +1769,7 @@
       "tool": 5,
       "question": 2,
       "description": "The system is always on 24/7. Once you have access, humanitarians can rapidly launch a program (cash program or voucher program), conduct a needs assessments, or utilize the check-in features to track visits to national society facilities.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1784,7 +1784,7 @@
       "tool": 5,
       "question": 3,
       "description": "Configurable features - self-enrollment, needs assessments, information campaigns, PDMs, messaging - can be used to help manage the disaster cycle.",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1799,7 +1799,7 @@
       "tool": 5,
       "question": 4,
       "description": "Access RC is governed by IFRC and member National Societies, supported by strategic private sector partnerships for technical expertise and funding. The product is continuously being updated and improved. Feedback process allows national societies to share experiences and ask for changes. If selected, enhancements are created and provided at no cost to the national society.",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1814,7 +1814,7 @@
       "tool": 5,
       "question": 5,
       "description": "For training and documentation, there is an online repository with user guides, FAQs, IFRC supported learning modules, plus the option of in-country training by surge delegates.",
-      "ordinal_value": 14,
+      "ordinal_value": 4,
       "selected_options": []
     }
   },
@@ -1829,7 +1829,7 @@
       "tool": 5,
       "question": 6,
       "description": "\"Access RC works for large-scale, multi-country emergencies and can also be utilized for smaller, localized preparedness, anticipatory action, response and recovery efforts.\r\n\r\nLeverages scalable cloud infrastructure for rapid capacity adjustments and simplified updates, while retaining the choice for local hosting where required. Previous national societies have announced programs to all accounts in the country and registered 12,000 people in 24 hours.\"",
-      "ordinal_value": 12,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1844,7 +1844,7 @@
       "tool": 5,
       "question": 7,
       "description": "Beneficiaries use a Android/iOS mobile app. National Society staff use a web-based portal.\r\n\r\nDefault cloud hosting can introduce performance challenges in low-connectivity regions.",
-      "ordinal_value": 14,
+      "ordinal_value": 4,
       "selected_options": []
     }
   },
@@ -1859,7 +1859,7 @@
       "tool": 5,
       "question": 8,
       "description": "AccessRC has a number data cleaning and de-dupliacation checks. We have verification levels to increase the level of assurance on identities applying for programs. When a user submits identity documents, we use an ID verification service to verify the document is real, the ID is owned by the user and matches their face. We also extract the information on the document. For documents that cannot be auto approved, we run the reviews by caseworkers to make the final decision. All this data is then utilized for de-duplication. We can check for duplicate accounts (duplication of biodata). We can also allow for configuration of de-duplication against other programs. AccessRC also has pre-payment checks that warn when batch payments are out of compliance. These prevent the double payment of individuals.",
-      "ordinal_value": 11,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1874,7 +1874,7 @@
       "tool": 5,
       "question": 9,
       "description": "For interoperability, open APIs connect seamlessly to data management systems for end-to-end coordination.",
-      "ordinal_value": 14,
+      "ordinal_value": 4,
       "selected_options": []
     }
   },
@@ -1889,7 +1889,7 @@
       "tool": 5,
       "question": 10,
       "description": "Comprehensive built in data visualization exists with almost real time refresh. These are self-service dashboards at higher level overviews as well as program level dashboards that cover everything from applications, application processing, and assistance monitoring.",
-      "ordinal_value": 14,
+      "ordinal_value": 4,
       "selected_options": []
     }
   },
@@ -1904,7 +1904,7 @@
       "tool": 5,
       "question": 11,
       "description": "The platform supports secure ID upload via integrated vendor verification. Built with stringent data privacy and security measures - including role-based access controls and end-to-end encryption - AccessRC meets IFRC data protection standards.\r\n\r\nDefault cloud hosting can raise data-residency compliance questions - though local hosting deployments remain fully supported as an alternative.",
-      "ordinal_value": 14,
+      "ordinal_value": 4,
       "selected_options": []
     }
   }

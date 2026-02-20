@@ -6,6 +6,7 @@ from strawberry_django.optimizer import DjangoOptimizerExtension
 
 from apps.resources.graphql import mutations as resource_mutations
 from apps.resources.graphql import queries as resources_queries
+from apps.tool_picker.graphql import mutations as tool_picker_muations
 from apps.tool_picker.graphql import queries as tool_picker_queries
 from apps.user.graphql import queries as user_queries
 
@@ -37,6 +38,7 @@ class Query(
 @strawberry.type
 class Mutation(
     resource_mutations.Mutation,
+    tool_picker_muations.Mutation,
 ): ...
 
 

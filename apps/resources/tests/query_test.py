@@ -1,7 +1,7 @@
 import typing
 
 from apps.resources.factories import CaseStudyFactory
-from apps.tool_picker.factories import ToolFactory
+from apps.tool_picker.factories import CatalogFactory, ToolFactory
 from apps.user.factories import UserFactory
 from main.tests import TestCase
 
@@ -45,8 +45,11 @@ class TestResourceQueries(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.catalog = CatalogFactory.create()
         cls.user = UserFactory.create()
-        cls.tool = ToolFactory.create()
+        cls.tool = ToolFactory.create(
+            catalogs=[cls.catalog],
+        )
         cls.case_studies = CaseStudyFactory.create_batch(
             3,
             tool=cls.tool,
