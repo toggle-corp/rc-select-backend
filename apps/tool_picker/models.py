@@ -122,12 +122,6 @@ class Question(UserResource):
 
     class Meta(UserResource.Meta):
         ordering = ["catalog", "order"]
-        constraints = [
-            models.UniqueConstraint(
-                fields=["catalog", "order"],
-                name="unique_catalog_order",
-            ),
-        ]
 
     @typing.override
     def __str__(self) -> str:
