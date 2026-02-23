@@ -2,10 +2,11 @@
 from django.contrib import admin
 
 from apps.resources.models import CaseStudy, ContactRequest
+from apps.tool_picker.admin import ReadOnlyMixin
 
 
 @admin.register(ContactRequest)
-class ContactRequestAdmin(admin.ModelAdmin[ContactRequest]):
+class ContactRequestAdmin(ReadOnlyMixin, admin.ModelAdmin[ContactRequest]):
     list_display = ("name", "email", "national_society", "created_at")
     search_fields = ("name", "email")
 
