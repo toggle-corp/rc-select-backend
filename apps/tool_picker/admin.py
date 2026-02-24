@@ -23,6 +23,17 @@ from .models import (
 )
 
 
+class ReadOnlyMixin:
+    def has_add_permission(self, *args, **kwargs):
+        return False
+
+    def has_change_permission(self, *args, **kwargs):
+        return False
+
+    def has_delete_permission(self, *args, **kwargs):
+        return False
+
+
 # Inline for Checkbox Options within Question
 class CheckboxOptionInline(admin.TabularInline):  # type: ignore[reportMissingTypeArgument]
     model = CheckboxOption
@@ -393,7 +404,7 @@ class UserAnswerAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgume
 
 
 @admin.register(RecommendationResult)
-class RecommendationResultAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
+class RecommendationResultAdmin(ReadOnlyMixin, admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
     list_display = ["submission_short", "rank", "tool", "score", "catalog"]
     list_filter = ["submission__catalog", "rank"]
     search_fields = ["submission__id", "tool__name"]

@@ -12,6 +12,8 @@ base_graphql_kwargs = dict(
     multipart_uploads_enabled=True,
 )
 
+admin.site.site_header = "RC Select Admin Portal"
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("health-check/", include("health_check.urls")),
