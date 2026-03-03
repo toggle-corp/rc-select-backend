@@ -107,7 +107,7 @@ class Question(UserResource):
     title = models.CharField[str, str](max_length=500)
     short_name = models.CharField[str, str](max_length=500)
     description = models.TextField[str, str](blank=True)
-    order = models.IntegerField[int, int](default=0, validators=[MinValueValidator(0)])
+    order = models.PositiveIntegerField[int, int]()
 
     # Ordinal-specific fields
     label_na = models.TextField[str, str](default="N/A", blank=True)
@@ -137,7 +137,7 @@ class CheckboxOption(UserResource):
         related_name="options",
     )
     text = models.CharField[str, str](max_length=300)
-    order = models.IntegerField[int, int](default=0, validators=[MinValueValidator(0)])
+    order = models.PositiveIntegerField[int, int]()
 
     class Meta(UserResource.Meta):
         ordering = ["question", "order"]
