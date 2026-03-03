@@ -213,6 +213,7 @@ type QuestionTitleType {
   title: String!
   questionType: QuestionTypeEnum!
   description: String!
+  order: Int!
 }
 
 """Model representing question within a catalog."""
