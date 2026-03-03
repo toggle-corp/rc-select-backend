@@ -19,6 +19,7 @@ class QuestionTitleType:
     title: strawberry.auto
     question_type: strawberry.auto
     description: strawberry.auto
+    order: strawberry.auto
 
 
 @strawberry_django.type(CheckboxOption)
