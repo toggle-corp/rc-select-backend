@@ -12,6 +12,7 @@ class CaseStudyType:
     tool_id: strawberry.ID
     content: strawberry.auto
     cover_image: DjangoFileType | None
+    link: strawberry.auto
 
 
 @strawberry_django.type(ContactRequest)

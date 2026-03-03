@@ -38,6 +38,7 @@ type CaseStudyType {
   toolId: ID!
   content: String!
   coverImage: DjangoFileType
+  link: String
 }
 
 type CaseStudyTypeOffsetPaginated {

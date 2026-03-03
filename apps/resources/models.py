@@ -40,6 +40,11 @@ class CaseStudy(UserResource):
         on_delete=models.CASCADE,
         related_name="case_studies",
     )
+    link = models.URLField(
+        blank=True,
+        null=True,
+        verbose_name="External case study URL",
+    )
 
     class Meta(UserResource.Meta):
         ordering = ["title"]
