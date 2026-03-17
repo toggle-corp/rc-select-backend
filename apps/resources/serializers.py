@@ -3,7 +3,8 @@ import typing
 from captcha.serializers import CaptchaModelSerializer
 from rest_framework import serializers
 
-from apps.resources.models import ContactRequest
+from apps.resources.models import ContactRequest, RequestDemo
+from apps.tool_picker.models import Tool
 
 
 class ContactRequestSerializer(CaptchaModelSerializer):
@@ -26,3 +27,19 @@ class ContactRequestSerializer(CaptchaModelSerializer):
         validated_data.pop("captcha_code", None)
         validated_data.pop("captcha_hashkey", None)
         return super().create(validated_data)
+
+
+class RequestDemoSerializer(serializers.ModelSerializer):
+    tool = serializers.PrimaryKeyRelatedField(
+        queryset=Tool.objects.all(),
+    )
+
+    class Meta:
+        model = RequestDemo
+        fields = (
+            "name",
+            "email",
+            "national_society",
+            "content",
+            "tool",
+        )

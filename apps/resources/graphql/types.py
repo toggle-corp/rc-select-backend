@@ -1,7 +1,7 @@
 import strawberry
 import strawberry_django
 
-from apps.resources.models import CaseStudy, ContactRequest
+from apps.resources.models import CaseStudy, ContactRequest, RequestDemo
 from utils.graphql.types import DjangoFileType
 
 
@@ -23,3 +23,14 @@ class ContactRequestType:
     created_at: strawberry.auto
     content: strawberry.auto
     national_society: strawberry.auto
+
+
+@strawberry_django.type(RequestDemo)
+class RequestDemoType:
+    id: strawberry.ID
+    name: strawberry.auto
+    email: strawberry.auto
+    created_at: strawberry.auto
+    content: strawberry.auto
+    national_society: strawberry.auto
+    tool: strawberry.auto

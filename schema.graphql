@@ -119,6 +119,8 @@ type ContactRequestTypeMutationResponseType {
 
 union CreateContactRequestPayload = ContactRequestTypeMutationResponseType | OperationInfo
 
+union CreateDemoRequestPayload = RequestDemoTypeMutationResponseType | OperationInfo
+
 union CreateUserSubmissionPayload = UserSubmissionTypeMutationResponseType | OperationInfo
 
 """A generic type to return error messages"""
@@ -133,8 +135,13 @@ type DjangoFileType {
   url: String!
 }
 
+type DjangoModelType {
+  pk: ID!
+}
+
 type Mutation {
   createContactRequest(data: ContactRequestInput!): CreateContactRequestPayload!
+  createDemoRequest(data: RequestDemoInput!): CreateDemoRequestPayload!
   createUserSubmission(data: UserSubmissionInput!): CreateUserSubmissionPayload!
 }
 
@@ -271,6 +278,36 @@ type RecommendationResultTypeOffsetPaginated {
 
   """List of paginated results."""
   results: [RecommendationResultType!]!
+}
+
+"""
+Model representing contact where anyone can request the tool demo to the admins.
+"""
+input RequestDemoInput {
+  name: String!
+  email: String!
+  content: String
+  nationalSociety: String!
+  tool: Int!
+}
+
+"""
+Model representing contact where anyone can request the tool demo to the admins.
+"""
+type RequestDemoType {
+  id: ID!
+  name: String!
+  email: String!
+  createdAt: DateTime!
+  content: String
+  nationalSociety: String!
+  tool: DjangoModelType!
+}
+
+type RequestDemoTypeMutationResponseType {
+  ok: Boolean!
+  errors: CustomErrorType
+  result: RequestDemoType
 }
 
 """Model representing tool's selection of question and its answer."""

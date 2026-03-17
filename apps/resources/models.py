@@ -52,3 +52,26 @@ class CaseStudy(UserResource):
     @typing.override
     def __str__(self):
         return self.title
+
+
+class RequestDemo(models.Model):
+    """Model representing contact where anyone can request the tool demo to the admins."""
+
+    name = models.CharField[str, str](max_length=200)
+    email = models.CharField[str, str](max_length=200)
+    created_at = models.DateTimeField[datetime.datetime, datetime.datetime](auto_now_add=True)
+    national_society = models.CharField[str, str](max_length=200)
+    content = models.TextField[str, str](blank=True, null=True)
+    tool = models.ForeignKey[Tool, Tool](
+        Tool,
+        related_name="request_demo_tool",
+        verbose_name="Related Tool",
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        ordering = ["name"]
+
+    @typing.override
+    def __str__(self):
+        return self.name
