@@ -295,11 +295,13 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
                         ),
                     },
                 )
-
-                # If it already exists, just update modified_by
                 if not created:
                     tool_answer.modified_by = request.user  # type: ignore[reportMissingTypeArgument]
                     tool_answer.save(update_fields=["modified_by"])
+
+        ToolAnswer.objects.filter(tool=obj).exclude(
+            question__catalog__in=obj.catalogs.all(),
+        ).delete()
 
 
 # ============================================================================
