@@ -66,7 +66,7 @@ class CalculateRecommendationsTest(TestCase):
         ToolAnswerFactory(
             tool=cls.tool1,
             question=cls.ordinal_question,
-            ordinal_value=OrdinalTypeEnum.TWO,
+            ordinal_value=OrdinalTypeEnum.ONE,
         )
 
         tool1_with_checkbox = ToolAnswerFactory(
@@ -97,13 +97,10 @@ class CalculateRecommendationsTest(TestCase):
             submission=cls.submission,
         ).order_by("rank")
 
-        # Tool-1 should be best
         assert results[0].tool == cls.tool1
         assert results[0].rank == 1
+        assert results[0].score == 2  # tool1
 
-        # Tool-2 second
         assert results[1].tool == cls.tool2
         assert results[1].rank == 2
-
-        # Score ordering check
-        assert results[0].score > results[1].score
+        assert results[1].score == 1  # tool2

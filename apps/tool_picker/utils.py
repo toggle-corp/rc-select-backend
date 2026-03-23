@@ -9,26 +9,8 @@ from django.db.models import Prefetch, Q
 from apps.tool_picker.models import OrdinalTypeEnum, QuestionTypeEnum, RecommendationResult, Tool, ToolAnswer, UserSubmission
 
 
-def calculate_score_from_diff(diff: int) -> int:
-    """Convert difference between tool and user values to points.
-
-    Scoring table:
-    - diff = +3: -5 points (tool way more complex than user wants)
-    - diff = +2: -3 points (tool more complex than user wants)
-    - diff = +1: -1 points (tool slightly more complex)
-    - diff = 0:  +1 point  (exact match)
-    - diff < 0:  +3 points (tool simpler than user required)
-    """
-    if diff >= 3:
-        return -5
-    if diff == 2:
-        return -3
-    if diff == 1:
-        return -1
-    if diff == 0:
-        return 1
-    # diff < 0
-    return 3
+def calculate_score(diff: int) -> int:
+    return max(0, 3 - abs(diff))
 
 
 def is_checkbox_compatible(tool: Tool, user_checkbox_answers: dict[int, set[int]]) -> bool:
@@ -104,10 +86,11 @@ def calculate_recommendations(submission: UserSubmission):
             if user_value is None:
                 continue
 
-            diff = tool_answer.ordinal_value - user_value
-            total_point += calculate_score_from_diff(diff)
+            total_point += calculate_score(
+                tool_answer.ordinal_value - user_value,
+            )
 
-        tool_scores.append((tool, float(total_point)))
+        tool_scores.append((tool, total_point))
 
     sorted_tools = sorted(
         tool_scores,
