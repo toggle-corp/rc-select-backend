@@ -280,15 +280,14 @@ type RecommendationResultTypeOffsetPaginated {
   results: [RecommendationResultType!]!
 }
 
-"""
-Model representing contact where anyone can request the tool demo to the admins.
-"""
 input RequestDemoInput {
   name: String!
   email: String!
-  content: String
+  content: String!
   nationalSociety: String!
   tool: Int!
+  captchaHashkey: String!
+  captchaCode: String!
 }
 
 """

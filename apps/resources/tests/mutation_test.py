@@ -165,12 +165,18 @@ class TestRequestDemoMutation(TestCase):
         )
 
     def test_create_tool_demo_request(self):
+        captcha_key = CaptchaStore.generate_key()
+        captcha_obj = CaptchaStore.objects.get(hashkey=captcha_key)
+        captcha_code = captcha_obj.response
+
         tool_demo_request_data = {
             "name": "John",
             "email": "john@test.com",
             "nationalSociety": "Test National Society",
             "content": "This is test content",
             "tool": self.tool.id,
+            "captchaHashkey": captcha_key,
+            "captchaCode": captcha_code,
         }
 
         content = self._create_tool_demo_request_mutation(data=tool_demo_request_data)
@@ -190,3 +196,39 @@ class TestRequestDemoMutation(TestCase):
                 "pk": self.gID(demo_request.tool.pk),
             },
         }
+
+    def test_create_tool_demo_request_without_captcha(self):
+        tool_demo_request_data = {
+            "name": "John",
+            "email": "john@test.com",
+            "nationalSociety": "Test National Society",
+            "content": "This is test content",
+            "tool": self.tool.id,
+            "captchaHashkey": "",
+            "captchaCode": "",
+        }
+
+        content = self._create_tool_demo_request_mutation(data=tool_demo_request_data)
+        response = content["data"]["createDemoRequest"]
+
+        assert response["ok"] is False
+        assert response["result"] is None
+
+        assert response["errors"] == [
+            {
+                "field": "captchaCode",
+                "client_id": None,
+                "messages": "This field may not be blank.",
+                "object_errors": None,
+                "array_errors": None,
+                "pydantic_errors": None,
+            },
+            {
+                "field": "captchaHashkey",
+                "client_id": None,
+                "messages": "This field may not be blank.",
+                "object_errors": None,
+                "array_errors": None,
+                "pydantic_errors": None,
+            },
+        ]

@@ -1,7 +1,4 @@
 import strawberry
-import strawberry_django
-
-from apps.resources.models import RequestDemo
 
 
 @strawberry.input
@@ -14,10 +11,12 @@ class ContactRequestInput:
     captcha_code: str
 
 
-@strawberry_django.input(RequestDemo)
+@strawberry.input
 class RequestDemoInput:
-    name: strawberry.auto
-    email: strawberry.auto
-    content: strawberry.auto
-    national_society: strawberry.auto
+    name: str
+    email: str
+    content: str
+    national_society: str
     tool: int
+    captcha_hashkey: str
+    captcha_code: str

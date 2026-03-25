@@ -29,7 +29,10 @@ class ContactRequestSerializer(CaptchaModelSerializer):
         return super().create(validated_data)
 
 
-class RequestDemoSerializer(serializers.ModelSerializer):
+class RequestDemoSerializer(CaptchaModelSerializer):
+    captcha_code = serializers.CharField(write_only=True)
+    captcha_hashkey = serializers.CharField(write_only=True)
+
     tool = serializers.PrimaryKeyRelatedField(
         queryset=Tool.objects.all(),
     )
@@ -42,4 +45,12 @@ class RequestDemoSerializer(serializers.ModelSerializer):
             "national_society",
             "content",
             "tool",
+            "captcha_code",
+            "captcha_hashkey",
         )
+
+    @typing.override
+    def create(self, validated_data: dict[str, typing.Any]):
+        validated_data.pop("captcha_code", None)
+        validated_data.pop("captcha_hashkey", None)
+        return super().create(validated_data)
