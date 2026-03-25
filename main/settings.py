@@ -48,6 +48,17 @@ env = environ.Env(
     STATIC_ROOT=(str, BASE_DIR / "data/static"),
     # Pytest
     PYTEST_XDIST_WORKER=(str, None),
+    EMAIL_API_URL=(str, None),
+    EMAIL_API_KEY=(str, None),
+    EMAIL_BACKEND=(str, None),
+    EMAIL_API_TIMEOUT=(int, None),
+    EMAIL_HOST=(str, None),
+    EMAIL_PORT=(str, None),
+    EMAIL_USE_TLS=(bool, None),
+    EMAIL_HOST_USER=(str, None),
+    EMAIL_HOST_PASSWORD=(str, None),
+    DEFAULT_FROM_EMAIL=(str, None),
+    EMAIL_TO=(str, None),
 )
 
 
@@ -135,6 +146,7 @@ ROOT_URLCONF = "main.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [Path(BASE_DIR, "utils/templates/")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -382,3 +394,15 @@ STRAWBERRY_DJANGO = {
     "PAGINATION_DEFAULT_LIMIT": 20,
     "DEFAULT_PK_FIELD_NAME": "id",
 }
+# Email
+EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend")
+EMAIL_API_URL = env("EMAIL_API_URL")
+EMAIL_API_KEY = env("EMAIL_API_KEY")
+EMAIL_API_TIMEOUT = env("EMAIL_API_TIMEOUT", default=30)
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+EMAIL_TO = env("EMAIL_TO")
