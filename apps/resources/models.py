@@ -28,7 +28,7 @@ class CaseStudy(UserResource):
     """Model representing case study of national society for specific tool."""
 
     title = models.CharField[str, str](max_length=200)
-    content = models.TextField[str, str]()
+    content = models.TextField[str, str](max_length=320)
     cover_image = models.ImageField(
         upload_to="case_studies/",
         verbose_name="Case Study Cover Image",
@@ -40,11 +40,7 @@ class CaseStudy(UserResource):
         on_delete=models.CASCADE,
         related_name="case_studies",
     )
-    link = models.URLField(
-        blank=True,
-        null=True,
-        verbose_name="External case study URL",
-    )
+    link = models.URLField(verbose_name="External case study URL")
 
     class Meta(UserResource.Meta):
         ordering = ["title"]
