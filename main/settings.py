@@ -48,17 +48,18 @@ env = environ.Env(
     STATIC_ROOT=(str, BASE_DIR / "data/static"),
     # Pytest
     PYTEST_XDIST_WORKER=(str, None),
+    # Email
     EMAIL_API_URL=(str, None),
     EMAIL_API_KEY=(str, None),
     EMAIL_BACKEND=(str, None),
     EMAIL_API_TIMEOUT=(int, None),
     EMAIL_HOST=(str, None),
     EMAIL_PORT=(str, None),
-    EMAIL_USE_TLS=(bool, None),
     EMAIL_HOST_USER=(str, None),
     EMAIL_HOST_PASSWORD=(str, None),
     DEFAULT_FROM_EMAIL=(str, None),
     EMAIL_TO=(str, None),
+    EMAIL_USE_TLS=(bool, False),
 )
 
 
@@ -146,7 +147,7 @@ ROOT_URLCONF = "main.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [Path(BASE_DIR, "utils/templates/")],
+        "DIRS": [(BASE_DIR / "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

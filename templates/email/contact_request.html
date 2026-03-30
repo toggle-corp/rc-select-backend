@@ -1,0 +1,39 @@
+{% extends "email/base.html" %}
+{% block content %}
+<p style="font-size: 14px; margin-bottom: 15px;">
+  You have received a new contact request from the RC Select platform.
+</p>
+
+<div style="margin: 10px 0; border-top: 1px solid #dddddd;"></div>
+<table width="100%" cellpadding="0" cellspacing="0" style="font-size: 14px;">
+  <tr>
+    <td style="padding: 6px 0; font-weight: bold; width: 40%;">Name:</td>
+    <td style="padding: 6px 0;">{{ name }}</td>
+  </tr>
+
+  <tr>
+    <td style="padding: 6px 0; font-weight: bold; width: 40%;">Email:</td>
+    <td style="padding: 6px 0;">{{ email }}</td>
+  </tr>
+
+  <tr>
+    <td style="padding: 6px 0; font-weight: bold;">National Society:</td>
+    <td style="padding: 6px 0;">{{ national_society }}</td>
+  </tr>
+</table>
+
+<div style="margin: 10px 0; border-top: 1px solid #dddddd;"></div>
+
+<p style="font-weight: bold; margin-bottom: 8px;">Description:</p>
+
+<div style="
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #eeeeee;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+">
+  {{ content }}
+</div>
+{% endblock %}
