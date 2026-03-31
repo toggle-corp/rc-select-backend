@@ -285,7 +285,7 @@ input RequestDemoInput {
   email: String!
   content: String!
   nationalSociety: String!
-  tool: Int!
+  tool: ID!
   captchaHashkey: String!
   captchaCode: String!
 }
