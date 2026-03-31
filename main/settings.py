@@ -60,6 +60,11 @@ env = environ.Env(
     DEFAULT_FROM_EMAIL=(str, None),
     EMAIL_TO=(str, None),
     EMAIL_USE_TLS=(bool, False),
+    # celery
+    CELERY_REDIS_URL=str,  # redis://redis:6379/0
+    # Cache
+    CACHE_REDIS_URL=str,  # redis://redis:6379/1
+    TEST_CACHE_REDIS_URL=(str, None),  # redis://redis:6379/11
 )
 
 
@@ -407,3 +412,9 @@ EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 EMAIL_TO = env("EMAIL_TO")
+
+# Celery
+CELERY_REDIS_URL = env("CELERY_REDIS_URL")
+CACHE_REDIS_URL = env("CACHE_REDIS_URL")
+CELERY_BROKER_URL = CELERY_REDIS_URL
+CELERY_RESULT_BACKEND = CELERY_REDIS_URL

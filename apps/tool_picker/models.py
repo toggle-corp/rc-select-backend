@@ -232,7 +232,7 @@ class ToolAnswer(UserResource):
 
     # typing
     question_id: typing.ClassVar[int]
-    ordinal_value: int | None
+    ordinal_value: int | None  # noqa:PIE794
 
     class Meta(UserResource.Meta):
         verbose_name = "Tool Answer"

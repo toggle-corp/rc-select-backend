@@ -31,7 +31,7 @@ class Query(
     user_queries.Query,
 ):
     enums: AppEnumCollection = strawberry.field(  # type: ignore[reportGeneralTypeIssues]
-        resolver=lambda: AppEnumCollectionData(),
+        resolver=lambda: AppEnumCollectionData(),  # noqa: PLW0108
     )
 
 

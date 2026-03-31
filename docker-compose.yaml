@@ -42,6 +42,15 @@ x-server: &base_server_setup
     - ipython_data_local:/root/.ipython/profile_default   # persist ipython data, including ipython history
   depends_on:
     - db
+    - redis
+    - mailpit
+
+x-worker: &base_worker_setup
+  <<: *base_server_setup
+  restart: unless-stopped
+  environment:
+    <<: *base_server_environments
+    APP_TYPE: "WORKER"
 
 services:
   db:
@@ -53,12 +62,17 @@ services:
     volumes:
       - postgres_data17:/var/lib/postgresql/data
 
+  redis:
+    image: redis:8
+    volumes:
+      - redis_data:/data
+
   mailpit:
     image: axllent/mailpit
     container_name: mailpit
     restart: unless-stopped
     volumes:
-      - mailpit-data:/data
+      - mailpit_data:/data
     ports:
         - 8025:8025
     environment:
@@ -77,8 +91,20 @@ services:
       - 127.0.0.1:8000:8000
     depends_on:
       - db
+      - redis
+
+  worker:
+    <<: *base_worker_setup
+    command: bash -c "/code/misc/dev/run_worker.sh"
+    healthcheck:
+      test: ["CMD-SHELL", "celery -A main inspect ping -d celery@$$HOSTNAME || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
 
 volumes:
   postgres_data17:
   ipython_data_local:
-  mailpit-data:
+  mailpit_data:
+  redis_data:
