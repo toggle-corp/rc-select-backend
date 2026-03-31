@@ -53,6 +53,20 @@ services:
     volumes:
       - postgres_data17:/var/lib/postgresql/data
 
+  mailpit:
+    image: axllent/mailpit
+    container_name: mailpit
+    restart: unless-stopped
+    volumes:
+      - mailpit-data:/data
+    ports:
+        - 8025:8025
+    environment:
+        MP_MAX_MESSAGES: 5000
+        MP_DATABASE: /data/mailpit.db
+        MP_SMTP_AUTH_ACCEPT_ANY: 1
+        MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
   web:
     <<: *base_server_setup
     command: ["/code/misc/dev/run_web.sh"]
@@ -67,3 +81,4 @@ services:
 volumes:
   postgres_data17:
   ipython_data_local:
+  mailpit-data:
