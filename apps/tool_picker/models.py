@@ -159,6 +159,7 @@ class Tool(UserResource):
     catalogs = models.ManyToManyField(
         Catalog,
         related_name="tool_catalogs",
+        help_text="After adding or updating a catalog, the related questions are automatically populated to this tool.",
     )
     name = models.CharField[str, str](max_length=200)
     tagline = models.CharField[str, str](max_length=300, blank=True)
@@ -186,7 +187,14 @@ class Tool(UserResource):
 class OrdinalTypeEnum(models.IntegerChoices):
     """Enum representing scale of ordinal type question."""
 
-    NOT_AVAILABLE = 100, ("n/a")
+    """
+        Note: The enum labels are intentionally descriptive and user-friendly so they can be
+        used directly in the frontend UI and remain consistent with design requirements.
+    """
+    NOT_AVAILABLE = (
+        100,
+        ("We don't know enough to answer at this time or don't want to include this when considering options"),
+    )
     ONE = 1, ("One")
     TWO = 2, ("Two")
     THREE = 3, ("Three")
