@@ -9,16 +9,14 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Poppins, Arial, sans-serif;
     }
 
     .container {
-      max-width: 600px;
+      max-width: 100%;
       margin: 20px auto;
       background-color: #ffffff;
       padding: 20px;
-      border: 1px solid #e0e0e0;
     }
 
     .header {
@@ -34,12 +32,6 @@
       color: #555555;
     }
 
-    .row {
-      display: flex;
-      padding: 8px 0;
-      border-bottom: 1px solid #eeeeee;
-      font-size: 14px;
-    }
 
     .label {
       width: 40%;
@@ -50,12 +42,6 @@
     .value {
       width: 60%;
       color: #000000;
-    }
-
-    .footer {
-      margin-top: 20px;
-      font-size: 12px;
-      color: #888888;
     }
 
     @media only screen and (max-width: 600px) {
@@ -82,10 +68,6 @@
 
     {% block content %}
     {% endblock %}
-
-    <div class="footer">
-      This email was generated automatically by RC Select Platform.
-    </div>
 
   </div>
 </body>

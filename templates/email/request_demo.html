@@ -2,47 +2,44 @@
 
 {% block content %}
 
-<p style="font-size: 14px; margin-bottom: 15px;">
-  You have received a new demo request from the RC Select platform.
+<div style="margin-bottom: 20px;">
+  <!-- TODO: Add Logo link here -->
+  <img src="../assets/logos.png" alt="logos" style="width: 100%; max-width: 600px; height: auto; display: block;">
+</div>
+
+<p style="font-size: 14px; margin-bottom: 15px; font-weight: bold; font-family: Arial, sans-serif; color: #000000;">
+  You got a new Request for Demo!
 </p>
 
-<div style="margin: 10px 0; border-top: 1px solid #dddddd;"></div>
-
-<table width="100%" cellpadding="0" cellspacing="0" style="font-size: 14px;">
-
-  <tr>
-    <td style="padding: 6px 0; font-weight: bold; width: 40%;">Name:</td>
-    <td style="padding: 6px 0;">{{ name }}</td>
-  </tr>
-
-  <tr>
-    <td style="padding: 6px 0; font-weight: bold; width: 40%;">Email:</td>
-    <td style="padding: 6px 0;">{{ email }}</td>
-  </tr>
-
-  <tr>
-    <td style="padding: 6px 0; font-weight: bold;">National Society:</td>
-    <td style="padding: 6px 0;">{{ national_society }}</td>
-  </tr>
-  <tr>
-    <td style="padding: 6px 0; font-weight: bold;">Requested Tool:</td>
-    <td style="padding: 6px 0;">{{ tool }}</td>
-  </tr>
-</table>
-
-
-<div style="margin: 10px 0; border-top: 1px solid #dddddd;"></div>
-
-<p style="font-weight: bold; margin-bottom: 8px;">Description:</p>
-
-<div style="
-  background-color: #f9f9f9;
-  padding: 10px;
-  border: 1px solid #eeeeee;
-  font-size: 14px;
-  line-height: 1.5;
-  white-space: pre-line;
-">
-  {{ content }}
+<!-- TODO: Add tool owner name here -->
+<div style="font-size: 14px; margin-bottom: 15px; font-family: Arial, sans-serif; color: #000000;">
+  Hi {{name}},
 </div>
+
+<!-- TODO: Add tool name here -->
+<div style="font-size: 14px; margin-bottom: 15px; font-family: Arial, sans-serif; color: #000000;">
+  You've received a new demo request from a user through {{name}}:
+</div>
+
+<div style="font-size: 14px; margin-bottom: 15px; font-family: Arial, sans-serif; color: #000000;">
+  User Information:
+</div>
+
+<ul style="padding-left: 20px; margin: 0; font-family: Arial, sans-serif; font-size: 14px; color: #000000; line-height: 1.6;">
+  <li style="margin-bottom: 8px;">
+    <strong style="color: #000000;">Name:</strong> {{ name }}
+  </li>
+  
+  <li style="margin-bottom: 8px;">
+    <strong style="color: #000000;">Email:</strong> {{ email }}
+  </li>
+  
+  <li style="margin-bottom: 8px;">
+    <strong style="color: #000000;">National Society:</strong> {{ national_society }}
+  </li>
+
+  <li style="margin-bottom: 8px;">
+    <strong style="color: #000000;">Description:</strong> {{ content }}
+  </li>
+</ul>
 {% endblock %}
