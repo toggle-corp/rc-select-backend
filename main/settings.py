@@ -77,7 +77,7 @@ FRONTEND_DOMAIN = env.url("FRONTEND_DOMAIN")
 APP_ENVIRONMENT = env("APP_ENVIRONMENT").upper()
 APP_TYPE = env("APP_TYPE").upper()
 SECRET_KEY = env("DJANGO_SECRET_KEY")
-
+STATICFILES_DIRS = (str(BASE_DIR.joinpath("static")),)
 DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = [

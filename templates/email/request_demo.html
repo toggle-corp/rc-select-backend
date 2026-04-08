@@ -1,45 +1,115 @@
 {% extends "email/base.html" %}
-
 {% block content %}
+{% load custom_tags %}
 
-<div style="margin-bottom: 20px;">
-  <!-- TODO: Add Logo link here -->
-  <img src="../assets/logos.png" alt="logos" style="width: 100%; max-width: 600px; height: auto; display: block;">
+<!-- Logo -->
+<div style="margin-bottom: 24px;">
+  <img
+    alt="RC Select Logo" height="auto"
+    src="{{ 'images/rc-select-logo.png' | static_full_path }}"
+    style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:30%;font-size:14px;"
+    width="10"
+  />
 </div>
 
-<p style="font-size: 14px; margin-bottom: 15px; font-weight: bold; font-family: Arial, sans-serif; color: #000000;">
-  You got a new Request for Demo!
+<!-- Heading -->
+<p style="font-size: 20px; margin: 0 0 4px 0; font-weight: bold; font-family: Arial, sans-serif; color: #1a1a2e;">
+  New Demo Request
+</p>
+<p style="font-size: 14px; margin: 0 0 24px 0; font-family: Arial, sans-serif; color: #6b7280;">
+  Someone is interested in seeing <strong style="color: #c4362a;">{{ tool }}</strong> in action.
 </p>
 
-<!-- TODO: Add tool owner name here -->
-<div style="font-size: 14px; margin-bottom: 15px; font-family: Arial, sans-serif; color: #000000;">
-  Hi {{name}},
+<!-- Divider -->
+<hr style="border: none; border-top: 1px solid #e5e7eb; margin: 0 0 24px 0;" />
+
+<!-- User Info Card -->
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f8f9fb; border-radius: 8px; border: 1px solid #ebedf0;">
+  <tr>
+    <td style="padding: 20px 24px;">
+
+      <!-- Row: Name -->
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+          <td width="130" style="padding: 8px 0; vertical-align: top;">
+            <span style="font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.8px; color: #9ca3af; font-family: Arial, sans-serif;">Name</span>
+          </td>
+          <td style="padding: 8px 0; vertical-align: top;">
+            <span style="font-size: 14px; font-weight: bold; color: #1a1a2e; font-family: Arial, sans-serif;">{{ name }}</span>
+          </td>
+        </tr>
+      </table>
+
+      <hr style="border: none; border-top: 1px solid #e8eaed; margin: 0;" />
+
+      <!-- Row: Email -->
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+          <td width="130" style="padding: 8px 0; vertical-align: top;">
+            <span style="font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.8px; color: #9ca3af; font-family: Arial, sans-serif;">Email</span>
+          </td>
+          <td style="padding: 8px 0; vertical-align: top;">
+            <a href="mailto:{{ email }}" style="font-size: 14px; color: #c4362a; text-decoration: none; font-family: Arial, sans-serif;">{{ email }}</a>
+          </td>
+        </tr>
+      </table>
+
+      <hr style="border: none; border-top: 1px solid #e8eaed; margin: 0;" />
+
+      <!-- Row: Tool -->
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+          <td width="130" style="padding: 8px 0; vertical-align: top;">
+            <span style="font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.8px; color: #9ca3af; font-family: Arial, sans-serif;">Tool</span>
+          </td>
+          <td style="padding: 8px 0; vertical-align: top;">
+            <span style="font-size: 14px; color: #1a1a2e; font-family: Arial, sans-serif;">{{ tool }}</span>
+          </td>
+        </tr>
+      </table>
+
+      <hr style="border: none; border-top: 1px solid #e8eaed; margin: 0;" />
+
+      <!-- Row: National Society -->
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+          <td width="130" style="padding: 8px 0; vertical-align: top;">
+            <span style="font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.8px; color: #9ca3af; font-family: Arial, sans-serif;">National Society</span>
+          </td>
+          <td style="padding: 8px 0; vertical-align: top;">
+            <span style="font-size: 14px; color: #1a1a2e; font-family: Arial, sans-serif;">{{ national_society }}</span>
+          </td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+</table>
+
+<!-- Description -->
+<div style="margin-top: 24px;">
+  <p style="margin: 0 0 8px 0; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.8px; color: #9ca3af; font-family: Arial, sans-serif;">
+    Description
+  </p>
+  <div style="background-color: #fef9f8; border-left: 4px solid #c4362a; border-radius: 0 6px 6px 0; padding: 16px 20px;">
+    <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #374151; font-family: Arial, sans-serif;">
+      {{ content }}
+    </p>
+  </div>
 </div>
 
-<!-- TODO: Add tool name here -->
-<div style="font-size: 14px; margin-bottom: 15px; font-family: Arial, sans-serif; color: #000000;">
-  You've received a new demo request from a user through {{name}}:
+<!-- CTA -->
+<div style="margin-top: 28px; text-align: center;">
+  <a href="mailto:{{ email }}?subject=Re: Demo Request for {{ tool }}" style="display: inline-block; background-color: #f5333f; color: #ffffff; font-size: 14px; font-weight: bold; text-decoration: none; padding: 12px 36px; border-radius: 6px; font-family: Arial, sans-serif;">
+    Reply to {{ name }} &rarr;
+  </a>
 </div>
 
-<div style="font-size: 14px; margin-bottom: 15px; font-family: Arial, sans-serif; color: #000000;">
-  User Information:
+<div style="margin-top: 28px;">
+  <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 0 0 16px 0;" />
+  <p style="margin: 0; font-size: 12px; color: #9ca3af; font-family: Arial, sans-serif; line-height: 1.5;">
+    This is an automated notification. Please do not forward this email as it contains the requester&rsquo;s contact information.
+  </p>
 </div>
 
-<ul style="padding-left: 20px; margin: 0; font-family: Arial, sans-serif; font-size: 14px; color: #000000; line-height: 1.6;">
-  <li style="margin-bottom: 8px;">
-    <strong style="color: #000000;">Name:</strong> {{ name }}
-  </li>
-  
-  <li style="margin-bottom: 8px;">
-    <strong style="color: #000000;">Email:</strong> {{ email }}
-  </li>
-  
-  <li style="margin-bottom: 8px;">
-    <strong style="color: #000000;">National Society:</strong> {{ national_society }}
-  </li>
-
-  <li style="margin-bottom: 8px;">
-    <strong style="color: #000000;">Description:</strong> {{ content }}
-  </li>
-</ul>
 {% endblock %}
