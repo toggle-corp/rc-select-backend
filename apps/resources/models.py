@@ -32,8 +32,6 @@ class CaseStudy(UserResource):
     cover_image = models.ImageField(
         upload_to="case_studies/",
         verbose_name="Case Study Cover Image",
-        null=True,
-        blank=True,
     )
     tool = models.ForeignKey[Tool, Tool](
         Tool,
