@@ -9,6 +9,6 @@ class IsAuthenticated(BasePermission):
     message = "User is not authenticated"
 
     @sync_to_async
-    def has_permission(self, source: typing.Any, info: Info, **_) -> bool:
+    def has_permission(self, source: typing.Any, info: Info, **_) -> bool:  # noqa: Vulture
         user = info.context.request.user
         return bool(user and user.is_authenticated)
