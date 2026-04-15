@@ -23,16 +23,6 @@ app:
         size: .5Gi
         storageClass:
 
-  celery:
-    enabled: true
-    resources:
-      requests:
-        cpu: "0.5"
-        memory: 0.4Gi
-      limits:
-        cpu: "2"
-        memory: 2Gi
-
   postgresql:
     enabled: true
     fullnameOverride: "rc-select-postgresql"
@@ -116,7 +106,34 @@ app:
         command: ["/bin/bash", "-c",  "./manage.py loaddata seed-data/db_seed.json" ]
 
   worker:
-    enabled: false
+    enabled: true
+    beat:
+      command: ["celery", "-A", "main", "beat", "-l", "INFO"]
+      resources:
+        requests:
+          cpu: "0.1"
+          memory: 0.5Gi
+        limits:
+          cpu: "1"
+          memory: 1Gi
+    queueCommandPrefix:
+      - "celery"
+      - "-A"
+      - "main"
+      - "worker"
+      - "-l"
+      - "INFO"
+    queues:
+      default:
+        enabled: true
+        replicaCount: 1
+        celeryArgs:
+          - "-Q"
+          - "default"
+          - "--concurrency"
+          - "4"
+          - "--max-tasks-per-child"
+          - "10"
 
   env:
     APP_RELEASE: "{{ $.Values.image.tag }}"
