@@ -151,3 +151,11 @@ app:
     # Redis
     CELERY_REDIS_URL: "redis://{{ printf \"%s-master\" (include \"common.names.fullname\" $.Subcharts.redis) }}:6379/0"
     CACHE_REDIS_URL: "redis://{{ printf \"%s-master\" (include \"common.names.fullname\" $.Subcharts.redis) }}:6379/1"
+
+    # Email
+    DEFAULT_FROM_EMAIL: "{{ required \".app.secrets.DEFAULT_FROM_EMAIL\" nil }}"
+    EMAIL_HOST: "{{ required \".app.secrets.EMAIL_HOST\" nil }}"
+    EMAIL_PORT: "{{ required \".app.secrets.EMAIL_PORT\" nil }}"
+    EMAIL_HOST_USER: "{{ required \".app.secrets.EMAIL_HOST_USER\" nil }}"
+    EMAIL_HOST_PASSWORD: "{{ required \".app.secrets.EMAIL_HOST_PASSWORD\" nil }}"
+    EMAIL_TO: "{{ required \".app.secrets.EMAIL_TO\" nil }}"
