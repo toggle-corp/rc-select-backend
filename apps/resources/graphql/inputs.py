@@ -17,6 +17,6 @@ class RequestDemoInput:
     email: str
     content: str
     national_society: str
-    tool: int
+    tool: strawberry.ID
     captcha_hashkey: str
     captcha_code: str

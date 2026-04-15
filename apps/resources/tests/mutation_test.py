@@ -1,4 +1,5 @@
 import typing
+from unittest.mock import call, patch
 
 from captcha.models import CaptchaStore
 
@@ -44,14 +45,16 @@ class TestContactRequestMutation(TestCase):
         cls.user = UserFactory.create(email="test@gmail.com")
 
     def _create_contact_request_mutation(self, data: dict[str, str], **kwargs: typing.Any):
-        return self.query_check(
-            query=self.Mutation.CREATE_CONTACT_REQUEST,
-            variables={
-                "data": data,
-            },
-        )
+        with self.captureOnCommitCallbacks(execute=True):
+            return self.query_check(
+                query=self.Mutation.CREATE_CONTACT_REQUEST,
+                variables={
+                    "data": data,
+                },
+            )
 
-    def test_create_contact_request(self):
+    @patch("apps.resources.serializers.send_contact_request_email.delay")
+    def test_create_contact_request(self, mock_requests):  # type: ignore[reportMissingParameterType]
         # Generates CAPTCHA key and value
         captcha_key = CaptchaStore.generate_key()
         captcha_obj = CaptchaStore.objects.get(hashkey=captcha_key)
@@ -80,6 +83,9 @@ class TestContactRequestMutation(TestCase):
             "content": contact_request.content,
             "nationalSociety": contact_request.national_society,
         }
+
+        mock_requests.assert_called_once()
+        mock_requests.assert_has_calls([call(contact_request.pk)])
 
     def test_create_contact_request_without_captcha(self):
         contact_request_data = {
@@ -157,14 +163,16 @@ class TestRequestDemoMutation(TestCase):
         cls.tool = ToolFactory.create()
 
     def _create_tool_demo_request_mutation(self, data: dict[str, str | int], **kwargs: typing.Any):
-        return self.query_check(
-            query=self.Mutation.CREATE_DEMO_REQUEST,
-            variables={
-                "data": data,
-            },
-        )
+        with self.captureOnCommitCallbacks(execute=True):
+            return self.query_check(
+                query=self.Mutation.CREATE_DEMO_REQUEST,
+                variables={
+                    "data": data,
+                },
+            )
 
-    def test_create_tool_demo_request(self):
+    @patch("apps.resources.serializers.send_demo_request_email.delay")
+    def test_create_tool_demo_request(self, mock_requests):  # type: ignore[reportMissingParameterType]
         captcha_key = CaptchaStore.generate_key()
         captcha_obj = CaptchaStore.objects.get(hashkey=captcha_key)
         captcha_code = captcha_obj.response
@@ -196,6 +204,8 @@ class TestRequestDemoMutation(TestCase):
                 "pk": self.gID(demo_request.tool.pk),
             },
         }
+        mock_requests.assert_called_once()
+        mock_requests.assert_has_calls([call(demo_request.pk)])
 
     def test_create_tool_demo_request_without_captcha(self):
         tool_demo_request_data = {

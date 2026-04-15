@@ -20,6 +20,18 @@ x-server: &base_server_setup
     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     POSTGRES_HOST: ${POSTGRES_HOST:-db}
     POSTGRES_PORT: ${POSTGRES_PORT:-5432}
+    # Email
+    EMAIL_HOST: ${EMAIL_HOST:-mailpit}
+    EMAIL_PORT: ${EMAIL_PORT:-1025}
+    EMAIL_HOST_USER: ${EMAIL_HOST_USER:-mailpit}
+    EMAIL_HOST_PASSWORD: ${EMAIL_HOST_PASSWORD:-mailpit}
+    DEFAULT_FROM_EMAIL: ${DEFAULT_FROM_EMAIL:-rc-select-dev@local.com}
+    EMAIL_TO: ${EMAIL_TO:-test-rc-select-dev@local.com}
+    #Celery
+    CELERY_REDIS_URL: ${CELERY_REDIS_URL:-redis://redis:6379/0}
+    CACHE_REDIS_URL: ${CACHE_REDIS_URL:-redis://redis:6379/1}
+    TEST_CACHE_REDIS_URL: ${TEST_CACHE_REDIS_URL:-redis://redis:6379/11}
+
   env_file:
     - path: .env
       required: false
@@ -30,6 +42,15 @@ x-server: &base_server_setup
     - ipython_data_local:/root/.ipython/profile_default   # persist ipython data, including ipython history
   depends_on:
     - db
+    - redis
+    - mailpit
+
+x-worker: &base_worker_setup
+  <<: *base_server_setup
+  restart: unless-stopped
+  environment:
+    <<: *base_server_environments
+    APP_TYPE: "WORKER"
 
 services:
   db:
@@ -41,6 +62,25 @@ services:
     volumes:
       - postgres_data17:/var/lib/postgresql/data
 
+  redis:
+    image: redis:8
+    volumes:
+      - redis_data:/data
+
+  mailpit:
+    image: axllent/mailpit
+    container_name: mailpit
+    restart: unless-stopped
+    volumes:
+      - mailpit_data:/data
+    ports:
+        - 8025:8025
+    environment:
+        MP_MAX_MESSAGES: 5000
+        MP_DATABASE: /data/mailpit.db
+        MP_SMTP_AUTH_ACCEPT_ANY: 1
+        MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
   web:
     <<: *base_server_setup
     command: ["/code/misc/dev/run_web.sh"]
@@ -51,7 +91,20 @@ services:
       - 127.0.0.1:8000:8000
     depends_on:
       - db
+      - redis
+
+  worker:
+    <<: *base_worker_setup
+    command: bash -c "/code/misc/dev/run_worker.sh"
+    healthcheck:
+      test: ["CMD-SHELL", "celery -A main inspect ping -d celery@$$HOSTNAME || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
 
 volumes:
   postgres_data17:
   ipython_data_local:
+  mailpit_data:
+  redis_data:

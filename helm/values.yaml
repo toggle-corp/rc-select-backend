@@ -12,9 +12,9 @@ app:
       nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 
   redis:
-    enabled: false
-    architecture:
-    fullnameOverride:
+    enabled: true
+    architecture: standalone
+    fullnameOverride: rc-select-redis
     auth:
       enabled: false
     master:
@@ -22,6 +22,16 @@ app:
         enabled: true
         size: .5Gi
         storageClass:
+
+  celery:
+    enabled: true
+    resources:
+      requests:
+        cpu: "0.5"
+        memory: 0.4Gi
+      limits:
+        cpu: "2"
+        memory: 2Gi
 
   postgresql:
     enabled: true
@@ -138,3 +148,6 @@ app:
     AWS_S3_REGION_NAME: "us-east-1"
     AWS_S3_MEDIA_BUCKET_NAME: "rc-select-media"
     AWS_S3_STATIC_BUCKET_NAME: "rc-select-static"
+    # Redis
+    CELERY_REDIS_URL: "redis://{{ printf \"%s-master\" (include \"common.names.fullname\" $.Subcharts.redis) }}:6379/0"
+    CACHE_REDIS_URL: "redis://{{ printf \"%s-master\" (include \"common.names.fullname\" $.Subcharts.redis) }}:6379/1"

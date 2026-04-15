@@ -32,6 +32,7 @@ dependencies = [
     "django-mdeditor>=0.1.20",
     "django-simple-captcha>=0.6.3",
     "django-stubs>=5.1.3",
+    "celery>=5.6.3",
 ]
 
 [dependency-groups]
@@ -62,7 +63,6 @@ extend-exclude = [
     "venv",
     "**/migrations/*",
     "__pycache__",
-    "uv.lock"
 ]
 
 [tool.ruff.lint]
@@ -147,6 +147,7 @@ ignore = [
     "D107",  # undocumented-public-initg
     "D401",
     "D205",
+    "PLC0415",
 ]
 
 #   ruff check --statistics ./

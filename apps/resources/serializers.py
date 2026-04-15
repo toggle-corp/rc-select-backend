@@ -1,10 +1,13 @@
 import typing
 
 from captcha.serializers import CaptchaModelSerializer
+from django.db import transaction
 from rest_framework import serializers
 
 from apps.resources.models import ContactRequest, RequestDemo
 from apps.tool_picker.models import Tool
+
+from .tasks import send_contact_request_email, send_demo_request_email
 
 
 class ContactRequestSerializer(CaptchaModelSerializer):
@@ -26,7 +29,11 @@ class ContactRequestSerializer(CaptchaModelSerializer):
     def create(self, validated_data: dict[str, typing.Any]):
         validated_data.pop("captcha_code", None)
         validated_data.pop("captcha_hashkey", None)
-        return super().create(validated_data)
+        instance = super().create(validated_data)
+        transaction.on_commit(
+            lambda: send_contact_request_email.delay(instance.id),  # type: ignore[reportIncompatibleVariableOverride]
+        )
+        return instance
 
 
 class RequestDemoSerializer(CaptchaModelSerializer):
@@ -53,4 +60,8 @@ class RequestDemoSerializer(CaptchaModelSerializer):
     def create(self, validated_data: dict[str, typing.Any]):
         validated_data.pop("captcha_code", None)
         validated_data.pop("captcha_hashkey", None)
-        return super().create(validated_data)
+        instance = super().create(validated_data)
+        transaction.on_commit(
+            lambda: send_demo_request_email.delay(instance.id),  # type: ignore[reportIncompatibleVariableOverride]
+        )
+        return instance

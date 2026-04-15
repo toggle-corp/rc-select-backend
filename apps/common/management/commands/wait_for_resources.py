@@ -5,9 +5,11 @@ from urllib.parse import urljoin
 
 import requests
 from django.conf import settings
+from django.core.cache import cache
 from django.core.management.base import BaseCommand, CommandParser
 from django.db import connections
 from django.db.utils import OperationalError
+from redis.exceptions import ConnectionError as RedisConnectionError
 
 
 class TimeoutException(Exception): ...
@@ -36,6 +38,25 @@ class Command(BaseCommand):
             time.sleep(1)
 
         self.stdout.write(self.style.SUCCESS(f"DB is available after {time.time() - start_time} seconds"))
+
+    def wait_for_redis(self):
+        self.stdout.write("Waiting for Redis...")
+        redis_conn = None
+        start_time = time.time()
+        while True:
+            try:
+                cache.set("wait-for-it-ping", "pong", timeout=1)  # Set a key to check Redis availability
+                redis_conn = cache.get("wait-for-it-ping")  # Try to get the value back from Redis
+                if redis_conn != "pong":
+                    raise TypeError
+                break
+            except (RedisConnectionError, TypeError):
+                ...
+            # Try again
+            self.stdout.write(self.style.WARNING("Redis not available, waiting..."))
+            time.sleep(1)
+
+        self.stdout.write(self.style.SUCCESS(f"Redis is available after {time.time() - start_time} seconds"))
 
     def wait_for_minio(self):
         self.stdout.write("Waiting for Minio...")
@@ -69,6 +90,8 @@ class Command(BaseCommand):
             help="The maximum time (in seconds) the command is allowed to run before timing out. Default is 10 min.",
         )
         parser.add_argument("--db", action="store_true", help="Wait for DB to be available")
+        parser.add_argument("--celery-queue", action="store_true", help="Wait for Celery queue to be available")
+        parser.add_argument("--redis", action="store_true", help="Wait for Redis to be available")
         parser.add_argument("--minio", action="store_true", help="Wait for MinIO (S3) storage to be available")
         parser.add_argument("--all", action="store_true", help="Wait for all to be available")
 
@@ -86,6 +109,10 @@ class Command(BaseCommand):
                 self.wait_for_db()
             if _all or kwargs["minio"]:
                 self.wait_for_minio()
+            if _all or kwargs["redis"]:
+                self.wait_for_redis()
+            if _all or kwargs["celery_queue"]:
+                self.wait_for_redis()
         except TimeoutException:
             ...
         finally:

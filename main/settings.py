@@ -48,6 +48,23 @@ env = environ.Env(
     STATIC_ROOT=(str, BASE_DIR / "data/static"),
     # Pytest
     PYTEST_XDIST_WORKER=(str, None),
+    # Email
+    EMAIL_API_URL=(str, None),
+    EMAIL_API_KEY=(str, None),
+    EMAIL_BACKEND=(str, None),
+    EMAIL_API_TIMEOUT=(int, None),
+    EMAIL_HOST=(str, None),
+    EMAIL_PORT=(str, None),
+    EMAIL_HOST_USER=(str, None),
+    EMAIL_HOST_PASSWORD=(str, None),
+    DEFAULT_FROM_EMAIL=(str, None),
+    EMAIL_TO=(str, None),
+    EMAIL_USE_TLS=(bool, False),
+    # celery
+    CELERY_REDIS_URL=str,  # redis://redis:6379/0
+    # Cache
+    CACHE_REDIS_URL=str,  # redis://redis:6379/1
+    TEST_CACHE_REDIS_URL=(str, None),  # redis://redis:6379/11
 )
 
 
@@ -60,7 +77,7 @@ FRONTEND_DOMAIN = env.url("FRONTEND_DOMAIN")
 APP_ENVIRONMENT = env("APP_ENVIRONMENT").upper()
 APP_TYPE = env("APP_TYPE").upper()
 SECRET_KEY = env("DJANGO_SECRET_KEY")
-
+STATICFILES_DIRS = (str(BASE_DIR.joinpath("static")),)
 DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = [
@@ -135,6 +152,7 @@ ROOT_URLCONF = "main.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [(BASE_DIR / "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -382,3 +400,21 @@ STRAWBERRY_DJANGO = {
     "PAGINATION_DEFAULT_LIMIT": 20,
     "DEFAULT_PK_FIELD_NAME": "id",
 }
+# Email
+EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend")
+EMAIL_API_URL = env("EMAIL_API_URL")
+EMAIL_API_KEY = env("EMAIL_API_KEY")
+EMAIL_API_TIMEOUT = env("EMAIL_API_TIMEOUT", default=30)
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_PORT = env("EMAIL_PORT")
+EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+EMAIL_TO = env("EMAIL_TO")
+
+# Celery
+CELERY_REDIS_URL = env("CELERY_REDIS_URL")
+CACHE_REDIS_URL = env("CACHE_REDIS_URL")
+CELERY_BROKER_URL = CELERY_REDIS_URL
+CELERY_RESULT_BACKEND = CELERY_REDIS_URL
