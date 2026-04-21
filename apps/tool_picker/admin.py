@@ -92,6 +92,7 @@ class CheckboxQuestionInline(admin.StackedInline):  # type: ignore[reportMissing
 class CatalogAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
     list_display = ["name", "question_count", "tool_count", "show_in_help_me_choose"]
     search_fields = ["name", "description"]
+    autocomplete_fields = ["owners"]
     inlines = [OrdinalQuestionInline, CheckboxQuestionInline]
 
     @admin.display(description="Questions")
@@ -107,6 +108,16 @@ class CatalogAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportM
     @admin.display(description="Tools")
     def tool_count(self, obj: Catalog):
         return obj.tool_catalogs.count()
+
+    @typing.override
+    def get_queryset(self, request: typing.Any):
+        return (
+            super()
+            .get_queryset(request)
+            .prefetch_related(
+                "owners",
+            )
+        )
 
 
 # Proxy model for checkbox-only view
@@ -235,6 +246,7 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
     list_filter = ["catalogs"]
     search_fields = ["name", "tagline", "description"]
     autocomplete_fields = ["catalogs", "tool_sectors", "tool_owners", "tool_features"]
+    autocomplete_fields = ["catalogs", "tool_sectors", "owners", "tool_features"]
     fieldsets = (
         (
             "Basic Information",
@@ -247,7 +259,7 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
                     "video_link",
                     "tool_link",
                     "tool_sectors",
-                    "tool_owners",
+                    "owners",
                     "tool_features",
                     "logo",
                 ),
@@ -262,7 +274,7 @@ class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMiss
             .get_queryset(request)
             .prefetch_related(
                 "tool_sectors",
-                "tool_owners",
+                "owners",
                 "tool_features",
             )
         )

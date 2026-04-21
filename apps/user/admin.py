@@ -20,6 +20,7 @@ class UserAdmin(DjangoUserAdmin):  # type: ignore[reportMissingTypeArgument]
         "is_active",
         "is_staff",
         "is_superuser",
+        "is_steerco",
     )
     list_filter = (
         "is_staff",
@@ -59,6 +60,7 @@ class UserAdmin(DjangoUserAdmin):  # type: ignore[reportMissingTypeArgument]
                     "is_active",
                     "is_staff",
                     "is_superuser",
+                    "is_steerco",
                     "groups",
                     "user_permissions",
                 ),
