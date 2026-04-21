@@ -2,6 +2,8 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
+from apps.tool_picker.permission import SteercoUserPermission
+
 from .models import User
 
 
@@ -12,7 +14,7 @@ class UserCreationForm(forms.ModelForm):  # type: ignore[reportMissingTypeArgume
 
 
 @admin.register(User)
-class UserAdmin(DjangoUserAdmin):  # type: ignore[reportMissingTypeArgument]
+class UserAdmin(DjangoUserAdmin, SteercoUserPermission):  # type: ignore[reportMissingTypeArgument]
     list_display = (
         "email",
         "first_name",

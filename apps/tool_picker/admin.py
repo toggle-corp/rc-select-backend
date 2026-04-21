@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 
 from apps.common.admin import UserResourceAdmin
+from apps.tool_picker.permission import CatalogPermission, InlineAdminPermission, SteercoUserPermission, ToolPermission
 
 from .models import (
     Catalog,
@@ -43,7 +44,7 @@ class CheckboxOptionInline(admin.TabularInline):  # type: ignore[reportMissingTy
 
 
 # Inline for Ordinal Questions within Catalog
-class OrdinalQuestionInline(admin.StackedInline):  # type: ignore[reportMissingTypeArgument]
+class OrdinalQuestionInline(admin.StackedInline, InlineAdminPermission):  # type: ignore[reportMissingTypeArgument]
     model = Question
     extra = 0
     fields = ["order", "title", "description", "question_type", ("label_na", "label_1", "label_2", "label_3", "label_4")]
@@ -57,7 +58,7 @@ class OrdinalQuestionInline(admin.StackedInline):  # type: ignore[reportMissingT
 
 
 # Inline for Checkbox Questions within Catalog
-class CheckboxQuestionInline(admin.StackedInline):  # type: ignore[reportMissingTypeArgument]
+class CheckboxQuestionInline(admin.StackedInline, InlineAdminPermission):  # type: ignore[reportMissingTypeArgument]
     model = Question
     extra = 0
     fields = ["order", "title", "description", "question_type", "edit_options_link"]
@@ -89,7 +90,7 @@ class CheckboxQuestionInline(admin.StackedInline):  # type: ignore[reportMissing
 
 
 @admin.register(Catalog)
-class CatalogAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
+class CatalogAdmin(UserResourceAdmin, CatalogPermission):
     list_display = ["name", "question_count", "tool_count", "show_in_help_me_choose"]
     search_fields = ["name", "description"]
     autocomplete_fields = ["owners"]
@@ -177,7 +178,7 @@ class CheckboxQuestionBulkAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: i
 
 
 # Separate inlines for different answer types
-class ToolAnswerOrdinalInline(admin.TabularInline):  # type: ignore[reportMissingTypeArgument]
+class ToolAnswerOrdinalInline(InlineAdminPermission):
     model = ToolAnswer
     extra = 0
     fields = ["question", "ordinal_value", "description"]
@@ -204,7 +205,7 @@ class ToolAnswerOrdinalInline(admin.TabularInline):  # type: ignore[reportMissin
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
-class ToolAnswerCheckboxInline(admin.StackedInline):  # type: ignore[reportMissingTypeArgument]
+class ToolAnswerCheckboxInline(admin.StackedInline, InlineAdminPermission):  # type: ignore[reportMissingTypeArgument]
     model = ToolAnswer
     extra = 0
     fields = ["question", "selected_options"]
@@ -241,11 +242,10 @@ class ToolAnswerCheckboxInline(admin.StackedInline):  # type: ignore[reportMissi
 
 
 @admin.register(Tool)
-class ToolAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
+class ToolAdmin(UserResourceAdmin, ToolPermission):
     list_display = ["name", "tagline"]
     list_filter = ["catalogs"]
     search_fields = ["name", "tagline", "description"]
-    autocomplete_fields = ["catalogs", "tool_sectors", "tool_owners", "tool_features"]
     autocomplete_fields = ["catalogs", "tool_sectors", "owners", "tool_features"]
     fieldsets = (
         (
@@ -435,13 +435,13 @@ class RecommendationResultAdmin(ReadOnlyMixin, admin.ModelAdmin):  # type: ignor
 
 
 @admin.register(Sector)
-class SectorAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
+class SectorAdmin(SteercoUserPermission):
     list_display = ["name"]
     search_fields = ["name"]
 
 
 @admin.register(ToolFeature)
-class ToolFeatureAdmin(admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
+class ToolFeatureAdmin(SteercoUserPermission):
     list_display = ["name", "feature_category"]
     list_filter = ["feature_category"]
     search_fields = ["name"]

@@ -32,13 +32,11 @@ def send_contact_request_email(contact_id: int):
 
 @shared_task
 def send_demo_request_email(request_demo_id: int):
-    instance = (
-        RequestDemo.objects.select_related("tool").prefetch_related("tool__tool_owners").filter(id=request_demo_id).first()
-    )
+    instance = RequestDemo.objects.select_related("tool").prefetch_related("tool__owners").filter(id=request_demo_id).first()
     if not instance:
         return None
 
-    tool_owners = instance.tool.tool_owners.all()
+    tool_owners = instance.tool.owners.all()
 
     if not tool_owners.exists():
         logger.info("skipping cause there are no tool owners associated with this tool")
