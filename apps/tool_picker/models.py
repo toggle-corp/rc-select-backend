@@ -43,6 +43,8 @@ class Catalog(UserResource):
     questions: typing.ClassVar[RelatedManager["Question"]]
     tool_catalogs: typing.ClassVar[RelatedManager["Tool"]]
 
+    owners = models.ManyToManyField(User, related_name="catalog_owners", blank=True)
+
     class Meta(UserResource.Meta):
         ordering = ["name"]
 
@@ -51,7 +53,7 @@ class Catalog(UserResource):
         return self.name
 
 
-class ToolFeature(models.Model):
+class ToolFeature(UserResource):
     """Model representing a tool feature."""
 
     class FeatureCategoryEnum(models.IntegerChoices):
@@ -74,7 +76,7 @@ class ToolFeature(models.Model):
         return f"{self.feature_category} - {self.name}"
 
 
-class Sector(models.Model):
+class Sector(UserResource):
     """Model representing tool sector."""
 
     name = models.CharField(max_length=100, unique=True)
@@ -174,7 +176,7 @@ class Tool(UserResource):
     )
     tool_sectors = models.ManyToManyField(Sector, related_name="tool_sectors", blank=True)
     tool_features = models.ManyToManyField(ToolFeature, related_name="tool_features", blank=True)
-    tool_owners = models.ManyToManyField(User, related_name="tool_owners", blank=True)
+    owners = models.ManyToManyField(User, related_name="tool_owners", blank=True)
 
     class Meta(UserResource.Meta):
         ordering = ["name"]

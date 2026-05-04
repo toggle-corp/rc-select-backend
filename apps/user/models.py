@@ -17,6 +17,11 @@ class User(AbstractUser):
     email = models.EmailField[str, str](unique=True)
     display_name = models.CharField[str, str](max_length=255)
 
+    is_steerco = models.BooleanField(
+        default=False,
+        help_text="Designates that this user has full administrative access to manage all users, catalogs, and tools.",
+    )
+
     objects: CustomUserManager = CustomUserManager()  # type: ignore[reportAssignmentType]
 
     # type hints
