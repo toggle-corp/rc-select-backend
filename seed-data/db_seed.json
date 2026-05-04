@@ -3,7 +3,7 @@
     "model": "user.user",
     "pk": 1,
     "fields": {
-      "email" : "alice@gmail.com",
+      "email": "alice@gmail.com",
       "password": "pbkdf2_sha256$260000$example$hashvalue",
       "is_superuser": false,
       "first_name": "Alice",
@@ -15,7 +15,7 @@
     "model": "user.user",
     "pk": 2,
     "fields": {
-      "email" : "bob@gmail.com",
+      "email": "bob@gmail.com",
       "password": "pbkdf2_sha256$260000$example$hashvalue",
       "is_superuser": false,
       "first_name": "Bob",
@@ -27,7 +27,7 @@
     "model": "user.user",
     "pk": 3,
     "fields": {
-      "email" : "carol@gmail.com",
+      "email": "carol@gmail.com",
       "password": "pbkdf2_sha256$260000$example$hashvalue",
       "is_superuser": false,
       "first_name": "Carol",
@@ -39,7 +39,7 @@
     "model": "user.user",
     "pk": 4,
     "fields": {
-      "email" : "dave@gmail.com",
+      "email": "dave@gmail.com",
       "password": "pbkdf2_sha256$260000$example$hashvalue",
       "is_superuser": false,
       "first_name": "Dave",
@@ -51,7 +51,7 @@
     "model": "user.user",
     "pk": 5,
     "fields": {
-      "email" : "eve@gmail.com",
+      "email": "eve@gmail.com",
       "password": "pbkdf2_sha256$260000$example$hashvalue",
       "is_superuser": false,
       "first_name": "Eve",
@@ -63,7 +63,7 @@
     "model": "user.user",
     "pk": 6,
     "fields": {
-      "email" : "frank@gmail.com",
+      "email": "frank@gmail.com",
       "password": "pbkdf2_sha256$260000$example$hashvalue",
       "is_superuser": false,
       "first_name": "Frank",
@@ -75,7 +75,7 @@
     "model": "user.user",
     "pk": 7,
     "fields": {
-      "email" : "grace@gmail.com",
+      "email": "grace@gmail.com",
       "password": "pbkdf2_sha256$260000$example$hashvalue",
       "is_superuser": false,
       "first_name": "Grace",
@@ -87,7 +87,7 @@
     "model": "user.user",
     "pk": 8,
     "fields": {
-      "email" : "heidi@gmail.com",
+      "email": "heidi@gmail.com",
       "password": "pbkdf2_sha256$260000$example$hashvalue",
       "is_superuser": false,
       "first_name": "Heidi",
@@ -99,7 +99,7 @@
     "model": "user.user",
     "pk": 9,
     "fields": {
-      "email" : "ivan@gmail.com",
+      "email": "ivan@gmail.com",
       "password": "pbkdf2_sha256$260000$example$hashvalue",
       "is_superuser": false,
       "first_name": "Ivan",
@@ -111,7 +111,7 @@
     "model": "user.user",
     "pk": 10,
     "fields": {
-      "email" : "judy@gmail.com",
+      "email": "judy@gmail.com",
       "password": "pbkdf2_sha256$260000$example$hashvalue",
       "is_superuser": true,
       "first_name": "Judy",
@@ -131,942 +131,729 @@
       "description": "Tools delivering the basic functionalities needed to carry out a Cash program: beneficiary registration, distribution, reconciliation, feedback & surveys, and reporting & analytics."
     }
   },
-
-{
-  "model": "tool_picker.sector",
-  "pk": 1,
-  "fields": {
-    "name": "Relief",
-    "description": "",
-    "sector_owners": []
-  }
-},
-{
-  "model": "tool_picker.sector",
-  "pk": 2,
-  "fields": {
-    "name": "CVA",
-    "description": "",
-    "sector_owners": []
-  }
-},
-{
-  "model": "tool_picker.sector",
-  "pk": 3,
-  "fields": {
-    "name": "WASH",
-    "description": "",
-    "sector_owners": [
-      2
-    ]
-  }
-},
-{
-  "model": "tool_picker.sector",
-  "pk": 4,
-  "fields": {
-    "name": "Health",
-    "description": "",
-    "sector_owners": [
-      1
-    ]
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 8,
-  "fields": {
-    "name": "Global Administration of Projects",
-    "feature_category": 10,
-    "description": "Ad administrator has the ability to manage cash projects globally. That means having a single view that can join data across projects and implementations, with reporting capable of aggregation of data.",
-    "cash_RTM_code": "01-MD01-01"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 9,
-  "fields": {
-    "name": "Segregation of Country Instances",
-    "feature_category": 10,
-    "description": "An administrator has the ability to configure and manage country instances separately. That means being able to define geographical areas, specify currencies, and select custom user and access permissions based on a country.",
-    "cash_RTM_code": "01-MD01-02"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 10,
-  "fields": {
-    "name": "Set Default Parameters",
-    "feature_category": 10,
-    "description": "An administrator has the ability to define and set default parameters—such as the average household size—for the project.",
-    "cash_RTM_code": "01-MD01-04"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 11,
-  "fields": {
-    "name": "Custom Approval Workflow",
-    "feature_category": 10,
-    "description": "Ability to configure an approval process and workflow that incorporates the segregation of duties with Requester/Approver workflows for Setup, Targeting, Disbursements, and Financial Flows.",
-    "cash_RTM_code": "01-MD01-06"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 12,
-  "fields": {
-    "name": "Linkage with Providers",
-    "feature_category": 10,
-    "description": "The program manager and their team can assign products such as cash, goods or services with suppliers, traders, financial service providers.",
-    "cash_RTM_code": "01-MD01-07"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 13,
-  "fields": {
-    "name": "Team Configuration",
-    "feature_category": 10,
-    "description": "Ability to configure users into teams for security access, program tasks and case management.\nSecurity access is configurable through both role-based and geographic access.",
-    "cash_RTM_code": "01-MD01-08"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 14,
-  "fields": {
-    "name": "Custom User Roles",
-    "feature_category": 10,
-    "description": "Configure user roles that can change information about beneficiaries and the project.",
-    "cash_RTM_code": "01-MD01-09"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 15,
-  "fields": {
-    "name": "Household Configuration",
-    "feature_category": 10,
-    "description": "Program manager and their team must can define the household packages (basket or group of products) that can be assigned to a household.",
-    "cash_RTM_code": "01-MD02-02"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 16,
-  "fields": {
-    "name": "Data Retention on Closeout",
-    "feature_category": 10,
-    "description": "An administrator of the system can close the project so that data cannot be changed or added and manage data according to policy.",
-    "cash_RTM_code": "01-MD02-03"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 17,
-  "fields": {
-    "name": "Pricing Setup",
-    "feature_category": 10,
-    "description": "The program manager and their team can set up prices and currencies for products that will form the entitlement.",
-    "cash_RTM_code": "01-MD02-04"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 18,
-  "fields": {
-    "name": "Registration of Merchants",
-    "feature_category": 10,
-    "description": "The program manager and their team can set up traders or merchants who are linked to specific products and prices.",
-    "cash_RTM_code": "01-MD03-01"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 19,
-  "fields": {
-    "name": "Flexible Payment Modality",
-    "feature_category": 10,
-    "description": "The ability to configure and integrate with multiple FSPs to use a variety of payment modalities, including (but not limited to) mobile money, pre-paid cards, e-vouchers, vouchers, bank transfers, remittance and money pick-up services.",
-    "cash_RTM_code": "01-MD03-03"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 20,
-  "fields": {
-    "name": "Funding Source Configuration",
-    "feature_category": 10,
-    "description": "Ability to setup funding sources, link those sources to each disbursement or distribution, and track how funds are utilized across the program.",
-    "cash_RTM_code": "01-MD05-01"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 21,
-  "fields": {
-    "name": "Device Management",
-    "feature_category": 10,
-    "description": "Ability to setup inventory of devices used in the program (e.g. mobile phones, tablets, point-of-sale terminals, smart cards).",
-    "cash_RTM_code": "01-MD06-01"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 22,
-  "fields": {
-    "name": "Financial Service Provider Integration",
-    "feature_category": 10,
-    "description": "Ability to configure and integrate with FSPs for CVA distributions via API, file-sharing, or similar method.",
-    "cash_RTM_code": "01-MD07-01"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 23,
-  "fields": {
-    "name": "Cross Platform Data Interoperability",
-    "feature_category": 10,
-    "description": "System utilizes accessible formats and the tool allows for direct connections that can tap into the data. Ability to connect to external systems to the data for analysis, visualization, and backup. These integrations allow for usage of third-party applications like Kobo for data collection, or PowerBI for dashboarding.",
-    "cash_RTM_code": "01-MD07-02"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 24,
-  "fields": {
-    "name": "Task Management Support",
-    "feature_category": 10,
-    "description": "Ability to configure task management for users and beneficiaries, including case follow-ups, case notes, reminders, etc.",
-    "cash_RTM_code": "01-MD08-04"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 25,
-  "fields": {
-    "name": "Native Data Collection Tool",
-    "feature_category": 20,
-    "description": "The platform has a built-in data collection tool and mobile application which eliminates the need for a secondary tool (like ODK, Kobo, etc.) to register beneficiaries.",
-    "cash_RTM_code": "02-BR01-01"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 26,
-  "fields": {
-    "name": "Integration with Third Party Data Collection Tools",
-    "feature_category": 20,
-    "description": "Ability to directly connect the platform with third party tool (like ODK, Kobo, etc.) without having to export/import.",
-    "cash_RTM_code": "02-BR01-02"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 27,
-  "fields": {
-    "name": "Asynchronous Data Updates",
-    "feature_category": 20,
-    "description": "The program manager and their team must be able to add or update information to an existing  beneficiary record at any point in the project execution.",
-    "cash_RTM_code": "02-BR01-07"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 28,
-  "fields": {
-    "name": "Registration Data Imports",
-    "feature_category": 20,
-    "description": "The program manager can import or upload a pre-formatted file (Excel or CSV) of beneficiary information into the system and have the data map to the appropriate fields.",
-    "cash_RTM_code": "02-BR01-11"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 29,
-  "fields": {
-    "name": "Self Registration Capabilities",
-    "feature_category": 10,
-    "description": "Ability for self-registration, including ID verification (digital verification of ID documents) as part of the self-registration process. If self-registration is not included, then the ability to integrate with a self-registration tool.",
-    "cash_RTM_code": "02-BR01-14"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 30,
-  "fields": {
-    "name": "Beneficiary Control of Registration Data",
-    "feature_category": 20,
-    "description": "After registering, a beneficiary can update or delete any data they provide directly, without needing to contact the program team.",
-    "cash_RTM_code": "02-BR01-15"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 31,
-  "fields": {
-    "name": "Automated Registration Fraud Detection",
-    "feature_category": 20,
-    "description": "Ability to detect fraudulent registrations using geo-boundary data, metadata, or anomalies within standard processes.",
-    "cash_RTM_code": "02-BR01-17"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 32,
-  "fields": {
-    "name": "Automatic De-Duplication Processes",
-    "feature_category": 20,
-    "description": "Tool provides a configurable, timely and accurate way of identifying, flagging and removing duplicate registrations. Can catch either duplicate individuals or multiple registrations from the same family.",
-    "cash_RTM_code": "02-BR03-01"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 33,
-  "fields": {
-    "name": "Define Distribution Geography",
-    "feature_category": 30,
-    "description": "The program manager and their team can select geographical areas of distribution",
-    "cash_RTM_code": "03-DP01-01"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 34,
-  "fields": {
-    "name": "Distribution Management",
-    "feature_category": 30,
-    "description": "The ability to create distribution records with relevant associated data such as location, time, modality, etc., and assign beneficiaries.",
-    "cash_RTM_code": "03-DP01-06"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 35,
-  "fields": {
-    "name": "Physical and E-Voucher Support",
-    "feature_category": 30,
-    "description": "The tool can generate e-vouchers and physical vouchers for distribution.",
-    "cash_RTM_code": "03-DP01-13"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 36,
-  "fields": {
-    "name": "Vendor Assignment for Vouchers",
-    "feature_category": 30,
-    "description": "The tool allows program teams to manage vendors that accept distributed encashment vouchers.",
-    "cash_RTM_code": "03-DP01-14"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 37,
-  "fields": {
-    "name": "Beneficiary Assignment to Financial Provider",
-    "feature_category": 30,
-    "description": "The program manager and their team can assign a beneficiary to a financial service provider (FSP), allowing the program to utilize multiple FSPs.",
-    "cash_RTM_code": "03-DP01-16"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 38,
-  "fields": {
-    "name": "Dynamic Entitlement Assignment",
-    "feature_category": 30,
-    "description": "The program manager and their team can assign packages or entitlements to a household using geographical criteria or vulnerability criteria.",
-    "cash_RTM_code": "03-DP02-01"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 39,
-  "fields": {
-    "name": "Entitlement Management with Support for Top Ups",
-    "feature_category": 10,
-    "description": "The program manager and their team can manage entitlements and assign additional entitlements to households (i.e. top ups).",
-    "cash_RTM_code": "03-DP02-02"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 40,
-  "fields": {
-    "name": "Support for Services Entitlement",
-    "feature_category": 30,
-    "description": "The tool allows program managers and their teams to provision services (e.g. health care services, training, etc.) to beneficiary records.",
-    "cash_RTM_code": "03-DP02-04"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 41,
-  "fields": {
-    "name": "Support for Multiple Currencies",
-    "feature_category": 30,
-    "description": "Teams can access currency conversion directly inside the tool.",
-    "cash_RTM_code": "03-DP04-07"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 42,
-  "fields": {
-    "name": "Referrals to Other Services",
-    "feature_category": 30,
-    "description": "Program managers and their teams can easily refer cases to other services or NGOs.",
-    "cash_RTM_code": "03-DP05-01"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 43,
-  "fields": {
-    "name": "Beneficiary Identification and Entitlement Verification",
-    "feature_category": 30,
-    "description": "The program manager and their team can confirm beneficiary identification, entitlement and if they are eligible for the a given distribution.",
-    "cash_RTM_code": "04-DT01-04"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 44,
-  "fields": {
-    "name": "Distribution Planned Versus Actual Analytics",
-    "feature_category": 30,
-    "description": "The program manager and their team can compare the distribution plan against the distribution report and generate a report that illustrates what was given out, to whom, when and what percentage compared to plan.",
-    "cash_RTM_code": "04-DT01-08"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 45,
-  "fields": {
-    "name": "Support for Digital Signatures",
-    "feature_category": 30,
-    "description": "The tool supports recording digital signatures of the beneficiaries when goods have been received.",
-    "cash_RTM_code": "04-DT01-09"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 46,
-  "fields": {
-    "name": "Distribution Automation",
-    "feature_category": 30,
-    "description": "The tool can be configured to have certain parameters and logic defined and then automate the distributions in high-velocity, high-volume programs.",
-    "cash_RTM_code": "04-DT03-01"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 47,
-  "fields": {
-    "name": "Two-Way Beneficiary Communications",
-    "feature_category": 40,
-    "description": "The tool allows program staff to send out custom messages, either through a dedicated app or popular messaging platforms, with important programmatic information. Beneficiaries can then respond directly through that platform.",
-    "cash_RTM_code": "05-FS02-02"
-  }
-},
-{
-  "model": "tool_picker.toolfeature",
-  "pk": 48,
-  "fields": {
-    "name": "One-Way Beneficiary Communications",
-    "feature_category": 40,
-    "description": "The tool allows program staff to send out custom messages, either through a dedicated app or popular messaging platforms, with important programmatic information.",
-    "cash_RTM_code": "05-FS02-01"
-  }
-},
-{
-    "model": "tool_picker.question",
+  {
+    "model": "tool_picker.sector",
     "pk": 1,
     "fields": {
-      "created_at": "2026-01-08T00:00:00Z",
-      "modified_at": "2026-01-08T00:00:00Z",
-      "created_by": 1,
-      "modified_by": 1,
-      "catalog": 1,
-      "question_type": 10,
-      "title": "Cost",
-      "description": "There are costs associated with setting up and maintaining a tool throughout the program implementation lifecycle.",
-      "order": 0,
-      "label_na": "N/A",
-      "label_1": "No funding is likely to be raised or allocated for this. We are looking primarily for a very low cost or free solution (or mix of solutions) that will allow our team to manage data without paying much for either the set up or maintenance. Ideally we would find a tool that doesn't have any sort of cost to license, host, or use.",
-      "label_2": "We will have funding to cover minimal cost to configure and use the solution for a limited time or volume. The tool needs to have clear pricing that will allow us to estimate the total cost to run and maintain it for the life of our program.",
-      "label_3": "We will have funding to cover some expenses related to the configuration and use of the tool for our program. While we prefer to keep costs low, we may have some flexibility if a given solution meets multiple of our needs.",
-      "label_4": "We will have funding to cover the higher cost of a fully-featured solution, and a plan to fund it for as long as we will use it. We can pay more if the tool can handle a variety of functions that we might otherwise pay separately for. The larger investment may be justified by the size of the operation, or by plans to continue to use the tool for other programs and operations."
+      "name": "Relief",
+      "description": "",
+      "sector_owners": []
     }
   },
   {
-    "model": "tool_picker.question",
+    "model": "tool_picker.sector",
     "pk": 2,
     "fields": {
-      "created_at": "2026-01-08T00:00:00Z",
-      "modified_at": "2026-01-08T00:00:00Z",
-      "created_by": 1,
-      "modified_by": 1,
-      "catalog": 1,
-      "question_type": 10,
-      "title": "Setup Time",
-      "description": "Teams frequently face deadlines for getting a tool up and running, and there are a variety of factors that can impact the time it takes.",
-      "order": 1,
-      "label_na": "N/A",
-      "label_1": "We don't have much time. Spinning up an instance of the tool must be done in a matter of hours, and tweaking it to meet our needs has to be a matter of pointing and clicking through a simple interface.",
-      "label_2": "We are in a rush, but have at least a few days to handle the configuration, including building out the data fields to match the program.",
-      "label_3": "We have some flexibility and at least a week before we need the tool up and running. Setup can be slow due to dependencies outside of our control, and we have time to consult necessary technical experts that might need to help with the configuration process.",
-      "label_4": "We have lots of flexibility to ensure that we take the time needed to carefully configure the tool. We have two weeks or more to be very deliberate with the set up process."
+      "name": "CVA",
+      "description": "",
+      "sector_owners": []
     }
   },
   {
-    "model": "tool_picker.question",
+    "model": "tool_picker.sector",
     "pk": 3,
     "fields": {
-      "created_at": "2026-01-08T00:00:00Z",
-      "modified_at": "2026-01-08T00:00:00Z",
-      "created_by": 1,
-      "modified_by": 1,
-      "catalog": 1,
-      "question_type": 10,
-      "title": "Setup Complexity",
-      "description": "Tools require varying levels of technical experience to configure them to suit the program's needs. Some may offer \"off-the-shelf\" functionality while others might require more advanced Information Management skills like coding to properly get the tool working.",
-      "order": 2,
-      "label_na": "N/A",
-      "label_1": "We need a solution that is very easy to set up and that requires no special technical skills. The tool should be pre-configured or come from a vendor whose price includes this step.",
-      "label_2": "Our team is able to do basic configuration including processes that might rely on intermediate knowledge of formulas and spreadsheet manipulation, but but not coding or advanced processes.",
-      "label_3": "We have specialist support on a limited basis that can complete complicated set up and configuration, for example coding, database management, or similarly-advanced technical processes.",
-      "label_4": "We have dedicated specialist support for the duration of our program that can complete complicated set up and configuration, for example coding, database management, or similarly-advanced technical processes."
+      "name": "WASH",
+      "description": "",
+      "sector_owners": [
+        2
+      ]
     }
   },
   {
-    "model": "tool_picker.question",
+    "model": "tool_picker.sector",
     "pk": 4,
     "fields": {
-      "created_at": "2026-01-08T00:00:00Z",
-      "modified_at": "2026-01-08T00:00:00Z",
-      "created_by": 1,
-      "modified_by": 1,
-      "catalog": 1,
-      "question_type": 10,
-      "title": "Maintenance",
-      "description": "While setting up a tool may bring certain technical challenges, we cannot overlook the importance of considering the time, money, and human resourcing necessary to keep the tool up and running.",
-      "order": 3,
-      "label_na": "N/A",
-      "label_1": "We do not have resources to manage and maintain the tool, our team needs to focus solely on program implementation. This must be handled automatically or by the vendor.",
-      "label_2": "While we prefer a tool that is simple to maintain, we do have some resources available to manage the tool after it has been set up. That doesn't mean we can tinker with computer code or other technically-intensive tasks, but we can make small changes to the configuration as needs arise.",
-      "label_3": "We need a tool that can be adjusted as the program is carried out, and have at least one person on our team that can handle relatively straightforward maintenance tasks or configuration adjustments.",
-      "label_4": "Our team has a dedicated and highly-capable technology specialist that will have the time available to provide ongoing support as needed when any maintenance tasks, required updates, or configuration adjsutments arise."
+      "name": "Health",
+      "description": "",
+      "sector_owners": [
+        1
+      ]
     }
   },
   {
-    "model": "tool_picker.question",
-    "pk": 5,
-    "fields": {
-      "created_at": "2026-01-08T00:00:00Z",
-      "modified_at": "2026-01-08T00:00:00Z",
-      "created_by": 1,
-      "modified_by": 1,
-      "catalog": 1,
-      "question_type": 10,
-      "title": "Train Learn",
-      "description": "When configuring the tool, using the tool, and training users, we will inevitably run into issues that will require consulting some sort of documentation or online support. More widely used tools may provide extensive technical documentation and entire online communities dedicated to providing support, while more niche tools may lack these resources.",
-      "order": 4,
-      "label_na": "N/A",
-      "label_1": "We're looking for a tool that is extremely well-documented, with extensive online resources that cover everything from setup and configuration to overcoming technical challenges for specific features we want. My end users also need access to some sort of support network or resource that can quickly answer their questions.",
-      "label_2": "We don't necessarily need a bunch of resources like online user support forums or blogs that outline use cases similar to mine, but having good documentation and other available support resources would be very desirable.",
-      "label_3": "At the very minimum, we need a user's manual for how to get the tool set up. We can figure out how to adapt it to my our use-case's specific needs and train end users myself.",
-      "label_4": "We're not concerned about training and learning resources. The people tasked with configuring the tool are capable of doing so without support, and end users can either be directly trained by them or are themselves highly technically proficient."
-    }
-  },
-  {
-    "model": "tool_picker.question",
-    "pk": 6,
-    "fields": {
-      "created_at": "2026-01-08T00:00:00Z",
-      "modified_at": "2026-01-08T00:00:00Z",
-      "created_by": 1,
-      "modified_by": 1,
-      "catalog": 1,
-      "question_type": 10,
-      "title": "Performance",
-      "description": "As certain inputs increase in whatever your use case may be‚ beneficiary counts, workflow complexities, number of tranches for cash payments, etc.‚ a tool has to be able to adapt to meet those increases. Larger volumes of data, more end users, bigger lists of cash recipients, and more can all trigger a need for a more performant solution.",
-      "order": 5,
-      "label_na": "N/A",
-      "label_1": "We're anticipating (or can't rule out) a large and potentially complex program with a number of high performance needs. We need a solution that can scale up as more records are added to the tool without greatly affecting speed, efficiency, or cost.",
-      "label_2": "While we are not expecting a massive, years-long use case, we still want to have the flexibility to scale up in the future without too many issues. We might need to store larger volumes of data (e.g. beneficiary photos) or accommodate more complex feature needs.",
-      "label_3": "We're relatively certain that we have a good sense for what our program looks like and do not anticipate the need for massively scaling up. However, we would like to keep options open for bumping up the performance should teams decide to add additional inputs.",
-      "label_4": "Our program is clearly-defined and we don't anticipate a huge data set or need for expandability. A lightweight solution is welcome. Our programs generally have the same volume and we do not anticipate scale up in the foreseeable future."
-    }
-  },
-  {
-    "model": "tool_picker.question",
-    "pk": 7,
-    "fields": {
-      "created_at": "2026-01-08T00:00:00Z",
-      "modified_at": "2026-01-08T00:00:00Z",
-      "created_by": 1,
-      "modified_by": 1,
-      "catalog": 1,
-      "question_type": 10,
-      "title": "Connectivity",
-      "description": "Connectivity in this context refers to internet access and how easily data can be sent from one place to another. Some programs or operations may be run out of a national headquarters with good connectivity, while others may be field-based and far from communications infrastructure and therefore need to adapt to an environment with poor connectivity. A disaster or crisis situation may also negatively impact connectivity, for example due to damaged telecommunications infrastructure.",
-      "order": 6,
-      "label_na": "N/A",
-      "label_1": "We need to plan for an operating environment that is extremely cutoff from telecommunications systems. The tool needs to be able to run locally on a computer without an internet connection. We expect no internet connectivity.",
-      "label_2": "Though the tool will be mostly used in no- or low-bandwidth environments, we will be able to periodically access the internet to upload/download data from a cloud server, but won't be able to interact with any websites in realtime. Internet may be available at very few office locations or even just a single one.",
-      "label_3": "We are mostly working in areas where connectivity will not be a concern, but aren't quite ready to go for a completely web-based solution. The tool will ideally store data in the cloud in order to facilitate access for end users that may be spread out, but still offer offline-functionality for certain interactions. We expect internet connectivity at multiple office locations but not everywhere the operation is taking place.",
-      "label_4": "Connectivity is not going to be an issue. We can consider solutions that are completely web-based and require an active and high-bandwidth internet connection. We expect internet connectivity everywhere for the program."
-    }
-  },
-  {
-    "model": "tool_picker.question",
+    "model": "tool_picker.toolfeature",
     "pk": 8,
     "fields": {
-      "created_at": "2026-01-08T00:00:00Z",
-      "modified_at": "2026-01-08T00:00:00Z",
-      "created_by": 1,
-      "modified_by": 1,
-      "catalog": 1,
-      "question_type": 10,
-      "title": "Data Cleaning",
-      "description": "When dealing with larger datasets‚ particularly those that contain beneficiary information‚ it is common to run into data accuracy, duplication, and other issues. Some tools may offer data cleaning features, while others will require you to use separate ones to handle these matters.",
-      "order": 7,
-      "label_na": "N/A",
-      "label_1": "Given the nature of my use case, we anticipate plenty of data cleaning needs. We lack the requisite human resources to use a separate tool to handle this, so we want robust data cleaning to be part of the recommended tool's feature set. Ideally, it will catch data issues without me prompting it, and offer automatic solutions when an issue is detected.",
-      "label_2": "We expect there to be data cleaning needs, and would like a tool that can run reports or similar tools where our team can monitor certain data points in real-time. The criteria for these searches need to be configurable based on our needs. It's ok if we then need to manually correct the data issues that such a search catches.",
-      "label_3": "We don't expect my data cleaning needs to be particularly robust. We likely just need a way to identify duplicates or data entry errors, and can handle fixing those data issues on our own.",
-      "label_4": "Data cleaning either is not an issue we anticipate, or we will export the data to handle cleaning in a separate tool. For example, if the list of program enrollees is reviewed and provided by another organization."
+      "name": "Global Administration of Projects",
+      "feature_category": 10,
+      "description": "Ad administrator has the ability to manage cash projects globally. That means having a single view that can join data across projects and implementations, with reporting capable of aggregation of data.",
+      "cash_RTM_code": "01-MD01-01"
     }
   },
   {
-    "model": "tool_picker.question",
+    "model": "tool_picker.toolfeature",
     "pk": 9,
     "fields": {
-      "created_at": "2026-01-08T00:00:00Z",
-      "modified_at": "2026-01-08T00:00:00Z",
-      "created_by": 1,
-      "modified_by": 1,
-      "catalog": 1,
-      "question_type": 10,
-      "title": "Data Extract",
-      "description": "Some companies and tools may rely on business models that lock users into specific ecosystems and either require you to pay to convert the data so that it can be used with other tools or simply don't allow you to migrate the data elsewhere. Interoperability in this case describes how easily you can export or reference data in the proposed solution with other tools you may wish to include as part of a suite of tools to meet your programmatic needs.",
-      "order": 8,
-      "label_na": "N/A",
-      "label_1": "We need complete flexibility with the data. Our teams will want to export data from wherever the tool is storing it into a number of other formats, including both proprietary (e.g. .xlsx, .docx) and open (e.g. .txt, .svg) formats. Data extraction must be a robust and built-in feature for the tool. The proposed solution must also have powerful data export functionality, including either a queryable API or a custom report tool.",
-      "label_2": "Our team will need to extract the data from the platform on a limited basis into formats that are either proprietary (e.g. .xlsx, .docx) or open (e.g. .txt, .svg), but it's acceptable if the tool manages data in such a way that not all of it can be exported. For example, if we have beneficiary lists with headshots, we would be ok with not being able to export the images and just get a CSV of the beneficiaries.",
-      "label_3": "Most of the work that requires access to the data can be done directly inside the proposed solution. We're not concerned about the specific formats that the data can be exported into, just that there is a way of getting data out for either analytical or archival purposes.",
-      "label_4": "We're not concerned about being locked into a single ecosystem, and do not anticipate needing to extract or move data from the proposed solution to another platform."
+      "name": "Segregation of Country Instances",
+      "feature_category": 10,
+      "description": "An administrator has the ability to configure and manage country instances separately. That means being able to define geographical areas, specify currencies, and select custom user and access permissions based on a country.",
+      "cash_RTM_code": "01-MD01-02"
     }
   },
   {
-    "model": "tool_picker.question",
+    "model": "tool_picker.toolfeature",
     "pk": 10,
     "fields": {
-      "created_at": "2026-01-08T00:00:00Z",
-      "modified_at": "2026-01-08T00:00:00Z",
-      "created_by": 1,
-      "modified_by": 1,
-      "catalog": 1,
-      "question_type": 10,
-      "title": "Data Viz",
-      "description": "Data management tools can become rich repositories of your programmatic information, and making sense of it is much easier when you visualize it. Some tools may offer powerful features out of the box to create dynamic visualizations like maps and dashboards, while others will require you to handle data visualization on your own using other tools.",
-      "order": 9,
-      "label_na": "N/A",
-      "label_1": "Data visualization features will be extremely important to end users and audiences that will be reviewing this program. We lack the time and/or capacity to create these, and we need a tool that will offer reports via pre-built templates. We need to create graphs, charts, and maps without having technical or data visualization expertise.",
-      "label_2": "Data visualization features will be extremely important to end users and audiences that will be reviewing this program. We need a tool that will allow us to create data visualizations natively, but we also have the time and resources to manually configure these and do not require pre-built templates.",
-      "label_3": "Our team will want to visualize this data, but don't need the proposed tool to handle it for us. We need to be able to build a live connection to the data for business intelligence tools like PowerBI.",
-      "label_4": "We don't need data visualization as part of the tool. We are able to create any reports, dashboards, or static visualizations from manually-exported data."
+      "name": "Set Default Parameters",
+      "feature_category": 10,
+      "description": "An administrator has the ability to define and set default parameters—such as the average household size—for the project.",
+      "cash_RTM_code": "01-MD01-04"
     }
   },
   {
-    "model": "tool_picker.question",
+    "model": "tool_picker.toolfeature",
     "pk": 11,
     "fields": {
-      "created_at": "2026-01-08T00:00:00Z",
-      "modified_at": "2026-01-08T00:00:00Z",
-      "created_by": 1,
-      "modified_by": 1,
-      "catalog": 1,
-      "question_type": 10,
-      "title": "Safeguarding Data",
-      "description": "There are multiple challenges when collecting, storing, and using sensitive data. It is necessary to adhere to data privacy laws and regulations. Data must be protected from unauthorized access, data breaches, or theft.",
-      "order": 10,
-      "label_na": "N/A",
-      "label_1": "The program will be collecting especially sensitive data, and there may be strict regulations regarding how data is stored. We require strong data security measures for data in transit and data storage (e.g. encryption). We need control over specific user roles that limit the ways they can interact with sensitive data, and full audit logs of each action a user takes. The tool needs constantly-updated measures kept in line with evolving threats to keep hackers out. It must also pass periodic, third-party security audits.",
-      "label_2": "Though our program is not required to adhere to strict data regulations, we are still seeking a tool that will actively facilitate good practices around how we responsibly manage private data. Any cloud-based solution must have modern security measures in place, and the ability to limit access and read/write permissions. We expect the tool to have high-quality measures in place to unauthorized access or manipulation of the data.",
-      "label_3": "We will follow best practices, but are not legally required to meet any particular set of standards. The team and program are small enough that manually following best practices via internal processes will be enough. We expect to clearly define and follow data protection strategy and security policies outside of what the tool might facilitate.",
-      "label_4": ""
+      "name": "Custom Approval Workflow",
+      "feature_category": 10,
+      "description": "Ability to configure an approval process and workflow that incorporates the segregation of duties with Requester/Approver workflows for Setup, Targeting, Disbursements, and Financial Flows.",
+      "cash_RTM_code": "01-MD01-06"
     }
   },
-{
-  "model": "tool_picker.tool",
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 12,
+    "fields": {
+      "name": "Linkage with Providers",
+      "feature_category": 10,
+      "description": "The program manager and their team can assign products such as cash, goods or services with suppliers, traders, financial service providers.",
+      "cash_RTM_code": "01-MD01-07"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 13,
+    "fields": {
+      "name": "Team Configuration",
+      "feature_category": 10,
+      "description": "Ability to configure users into teams for security access, program tasks and case management.\nSecurity access is configurable through both role-based and geographic access.",
+      "cash_RTM_code": "01-MD01-08"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 14,
+    "fields": {
+      "name": "Custom User Roles",
+      "feature_category": 10,
+      "description": "Configure user roles that can change information about beneficiaries and the project.",
+      "cash_RTM_code": "01-MD01-09"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 15,
+    "fields": {
+      "name": "Household Configuration",
+      "feature_category": 10,
+      "description": "Program manager and their team must can define the household packages (basket or group of products) that can be assigned to a household.",
+      "cash_RTM_code": "01-MD02-02"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 16,
+    "fields": {
+      "name": "Data Retention on Closeout",
+      "feature_category": 10,
+      "description": "An administrator of the system can close the project so that data cannot be changed or added and manage data according to policy.",
+      "cash_RTM_code": "01-MD02-03"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 17,
+    "fields": {
+      "name": "Pricing Setup",
+      "feature_category": 10,
+      "description": "The program manager and their team can set up prices and currencies for products that will form the entitlement.",
+      "cash_RTM_code": "01-MD02-04"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 18,
+    "fields": {
+      "name": "Registration of Merchants",
+      "feature_category": 10,
+      "description": "The program manager and their team can set up traders or merchants who are linked to specific products and prices.",
+      "cash_RTM_code": "01-MD03-01"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 19,
+    "fields": {
+      "name": "Flexible Payment Modality",
+      "feature_category": 10,
+      "description": "The ability to configure and integrate with multiple FSPs to use a variety of payment modalities, including (but not limited to) mobile money, pre-paid cards, e-vouchers, vouchers, bank transfers, remittance and money pick-up services.",
+      "cash_RTM_code": "01-MD03-03"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 20,
+    "fields": {
+      "name": "Funding Source Configuration",
+      "feature_category": 10,
+      "description": "Ability to setup funding sources, link those sources to each disbursement or distribution, and track how funds are utilized across the program.",
+      "cash_RTM_code": "01-MD05-01"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 21,
+    "fields": {
+      "name": "Device Management",
+      "feature_category": 10,
+      "description": "Ability to setup inventory of devices used in the program (e.g. mobile phones, tablets, point-of-sale terminals, smart cards).",
+      "cash_RTM_code": "01-MD06-01"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 22,
+    "fields": {
+      "name": "Financial Service Provider Integration",
+      "feature_category": 10,
+      "description": "Ability to configure and integrate with FSPs for CVA distributions via API, file-sharing, or similar method.",
+      "cash_RTM_code": "01-MD07-01"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 23,
+    "fields": {
+      "name": "Cross Platform Data Interoperability",
+      "feature_category": 10,
+      "description": "System utilizes accessible formats and the tool allows for direct connections that can tap into the data. Ability to connect to external systems to the data for analysis, visualization, and backup. These integrations allow for usage of third-party applications like Kobo for data collection, or PowerBI for dashboarding.",
+      "cash_RTM_code": "01-MD07-02"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 24,
+    "fields": {
+      "name": "Task Management Support",
+      "feature_category": 10,
+      "description": "Ability to configure task management for users and beneficiaries, including case follow-ups, case notes, reminders, etc.",
+      "cash_RTM_code": "01-MD08-04"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 25,
+    "fields": {
+      "name": "Native Data Collection Tool",
+      "feature_category": 20,
+      "description": "The platform has a built-in data collection tool and mobile application which eliminates the need for a secondary tool (like ODK, Kobo, etc.) to register beneficiaries.",
+      "cash_RTM_code": "02-BR01-01"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 26,
+    "fields": {
+      "name": "Integration with Third Party Data Collection Tools",
+      "feature_category": 20,
+      "description": "Ability to directly connect the platform with third party tool (like ODK, Kobo, etc.) without having to export/import.",
+      "cash_RTM_code": "02-BR01-02"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 27,
+    "fields": {
+      "name": "Asynchronous Data Updates",
+      "feature_category": 20,
+      "description": "The program manager and their team must be able to add or update information to an existing  beneficiary record at any point in the project execution.",
+      "cash_RTM_code": "02-BR01-07"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 28,
+    "fields": {
+      "name": "Registration Data Imports",
+      "feature_category": 20,
+      "description": "The program manager can import or upload a pre-formatted file (Excel or CSV) of beneficiary information into the system and have the data map to the appropriate fields.",
+      "cash_RTM_code": "02-BR01-11"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 29,
+    "fields": {
+      "name": "Self Registration Capabilities",
+      "feature_category": 10,
+      "description": "Ability for self-registration, including ID verification (digital verification of ID documents) as part of the self-registration process. If self-registration is not included, then the ability to integrate with a self-registration tool.",
+      "cash_RTM_code": "02-BR01-14"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 30,
+    "fields": {
+      "name": "Beneficiary Control of Registration Data",
+      "feature_category": 20,
+      "description": "After registering, a beneficiary can update or delete any data they provide directly, without needing to contact the program team.",
+      "cash_RTM_code": "02-BR01-15"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 31,
+    "fields": {
+      "name": "Automated Registration Fraud Detection",
+      "feature_category": 20,
+      "description": "Ability to detect fraudulent registrations using geo-boundary data, metadata, or anomalies within standard processes.",
+      "cash_RTM_code": "02-BR01-17"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 32,
+    "fields": {
+      "name": "Automatic De-Duplication Processes",
+      "feature_category": 20,
+      "description": "Tool provides a configurable, timely and accurate way of identifying, flagging and removing duplicate registrations. Can catch either duplicate individuals or multiple registrations from the same family.",
+      "cash_RTM_code": "02-BR03-01"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 33,
+    "fields": {
+      "name": "Define Distribution Geography",
+      "feature_category": 30,
+      "description": "The program manager and their team can select geographical areas of distribution",
+      "cash_RTM_code": "03-DP01-01"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 34,
+    "fields": {
+      "name": "Distribution Management",
+      "feature_category": 30,
+      "description": "The ability to create distribution records with relevant associated data such as location, time, modality, etc., and assign beneficiaries.",
+      "cash_RTM_code": "03-DP01-06"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 35,
+    "fields": {
+      "name": "Physical and E-Voucher Support",
+      "feature_category": 30,
+      "description": "The tool can generate e-vouchers and physical vouchers for distribution.",
+      "cash_RTM_code": "03-DP01-13"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 36,
+    "fields": {
+      "name": "Vendor Assignment for Vouchers",
+      "feature_category": 30,
+      "description": "The tool allows program teams to manage vendors that accept distributed encashment vouchers.",
+      "cash_RTM_code": "03-DP01-14"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 37,
+    "fields": {
+      "name": "Beneficiary Assignment to Financial Provider",
+      "feature_category": 30,
+      "description": "The program manager and their team can assign a beneficiary to a financial service provider (FSP), allowing the program to utilize multiple FSPs.",
+      "cash_RTM_code": "03-DP01-16"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 38,
+    "fields": {
+      "name": "Dynamic Entitlement Assignment",
+      "feature_category": 30,
+      "description": "The program manager and their team can assign packages or entitlements to a household using geographical criteria or vulnerability criteria.",
+      "cash_RTM_code": "03-DP02-01"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 39,
+    "fields": {
+      "name": "Entitlement Management with Support for Top Ups",
+      "feature_category": 10,
+      "description": "The program manager and their team can manage entitlements and assign additional entitlements to households (i.e. top ups).",
+      "cash_RTM_code": "03-DP02-02"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 40,
+    "fields": {
+      "name": "Support for Services Entitlement",
+      "feature_category": 30,
+      "description": "The tool allows program managers and their teams to provision services (e.g. health care services, training, etc.) to beneficiary records.",
+      "cash_RTM_code": "03-DP02-04"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 41,
+    "fields": {
+      "name": "Support for Multiple Currencies",
+      "feature_category": 30,
+      "description": "Teams can access currency conversion directly inside the tool.",
+      "cash_RTM_code": "03-DP04-07"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 42,
+    "fields": {
+      "name": "Referrals to Other Services",
+      "feature_category": 30,
+      "description": "Program managers and their teams can easily refer cases to other services or NGOs.",
+      "cash_RTM_code": "03-DP05-01"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 43,
+    "fields": {
+      "name": "Beneficiary Identification and Entitlement Verification",
+      "feature_category": 30,
+      "description": "The program manager and their team can confirm beneficiary identification, entitlement and if they are eligible for the a given distribution.",
+      "cash_RTM_code": "04-DT01-04"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 44,
+    "fields": {
+      "name": "Distribution Planned Versus Actual Analytics",
+      "feature_category": 30,
+      "description": "The program manager and their team can compare the distribution plan against the distribution report and generate a report that illustrates what was given out, to whom, when and what percentage compared to plan.",
+      "cash_RTM_code": "04-DT01-08"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 45,
+    "fields": {
+      "name": "Support for Digital Signatures",
+      "feature_category": 30,
+      "description": "The tool supports recording digital signatures of the beneficiaries when goods have been received.",
+      "cash_RTM_code": "04-DT01-09"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 46,
+    "fields": {
+      "name": "Distribution Automation",
+      "feature_category": 30,
+      "description": "The tool can be configured to have certain parameters and logic defined and then automate the distributions in high-velocity, high-volume programs.",
+      "cash_RTM_code": "04-DT03-01"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 47,
+    "fields": {
+      "name": "Two-Way Beneficiary Communications",
+      "feature_category": 40,
+      "description": "The tool allows program staff to send out custom messages, either through a dedicated app or popular messaging platforms, with important programmatic information. Beneficiaries can then respond directly through that platform.",
+      "cash_RTM_code": "05-FS02-02"
+    }
+  },
+  {
+    "model": "tool_picker.toolfeature",
+    "pk": 48,
+    "fields": {
+      "name": "One-Way Beneficiary Communications",
+      "feature_category": 40,
+      "description": "The tool allows program staff to send out custom messages, either through a dedicated app or popular messaging platforms, with important programmatic information.",
+      "cash_RTM_code": "05-FS02-01"
+    }
+  },
+  {
+    "model": "tool_picker.tool",
     "pk": 1,
     "fields": {
       "created_at": "2026-01-08T00:00:00Z",
       "modified_at": "2026-01-08T00:00:00Z",
       "created_by": 1,
       "modified_by": 1,
-      "catalogs": [1],
+      "catalogs": [
+        1
+      ],
       "name": "RedRose",
       "tagline": "A comprehensive cash operations solution that has been widely used across the Movement.",
       "description": "Since 2015, RedRose has been widely used by numerous international organisations in over 55 countries worldwide and reached over 155 Million people. It provides a flexible and scalable system to manage all aspects of both CVA and in-kind programmes. It has been used in numerous contexts by the IFRC and ICRC since 2018.  \r\n\r\n\r\n### Resources\r\n\r\n- [Homepage](https://www.redrose.io/)\r\n\r\n### National Societies Using Red Rose\r\n\r\nThese National Societies signed agreements under the first Global Framework Agreement with RedRose:\r\n\r\n- Belgian Red Cross, British Red Cross, Burkinabe Red Cross Society, Burundi Red Cross, Red Cross of Chad, Danish Red Cross, German Red Cross, Kenya Red Cross Society, Lebanese Red Cross, Netherlands Red Cross, Philippine Red Cross, Swiss Red Cross  \r\n\r\n\r\nThese National Societies have also implemented RedRose:\r\n\r\n- Gambia, Rwanda, Tanzania, Uganda, Zambia, Pakistan, DRC (Democratic Republic of Congo), Mozambique, Vietnam  \r\n\r\n\r\nIn addition, the ICRC used RedRose in different contexts under a separate agreement.\r\n\r\n\r\n### Contact\r\n\r\n**Arturo Garcia Fernandez**  \r\nIFRC Cash Data Management Officer  \r\narturo.garcia@ifrc.org",
       "video_link": "https://player.vimeo.com/video/391965448?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
       "tool_link": "https://www.redrose.io/",
       "logo": "",
-    "tool_sectors": [
-      2
-    ],
-    "tool_features": [
-      14,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26,
-      27,
-      28,
-      29,
-      30,
-      31,
-      32,
-      33,
-      34,
-      35,
-      36,
-      37,
-      38,
-      39,
-      40,
-      41,
-      42,
-      43,
-      44,
-      45,
-      46,
-      47,
-      48
-    ],
-    "tool_owners": [
-      8
-    ]
-  }
-},
-{
-   "model": "tool_picker.tool",
+      "tool_sectors": [
+        2
+      ],
+      "tool_features": [
+        14,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48
+      ],
+      "tool_owners": [
+        8
+      ]
+    }
+  },
+  {
+    "model": "tool_picker.tool",
     "pk": 2,
     "fields": {
       "created_at": "2026-01-08T00:00:00Z",
       "modified_at": "2026-01-08T00:00:00Z",
       "created_by": 1,
       "modified_by": 1,
-      "catalogs": [1],
+      "catalogs": [
+        1
+      ],
       "name": "121 Platform",
       "tagline": "The 121 Platform is a user-friendly tool designed to streamline the Cash & Voucher Assistance (CVA) process, making it easy, safe, and fast for disaster-affected individuals to meet their own needs.",
       "description": "The 121 Platform is a user-friendly tool designed to streamline the Cash & Voucher Assistance (CVA) process, making it easy, safe, and fast. It will allow you to distribute cash in days, rather than weeks. The 121 platform is created by the Netherlands Red Cross: a platform for the movement, by the movement.  \r\n\r\n\r\n### Resources\r\n\r\n- [Homepage](https://510.global/product/121-platform/)\r\n\r\n### National Societies using 121 Platform\r\n\r\nBenin, DRC, Eswatini, Ethiopia, Ivory Coast, Kenya, Nigeria, Netherlands, Slovakia, Somalia, South Africa, Sudan, Togo, Zambia\r\n\r\n### Contact\r\n\r\nsupport@121.global",
       "video_link": "https://player.vimeo.com/video/1060458500?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
       "tool_link": "https://510.global/product/121-platform/",
       "logo": "",
-    "tool_sectors": [
-      2
-    ],
-    "tool_features": [
-      14,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26,
-      27,
-      28,
-      29,
-      30,
-      31,
-      32,
-      33,
-      34,
-      35,
-      36,
-      37,
-      38,
-      39,
-      40,
-      41,
-      42,
-      43,
-      44,
-      45,
-      46,
-      47,
-      48
-    ],
-    "tool_owners": [
-      8
-    ]
-  }
-},
-{
-  "model": "tool_picker.tool",
+      "tool_sectors": [
+        2
+      ],
+      "tool_features": [
+        14,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48
+      ],
+      "tool_owners": [
+        8
+      ]
+    }
+  },
+  {
+    "model": "tool_picker.tool",
     "pk": 3,
     "fields": {
       "created_at": "2026-01-08T00:00:00Z",
       "modified_at": "2026-01-08T00:00:00Z",
       "created_by": 1,
       "modified_by": 1,
-      "catalogs": [1],
+      "catalogs": [
+        1
+      ],
       "name": "EspoCRM - Cloud",
       "tagline": "An open source CRM that National Societies can use to manage interactions with clients, partners, suppliers and others.",
       "description": "EspoCRM is a secure, easy-to-use, and quick-to-set-up data management tool that has been effectively adapted for cash and voucher assistance (CVA) programs by over 15 National Societies. Its low-code customization capabilities allow it to be tailored to the specific needs of each National Society.\r\n\r\n### Resources\r\n\r\n- [Documentation](https://docs.espocrm.com)\r\n- [Support forum](https://forum.espocrm.com)\r\n- [Knowledge base](https://github.com/rodekruis/EspoCRM-knowledge-base/wiki)\r\n- [People Affected Management setup template](https://github.com/rodekruis/espocrm-template-pam)\r\n\r\n### National Societies using EspoCRM - Cloud\r\n\r\nMali Red Cross, Cameroon Red Cross, Malagasy Red Cross, Ukraine Red Cross, Slovakia Red Cross, Estonia Red Cross, Lithuanian Red Cross, Polish Red Cross, Romanian Red Cross, Hungarian Red Cross, Red Cross Society of the Republic of Moldova, Bulgarian Red Cross, Slovenian Red Cross, Red Cross of Montenegro, Croatian Red Cross, Latvian Red Cross, Netherlands Red Cross, Syrian Arab Red Crescent, Uganda Red Cross, Lebanese Red Cross, Hellenic Red Cross, Kenya Red Cross, Zambia Red Cross, IFRC\r\n\r\n### Contact\r\n\r\nwdejong@redcross.nl",
       "video_link": null,
       "tool_link": "https://docs.espocrm.com",
       "logo": "",
-    "tool_sectors": [
-      2
-    ],
-    "tool_features": [
-      14,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26,
-      27,
-      28,
-      29,
-      30,
-      31,
-      32,
-      33,
-      34,
-      35,
-      36,
-      37,
-      38,
-      39,
-      40,
-      41,
-      42,
-      43,
-      44,
-      45,
-      46,
-      47,
-      48
-    ],
-    "tool_owners": [
-      8
-    ]
-  }
-},
-{
-   "model": "tool_picker.tool",
+      "tool_sectors": [
+        2
+      ],
+      "tool_features": [
+        14,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48
+      ],
+      "tool_owners": [
+        8
+      ]
+    }
+  },
+  {
+    "model": "tool_picker.tool",
     "pk": 4,
     "fields": {
       "created_at": "2026-01-08T00:00:00Z",
       "modified_at": "2026-01-08T00:00:00Z",
       "created_by": 1,
       "modified_by": 1,
-      "catalogs": [1],
+      "catalogs": [
+        1
+      ],
       "name": "Excel and Kobo",
       "tagline": "KoboTollbox is a free toolkit for collecting and managing data in challenging environments and is the most widely-used tool in humanitarian emergencies.",
       "description": "KoboTollbox is a free toolkit for collecting and managing data in challenging environments and is the most widely-used tool in humanitarian emergencies. The combination of kobotoolbox and Excel provide a basic system with complete data management features.\r\n\r\n### Resources\r\n\r\n- [IFRC FAQ](https://www.ifrc.org/ifrc-kobo)\r\n- [Kobo forum](https://community.kobotoolbox.org)\r\n- [ODK forum](https://forum.getodk.org) (can be used for XLSForm related questions and case studies)\r\n\r\n### National Societies using Excel and Kobo\r\n\r\nA number of National Societies have used, and still use, the combination of Excel and Kobo for their cash programs. \r\n\r\n### Contact\r\n\r\n**Arturo Garcia Fernandez**  \r\nIFRC Cash Data Management Officer  \r\narturo.garcia@ifrc.org",
       "video_link": null,
       "tool_link": "https://www.kobotoolbox.org/",
       "logo": "",
-    "tool_sectors": [
-      2
-    ],
-    "tool_features": [
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26,
-      27,
-      28,
-      29,
-      30,
-      31,
-      32,
-      33,
-      34,
-      35,
-      36,
-      37,
-      38,
-      39,
-      40,
-      41,
-      42,
-      43,
-      44,
-      45,
-      46,
-      47,
-      48
-    ],
-    "tool_owners": [
-      8
-    ]
-  }
-},
- {
+      "tool_sectors": [
+        2
+      ],
+      "tool_features": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48
+      ],
+      "tool_owners": [
+        8
+      ]
+    }
+  },
+  {
     "model": "tool_picker.tool",
     "pk": 5,
     "fields": {
@@ -1074,7 +861,9 @@
       "modified_at": "2026-01-08T00:00:00Z",
       "created_by": 1,
       "modified_by": 1,
-      "catalogs": [1],
+      "catalogs": [
+        1
+      ],
       "name": "AccessRC",
       "tagline": "AccessRC: The mobile app for humanitarian aid",
       "description": "AccessRC is a comprehensive digital self-enrollment and program management platform that accelerates humanitarian response by providing a set of integrated tools to help a national society. With the public app, affected individuals are empowered to register, verify their eligibility, and request assistance directly through a responsive mobile app. For national societies, they utilize a web based portal for National Society staff to create programs, review and manage assistance. AccessRC enhances transparency, data quality, and operational scalability across surge operations and routine programming.  \r\n\r\n\r\n### Resources\r\n\r\n- [Homepage](https://accessrc.org/) \r\n\r\n### National Societies using AccessRC\r\n\r\nBulgaria, Colombia, Ecuador, Honduras, Latvia, Lithuania, Moldova, Peru, Romania\r\n\r\n### Contact\r\n\r\n**Stephen Hagerich**  \r\nCoordinator, Integrated Assistance  \r\nstephen.hagerich@ifrc.org",
@@ -1108,7 +897,7 @@
       "modified_by": 1,
       "tool": 1,
       "question": 2,
-      "description": "SMEs for RedRose report that the setup process takes about two full weeks for the basic installation. Setup is usually scheduled as part of a CVA or in-kind programme. During the first week the NS receives training and the RedRose system is configured and tested. During the second week an actual distribution is carried out (CVA or in-kind) by the NS. The RedRose team provide hand-holding and support during this week to ensure that the distribution is carried out correctly.",
+      "description": "SME's for RedRose report that the setup process takes about two full weeks for the basic installation. Setup is usually scheduled as part of a CVA or in-kind programme. During the first week the NS receives training and the RedRose system is configured and tested. During the second week an actual distribution is carried out (CVA or in-kind) by the NS. The RedRose team provide hand-holding and support during this week to ensure that the distribution is carried out correctly.",
       "ordinal_value": 2,
       "selected_options": []
     }
@@ -1138,7 +927,7 @@
       "modified_by": 1,
       "tool": 1,
       "question": 4,
-      "description": "There is no additional charge for the maintenance of the RedRose system. This includes all software updates, backups and bug-fixes.",
+      "description": "There is no additional charge for the maintenance of the 121 Platform. This includes all software updates, backups and bug-fixes.\n\nOn customisation of the current tool: The 121 platform team has a close collaboration with all their partners. Since it is a movement product, users have the ability to influence the roadmap. Customisations and enhancements will be taken into account if multiple partners can benefit from it, free of charge.",
       "ordinal_value": 1,
       "selected_options": []
     }
@@ -1153,7 +942,7 @@
       "modified_by": 1,
       "tool": 1,
       "question": 5,
-      "description": "General online training resources are available but specific training is strongly recommended for NSs.",
+      "description": "General online training resources are available but specific training is strongly recommended for NSs.\nThe RedRose team provide one week of practical \"hands-on\" training, followed by one week of support and additional training during the CVA or in-kind distribution. This is usually onsite and provides the NS with time to test and practice using the system before a distribution.\nAs each NS is unique (e.g. currency, FSP agreements etc.) the local NS team are strongly encouraged to create their own localised reference guide.\nThe RedRose team are also able to provide \"refresher training\" as and when needed.",
       "ordinal_value": 2,
       "selected_options": []
     }
@@ -1198,8 +987,8 @@
       "modified_by": 1,
       "tool": 1,
       "question": 8,
-      "description": "RedRose contains various tools to help with data cleaning. Registration data is checked at the point of registration to minimise incorrect information being provided. For example, the format of phone numbers, addresses etc. are checked. There is also a duplicate checker that indicates when possible registration duplications have been entered.\r\nThere are many tools available within RedRose to filter, sort ad segment information to help with data cleansing.",
-      "ordinal_value":2,
+      "description": "RedRose contains various tools to help with data cleaning. Registration data is checked at the point of registration to minimise incorrect information being provided. For example, the format of phone numbers, addresses etc. are checked. There is also a duplicate checker that indicates when possible registration duplications have been entered.\nThere are many tools available within RedRose to filter,sort ad segment information to help with data cleansing.",
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1213,7 +1002,7 @@
       "modified_by": 1,
       "tool": 1,
       "question": 9,
-      "description": "Flexible data extraction. Data can be exported to a spreadsheet and also made available through an API for direct connectivity. Data can also be imported into RedRose through a very useful tool that checks for data errors when importing.\r\nWithin the RCRCM there are numerous examples of  data being imported and exported into RedRose.",
+      "description": "Flexible data extraction. Data can be exported to a spreadsheet and also made available through an API for direct connectivity. Data can also be imported into RedRose through a very useful tool that checks for data errors when importing.\nWithin the RCRCM there are numerous examples of  data being imported and exported into RedRose.",
       "ordinal_value": 1,
       "selected_options": []
     }
@@ -1228,7 +1017,7 @@
       "modified_by": 1,
       "tool": 1,
       "question": 10,
-      "description": "A basic visual dashboard is available out-of-the-box that shows programmatic information (e.g. amount distributed, amount remaining in fund, demographic visualisations, map/geographic indicators for registrations). \r\nFor more complete visualisations, it is recommended that the data in RedRose is integrated with PowerBI for bespoke reporting and visualisations. This has been done for various programmes within the RCRCM.",
+      "description": "A basic visual dashboard is available out-of-the-box that shows programmatic information (e.g. amount distributed, amount remaining in fund, demographic visualisations, map/geographic indicators for registrations). \nFor more complete visualisations, it is recommended that the data in RedRose is integrated with PowerBI for bespoke reporting and visualisations. This has been done for various programmes within the RCRCM.",
       "ordinal_value": 2,
       "selected_options": []
     }
@@ -1303,7 +1092,7 @@
       "modified_by": 1,
       "tool": 2,
       "question": 4,
-      "description": "There is no additional charge for the maintenance of the 121 Platform. This includes all software updates, backups and bug-fixes. On customisation of the current tool: The 121 platform team has a close collaboration with all their partners. Since it is a movement product, users have the ability to influence the roadmap. Customisations and enhancements will be taken into account if multiple partners can benefit from it, free of charge.",
+      "description": "\"There is no additional charge for the maintenance of the RedRose system. This includes all software updates, backups and bug-fixes.\nNOTE: if a NS requires bespoke customisations to the software (not recommended) then these developments will incur additional charges. For this reason it is recommended that NSs use the standard RedRose package which is highly configurable and provides a wide variety of CVA and in-kind uses.\"",
       "ordinal_value": 1,
       "selected_options": []
     }
@@ -1318,7 +1107,7 @@
       "modified_by": 1,
       "tool": 2,
       "question": 5,
-      "description": "The training format is a comprehensive format including 1 day how to use the platform. 1 day suffice to know how to use 121.  An additional day about CVA IM, digitalization and workflow, and finally half a day is used for practice sessions. A total of 2.5 days is required to fully adopt the 121 Platform. \r\nTraining materials are provided at the end of the training. Most trainings are adjusted to the local team. \r\nAn online user manual is available via the platform. \r\nIn addition, the team can provide CVA IM trainings on Kobo and PowerBI to build further the team capacities.",
+      "description": "The training format is a comprehensive format including 1 day how to use the platform. 1 day suffice to know how to use 121.  An additional day about CVA IM, digitalization and workflow, and finally half a day is used for practice sessions. A total of 2.5 days is required to fully adopt the 121 Platform. \nTraining materials are provided at the end of the training. Most trainings are adjusted to the local team. \nAn online user manual is available via the platform. \nIn addition, the team can provide CVA IM trainings on Kobo and PowerBI to build further the team capacities.",
       "ordinal_value": 2,
       "selected_options": []
     }
@@ -1333,7 +1122,7 @@
       "modified_by": 1,
       "tool": 2,
       "question": 6,
-      "description": "The 121 platform supports projects up to 250.000 households per project. Over 15 NS have already used the 121 platform at scale!",
+      "description": "The 121 platform supports projects up to 250,000 households per project.",
       "ordinal_value": 1,
       "selected_options": []
     }
@@ -1363,8 +1152,8 @@
       "modified_by": 1,
       "tool": 2,
       "question": 8,
-      "description": "The 121 platform supports automatic (and real-time) flagging of duplicates. Because this is clearly indicated in the platform, users can make sure to handle these duplicates before starting payments.\r\nIt further supports advanced filtering to identify missing or wrong data.\r\nLastly, there are automatic checks on the phoneNumber to make sure that these are entered correctly",
-      "ordinal_value": 1,
+      "description": "The 121 platform supports automatic (and real-time) flagging of duplicates. Because this is clearly indicated in the platform, users can make sure to handle these duplicates before starting payments.\nIt further supports advanced filtering to identify missing or wrong data.\nLastly, there are automatic checks on the phoneNumber to make sure that these are entered correctly",
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1378,7 +1167,7 @@
       "modified_by": 1,
       "tool": 2,
       "question": 9,
-      "description": "Data can be exported (if the user role allows it) in both xlsx and csv formats.\r\nFurther; the 121 Platform API allows for integration with PowerBI and other 3rd party tools (like DEH and EspoCRM).",
+      "description": "Data can be exported (if the user role allows it) in both xlsx and csv formats.\nFurther; the 121 Platform API allows for integration with PowerBI and other 3rd party tools (like DEH and EspoCRM).",
       "ordinal_value": 1,
       "selected_options": []
     }
@@ -1393,7 +1182,7 @@
       "modified_by": 1,
       "tool": 2,
       "question": 10,
-      "description": "Data visualization is built into the 121 Platform.",
+      "description": "\"A basic visual dashboard is available out-of-the-box that shows programmatic information (e.g. amount distributed, amount remaining in fund, demographic visualisations, map/geographic indicators for registrations). \nFor more complete visualisations, it is recommended that the data in RedRose is integrated with PowerBI for bespoke reporting and visualisations. This has been done for various programmes within the RCRCM.\"",
       "ordinal_value": 2,
       "selected_options": []
     }
@@ -1408,7 +1197,7 @@
       "modified_by": 1,
       "tool": 2,
       "question": 11,
-      "description": "The 121 platform complies with the GDPR - a legal framework that protects the fundamental rights and freedoms of natural persons with regard to the processing of personal data in the EU. GDPR compliance requires stronger protections than many other legal frameworks. The 121 Platform is checked on security by a 3rd party expert twice a year.\r\nAccess to data (and exports) can be limited based on a user role. Data protection is always part of a 121 training.\r\nAll actions performed on a profile (data changes, status changes, messages, etc.) are logged, visible in the platform and can be exported for audit purposes.",
+      "description": "The 121 platform complies with the GDPR - a legal framework that protects the fundamental rights and freedoms of natural persons with regard to the processing of personal data in the EU. GDPR compliance requires stronger protections than many other legal frameworks. The 121 Platform is checked on security by a 3rd party expert twice a year.\nAccess to data (and exports) can be limited based on a user role. Data protection is always part of a 121 training.\nAll actions performed on a profile (data changes, status changes, messages, etc.) are logged, visible in the platform and can be exported for audit purposes.",
       "ordinal_value": 1,
       "selected_options": []
     }
@@ -1438,7 +1227,7 @@
       "modified_by": 1,
       "tool": 3,
       "question": 2,
-      "description": "Activation can be done quickly by the vendor. Total set up time depends on complexity of the operation, but requires manual mapping of relationships between fields, establishing field types, setting user groups and permissions. All of this can be done directly in the browser and is not difficult. More complex needs, like FSP API linkages, will take time from someone with technical experience in that process.",
+      "description": "Activation can be done quickly by the vendor. The total setup time depends on the complexity of the operation and involves manually mapping field relationships, defining field types, and configuring user groups and permissions. All of this can be done directly in the browser and is not difficult. More complex needs, like FSP API linkages, will take time from someone with technical experience in that process.\n\nHas surge deployment capability and has been used in surge contexts by multiple National Societies and IFRC. Can be implemented in 1 - 4 weeks, depending on the complexity of information handling needs.",
       "ordinal_value": 3,
       "selected_options": []
     }
@@ -1453,7 +1242,7 @@
       "modified_by": 1,
       "tool": 3,
       "question": 3,
-      "description": "Cloud based hosting is set up by the company as part of a subscription.",
+      "description": "Cloud based hosting is set up by the company as part of a subscription.\n\nTher is a template for People Affected Management available. This template offers a generic data model, a simple layout, standard user roles and automated operational processes to serve as a foundation for National Societies.",
       "ordinal_value": 3,
       "selected_options": []
     }
@@ -1469,7 +1258,7 @@
       "tool": 3,
       "question": 4,
       "description": "Upgrades to the system are done automatically by the developer.",
-      "ordinal_value": 2,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1483,8 +1272,8 @@
       "modified_by": 1,
       "tool": 3,
       "question": 5,
-      "description": "Paid cloud hosting plans include dedicated email support from the developer, available during workday business hours. As a less popular tool, self-service documentation and forum support is limited.",
-      "ordinal_value": 3,
+      "description": "Paid cloud hosting plans include dedicated email support from the developer, available during workday business hours. \n\nExtensive documentation is available and there is a large and active support community. EspoCRM offers an easy-to-use and well documented API for integration with other tools.",
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1498,7 +1287,7 @@
       "modified_by": 1,
       "tool": 3,
       "question": 6,
-      "description": "Though not validated by the data management framework team, interviews with users of this tool report that it can slow down when record counts and cross-table queries add up. It should not be seen as a barrier, but local hosting requires consideration of your project scope as it can impact very large datasets.",
+      "description": "EspoCRM has demonstrated good scalability and adaptability, having been successfully deployed in complex, large-scale humanitarian operations. Though not validated by the data management framework team, interviews with users of this tool report that it can slow down when record counts and cross-table queries add up. It should not be seen as a barrier, but local hosting requires consideration of your project scope as it can impact very large datasets.",
       "ordinal_value": 1,
       "selected_options": []
     }
@@ -1528,7 +1317,7 @@
       "modified_by": 1,
       "tool": 3,
       "question": 8,
-      "description": "No native data cleaning tools present. A reporting tool can be used for specific queries, so looking for duplicate entries is possible via a simple search, but large scale data validation and find/replace features not present without more complex workflows that either involve usage of other tools (e.g. Excel) or technical expertise.",
+      "description": "No native data cleaning tools present. Basic flagging of duplicates is available. A reporting tool can be used for specific queries, allowing more complexity to look for duplicate entries via a simple search. Advanced filtering can be easily setup to flag missing or incoherent data values. Large scale data validation and find/replace features not present without more complex workflows that either involve usage of other tools (e.g. Excel) or technical expertise.",
       "ordinal_value": 2,
       "selected_options": []
     }
@@ -1543,7 +1332,7 @@
       "modified_by": 1,
       "tool": 3,
       "question": 9,
-      "description": "Data is stored in CSV format and can be exported like that or in XLSX format. APIs can be connected in JSON format. Delimiters on exported data can be customized.\r\n\r\nShould you choose to cancel EspoCRM-based Cloud hosting, you can switch to on-premise setups without any additional cost.",
+      "description": "Data is stored in CSV format and can be exported like that or in XLSX format. APIs can be connected in JSON format. Delimiters on exported data can be customized. Integrations with widely used tools like Kobo, 121, DEH, RedRose and PowerBI can quickly be setup\n\nShould you choose to cancel EspoCRM-based Cloud hosting, you can switch to on-premise setups without any additional cost.",
       "ordinal_value": 2,
       "selected_options": []
     }
@@ -1574,7 +1363,7 @@
       "tool": 3,
       "question": 11,
       "description": "Servers are only available in Germany and Canada, so any policies related to location of servers or the transfer of PII across national borders will need to consider with that possible limitation. LDAP authentication ensures users’ permissions can be controlled, and sensitive fields can be hidden for certain user groups. Logs are maintained of all user activity. SSL Encryption (HTTPS Support) for all cloud hosted accounts.",
-      "ordinal_value": 2,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1663,7 +1452,7 @@
       "modified_by": 1,
       "tool": 4,
       "question": 6,
-      "description": "No description provided.",
+      "description": "",
       "ordinal_value": 4,
       "selected_options": []
     }
@@ -1738,8 +1527,8 @@
       "modified_by": 1,
       "tool": 4,
       "question": 11,
-      "description": "No description provided.",
-      "ordinal_value": 100,
+      "description": "The tool does not maintain change logs of changes when stored as a standalone file. The fact that the file itself can be easily copied onto a thumb drive or other physical media makes data leakage possible (and without ever knowing that it occurred). However, when stored in a service like SharePoint, more granular controls over access can be implemented.\n\nThough password protection is possible, both via the application itself and indirectly when storing it in a secure server or harddrive, the lack of granular permission sets may conflict with policies centered around delineation of access levels by user type.",
+      "ordinal_value": 3,
       "selected_options": []
     }
   },
@@ -1753,7 +1542,7 @@
       "modified_by": 1,
       "tool": 5,
       "question": 1,
-      "description": "\"Core features such as launching needs assessments, PDMs, creating information only programs, and creating voucher programs are free.\r\n\r\nConsumption based pricing occurs when launching a cash program and includes transaction fees, identity verification and other fees)\"",
+      "description": "Core features such as launching needs assessments, PDMs, creating information only programs, and creating voucher programs are free.\n\nConsumption based pricing occurs when launching a cash program and includes transaction fees, identity verification and other fees)",
       "ordinal_value": 2,
       "selected_options": []
     }
@@ -1783,7 +1572,7 @@
       "modified_by": 1,
       "tool": 5,
       "question": 3,
-      "description": "Configurable features - self-enrollment, needs assessments, information campaigns, PDMs, messaging - can be used to help manage the disaster cycle.",
+      "description": "Configurable features - self-enrolment, needs assessments, information campaigns, PDMs, messaging - can be used to help manage the disaster cycle.",
       "ordinal_value": 1,
       "selected_options": []
     }
@@ -1814,7 +1603,7 @@
       "tool": 5,
       "question": 5,
       "description": "For training and documentation, there is an online repository with user guides, FAQs, IFRC supported learning modules, plus the option of in-country training by surge delegates.",
-      "ordinal_value": 4,
+      "ordinal_value": 1,
       "selected_options": []
     }
   },
@@ -1828,7 +1617,7 @@
       "modified_by": 1,
       "tool": 5,
       "question": 6,
-      "description": "\"Access RC works for large-scale, multi-country emergencies and can also be utilized for smaller, localized preparedness, anticipatory action, response and recovery efforts.\r\n\r\nLeverages scalable cloud infrastructure for rapid capacity adjustments and simplified updates, while retaining the choice for local hosting where required. Previous national societies have announced programs to all accounts in the country and registered 12,000 people in 24 hours.\"",
+      "description": "Access RC works for large-scale, multi-country emergencies and can also be utilized for smaller, localized preparedness, anticipatory action, response and recovery efforts.\n\nLeverages scalable cloud infrastructure for rapid capacity adjustments and simplified updates, while retaining the choice for local hosting where required. Previous national societies have announced programs to all accounts in the country and registered 12,000 people in 24 hours.",
       "ordinal_value": 2,
       "selected_options": []
     }
@@ -1843,8 +1632,8 @@
       "modified_by": 1,
       "tool": 5,
       "question": 7,
-      "description": "Beneficiaries use a Android/iOS mobile app. National Society staff use a web-based portal.\r\n\r\nDefault cloud hosting can introduce performance challenges in low-connectivity regions.",
-      "ordinal_value": 4,
+      "description": "Beneficiaries use a Android/iOS mobile app. National Society staff use a web-based portal.\n\nDefault cloud hosting can introduce performance challenges in low-connectivity regions.",
+      "ordinal_value": 3,
       "selected_options": []
     }
   },
@@ -1874,7 +1663,7 @@
       "tool": 5,
       "question": 9,
       "description": "For interoperability, open APIs connect seamlessly to data management systems for end-to-end coordination.",
-      "ordinal_value": 4,
+      "ordinal_value": 2,
       "selected_options": []
     }
   },
@@ -1889,7 +1678,7 @@
       "tool": 5,
       "question": 10,
       "description": "Comprehensive built in data visualization exists with almost real time refresh. These are self-service dashboards at higher level overviews as well as program level dashboards that cover everything from applications, application processing, and assistance monitoring.",
-      "ordinal_value": 4,
+      "ordinal_value": 3,
       "selected_options": []
     }
   },
@@ -1903,8 +1692,1322 @@
       "modified_by": 1,
       "tool": 5,
       "question": 11,
-      "description": "The platform supports secure ID upload via integrated vendor verification. Built with stringent data privacy and security measures - including role-based access controls and end-to-end encryption - AccessRC meets IFRC data protection standards.\r\n\r\nDefault cloud hosting can raise data-residency compliance questions - though local hosting deployments remain fully supported as an alternative.",
-      "ordinal_value": 4,
+      "description": "The platform supports secure ID upload via integrated vendor verification. Built with stringent data privacy and security measures - including role-based access controls and end-to-end encryption - AccessRC meets IFRC data protection standards.\n\nDefault cloud hosting can raise data-residency compliance questions - though local hosting deployments remain fully supported as an alternative.",
+      "ordinal_value": 3,
+      "selected_options": []
+    }
+  },
+  {
+    "model": "tool_picker.question",
+    "pk": 12,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "catalog": 1,
+      "question_type": 20,
+      "title": "Intended Use",
+      "description": "All of the tools described here are able to deliver the basic functionalities needed to carry out a program: beneficiary registration, reconciliation, feedback & surveys, and reporting & analytics. However, there may be additional functionalities needed for certain types of assistance.\n\nDo you know what program modalities you want the tool to handle?",
+      "order": 0,
+      "label_na": "",
+      "label_1": "",
+      "label_2": "",
+      "label_3": "",
+      "label_4": "",
+      "short_name": "Intended Use"
+    }
+  },
+  {
+    "model": "tool_picker.question",
+    "pk": 1,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "catalog": 1,
+      "question_type": 10,
+      "title": "Available budget",
+      "description": "There are costs associated with setting up and maintaining a tool throughout the program implementation lifecycle.\n\nHow much funding are you able to allocate and or raise for the costs of the tool?",
+      "order": 1,
+      "label_na": "We don't know enough to answer at this time, or don't want to include this when considering options.",
+      "label_1": "No funding is likely to be raised or allocated for this. We are looking primarily for a very low cost or free solution that will allow our team to manage data without paying much for either the set up or maintenance.",
+      "label_2": "We will have funding to cover minimal cost to configure and use the solution for a limited time or volume. The tool needs to have clear pricing that will allow us to estimate the total cost.",
+      "label_3": "We will have funding to cover some expenses related to the configuration and use of the tool for our program. We may have more flexibility if a given solution meets multiple of our needs.",
+      "label_4": "We will have funding to cover the higher cost of a fully-featured solution, and a plan to fund it for as long as we will use it. We can pay more if the tool can handle a variety of functions that we might otherwise pay separately for.",
+      "short_name": "Available budget"
+    }
+  },
+  {
+    "model": "tool_picker.question",
+    "pk": 2,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "catalog": 1,
+      "question_type": 10,
+      "title": "Setup Time",
+      "description": "Teams frequently face deadlines for getting a tool up and running, and there are a variety of factors that can impact the time it takes.\n\nHow quickly do you need the tool to be setup and ready for your program once you’ve procured it?",
+      "order": 2,
+      "label_na": "We don't know enough to answer at this time, or don't want to include this when considering options.",
+      "label_1": "We don’t have much time. Spinning up an instance of the tool must be done in a matter of hours, and tweaking it to meet our needs has to be very simple",
+      "label_2": "We are in a rush, but have at least a few days to handle the configuration, including building out the data fields to match the program.",
+      "label_3": "We have some flexibility and at least a week before we need the tool up and running. We may need to consult necessary technical experts to help with the configuration process.",
+      "label_4": "We have lots of flexibility to ensure that we take the time needed to carefully configure the tool. We have two weeks or more to be very deliberate with the set up process.",
+      "short_name": "Setup Time"
+    }
+  },
+  {
+    "model": "tool_picker.question",
+    "pk": 3,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "catalog": 1,
+      "question_type": 10,
+      "title": "Setup Complexity",
+      "description": "Tools require varying levels of technical experience to configure them to suit the program’s needs.\n\nHow comfortable do you feel with technical processes to get a tool up and running?",
+      "order": 3,
+      "label_na": "We don't know enough to answer at this time, or don't want to include this when considering options.",
+      "label_1": "We need a solution that is very easy to set up and that requires no special technical skills. The tool should be pre-configured or come from a vendor whose price includes this step.",
+      "label_2": "Our team is able to do basic configuration including processes that might rely on intermediate knowledge of formulas and spreadsheet manipulation, but not templates or advanced processes.",
+      "label_3": "We have specialist support on a limited basis that can complete complicated set up and configuration, for example coding and database management.",
+      "label_4": "We have dedicated specialist support for the duration of our program that can complete complicated set up and configuration, for example coding and database management.",
+      "short_name": "Setup Complexity"
+    }
+  },
+  {
+    "model": "tool_picker.question",
+    "pk": 4,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "catalog": 1,
+      "question_type": 10,
+      "title": "IT Tool Maintenance",
+      "description": "Tools require time, money, and human resourcing to be kept up and running.\n\nHow much time, money, and human resources are you able to dedicate to maintaining a tool after it has been set up? This may include bug fixes and reconfiguring data models as program plans change.",
+      "order": 4,
+      "label_na": "We don't know enough to answer at this time, or don't want to include this when considering options.",
+      "label_1": "We do not have resources to manage and maintain the tool, our team needs to focus solely on program implementation. This must be handled automatically or by the vendor.",
+      "label_2": "While we prefer a tool that is simple to maintain, we do have some resources available to manage the tool after it has been set up. We can make small changes to the configuration as needs arise.",
+      "label_3": "We need a tool that can be adjusted as the program is carried out, and have at least one person on our team that can handle relatively straightforward maintenance tasks or configuration adjustments.",
+      "label_4": "Our team has a dedicated and highly-capable technology specialist that will have the time available to provide ongoing support as needed.",
+      "short_name": "IT Tool Maintenance"
+    }
+  },
+  {
+    "model": "tool_picker.question",
+    "pk": 5,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "catalog": 1,
+      "question_type": 10,
+      "title": "Training and Learning Resources",
+      "description": "When configuring the tool, using the tool, and training users, we will inevitably run into issues that will require consulting some sort of documentation or online support.\n\nHow much do you rely on documentation, materials and guidance when training users or troubleshooting implementation?",
+      "order": 5,
+      "label_na": "We don't know enough to answer at this time, or don't want to include this when considering options.",
+      "label_1": "We’re looking for a tool that is extremely well-documented, with extensive online resources. My end users also need access to some sort of support network or resource that can quickly answer their questions.",
+      "label_2": "We don’t necessarily need a bunch of resources like online user support forums or blogs that outline use cases similar to mine, but having good documentation and other support resources would be very desirable.",
+      "label_3": "At the very minimum, we need a user’s manual for how to get the tool set up. We can figure out how to adapt it to my our use case’s specific needs and train and users myself.",
+      "label_4": "We’re not concerned about training and learning resources. The people tasked with configuring the tool are capable of doing it without support, and end users can either be directly trained or are themselves highly technically proficient.",
+      "short_name": "Training and Learning Resources"
+    }
+  },
+  {
+    "model": "tool_picker.question",
+    "pk": 6,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "catalog": 1,
+      "question_type": 10,
+      "title": "Performance and Scalability",
+      "description": "As certain inputs increase for instance beneficiary counts, workflow complexities, number of tranches for cash payments, etc., a tool has to be able to adapt and be more performant.\n\nHow scalable do you need the tool to be according to your program and operational needs? This refers to how well it can handle increased data storage needs or additional features.",
+      "order": 6,
+      "label_na": "We don't know enough to answer at this time, or don't want to include this when considering options.",
+      "label_1": "We’re anticipating (or can’t rule out) a large and potentially complex program with a number of high performance needs. We need a solution that can scale up without greatly affecting speed, efficiency, or cost.",
+      "label_2": "While we are not expecting a massive, years-long use case, we will want to have the flexibility to scale up in the future without too many issues. We might need to store larger volumes of data or accommodate more complex feature needs.",
+      "label_3": "We’re relatively certain that we have a good sense for what our program looks like and do not anticipate the need for massively scaling up. However, we would like to keep options open for bumping up the performance.",
+      "label_4": "Our program is clearly-defined and we don’t anticipate a huge data set or need for expandability. A lightweight solution is welcome. Our programs generally have the same volume and we do not anticipate scale up.",
+      "short_name": "Performance and Scalability"
+    }
+  },
+  {
+    "model": "tool_picker.question",
+    "pk": 7,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "catalog": 1,
+      "question_type": 10,
+      "title": "Connectivity",
+      "description": "Connectivity refers to internet access and how easily data can be sent from one place to another. A disaster or crisis situation may also negatively impact connectivity.\n\nHow easy do you anticipate it will be to connect to the internet in the areas where you’ll be collecting data and managing the program?",
+      "order": 7,
+      "label_na": "We don't know enough to answer at this time, or don't want to include this when considering options.",
+      "label_1": "The tool needs to be able to run locally on a computer without an internet connection. We expect no internet connectivity.",
+      "label_2": "Though the tool will be mostly used in no- or low-bandwidth environments, we will be able to periodically access the internet to share and upload data from a cloud server, but not in realtime.",
+      "label_3": "We are mostly working in areas where connectivity will not be a concern, but aren’t quite ready to go for a completely web-based solution. The tool will ideally store data in the cloud, but still offer offline-functionality for certain interactions.",
+      "label_4": "Connectivity is not going to be an issue. We can consider solutions that are completely web-based and require an active and high-speed internet connection",
+      "short_name": "Connectivity"
+    }
+  },
+  {
+    "model": "tool_picker.question",
+    "pk": 8,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "catalog": 1,
+      "question_type": 10,
+      "title": "Data Cleaning",
+      "description": "When dealing with larger datasets, particularly those that contain beneficiary information, it is common to run into data accuracy, duplication, and other issues. Some tools may offer data cleaning features.\n\nHow important is it that the tool facilitates cleaning for accuracy, de-duplication, and other issues?",
+      "order": 8,
+      "label_na": "We don't know enough to answer at this time, or don't want to include this when considering options.",
+      "label_1": "Given the use case, significant data cleaning is expected. Access to resources to use a separate specialized tool’s data cleaning features should be included in the solution, ideally with automatic error detection and resolution.",
+      "label_2": "We anticipate data-cleaning needs and want a tool that can run configurable reports to monitor key data points in need of cleaning, correction of identified issues is acceptable.",
+      "label_3": "We don’t expect my data cleaning needs to be particularly robust. We likely just need a way to identify duplicates and correct errors, and can handle fixing those data issues on our own.",
+      "label_4": "Data cleaning either is not an issue we anticipate, or we will handle cleaning in a separate tool. For example, if the list of program enrollees is reviewed and approved by another organization.",
+      "short_name": "Data Cleaning"
+    }
+  },
+  {
+    "model": "tool_picker.question",
+    "pk": 10,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "catalog": 1,
+      "question_type": 10,
+      "title": "Data Visualization & Reporting",
+      "description": "Data management tools can help teams visualize and make sense of program data, and summarize it for reporting.\n\nHow important is it that the tool have a way to report/export out on your data?",
+      "order": 9,
+      "label_na": "We don't know enough to answer at this time, or don't want to include this when considering options.",
+      "label_1": "Data visualization is critical for end users and audiences. As we lack the capacity to create these ourselves, the tool must provide pre-built report templates and enable the creation of graphs, charts, and maps without technical expertise.",
+      "label_2": "Data visualization is critical for end users and audiences. We need a tool that supports native data visualization but we also have the time and resources to manually configure these, without requiring pre-built templates.",
+      "label_3": "Our team will want to visualize this data, but don’t need the proposed tool to handle it for us. We need to be able to build a live connection to the data for business intelligence tools like PowerBI.",
+      "label_4": "We are able to create any reports, dashboards, or static visualizations from manually-exported data.",
+      "short_name": "Data Visualization & Reporting"
+    }
+  },
+  {
+    "model": "tool_picker.question",
+    "pk": 9,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "catalog": 1,
+      "question_type": 10,
+      "title": "Data Extraction & Connection",
+      "description": "Some tools lock users into proprietary ecosystems, making data migration costly or impossible. Interoperability refers to how easily data can be exported or used with other tools.\n\nHow important is it that the tool manage your data in a format that allows you to export it or connect it with another tool or service?",
+      "order": 10,
+      "label_na": "We don't know enough to answer at this time, or don't want to include this when considering options.",
+      "label_1": "We require full flexibility to export data in multiple formats, including both proprietary (e.g. .xlsx, .docx) and open (e.g. .txt, .svg). Ideally, the tool must offer robust, built-in data integration with powerful export options such as a queryable API or a custom reporting tool.",
+      "label_2": "Our team will need to extract the data from the platform on a limited basis, but formats that are either proprietary (e.g. .xlsx, .docx) or open (e.g. .txt, .svg). it’s acceptable if not all of the data can be exported. For example exporting beneficiary data in CSV format without associated images.",
+      "label_3": "Most of the work that requires access to the data can be done directly inside the proposed solution. We’re not concerned about the specific formats the data can be exported into, just that there is a way of getting data out for either analytical or archival purposes.",
+      "label_4": "We’re not concerned about being locked into a single ecosystem, and do not anticipate needing to extract or move data from the proposed solution to another platform.",
+      "short_name": "Data Extraction & Connection"
+    }
+  },
+  {
+    "model": "tool_picker.question",
+    "pk": 13,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "catalog": 1,
+      "question_type": 20,
+      "title": "Localization (Language Support)",
+      "description": "Given the nature of Red Cross Red Crescent operations, your solution may require that it be accessible in a variety of languages. Localization refers to making a tool available in other languages.\n\nDo you need the tool to be immediately available in a specific language?",
+      "order": 11,
+      "label_na": "",
+      "label_1": "",
+      "label_2": "",
+      "label_3": "",
+      "label_4": "",
+      "short_name": "Localization (Language Support)"
+    }
+  },
+  {
+    "model": "tool_picker.question",
+    "pk": 11,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "catalog": 1,
+      "question_type": 10,
+      "title": "Safeguarding Data",
+      "description": "Collecting, storing, and using sensitive data presents challenges, including compliance with data privacy laws and protection against unauthorized access or breaches.\n\nHow much will you rely on the data management tool to help you safeguard data?",
+      "order": 12,
+      "label_na": "We don't know enough to answer at this time, or don't want to include this when considering options.",
+      "label_1": "The program will handle highly sensitive data subject to strict storage regulations. Strong security measures are required for data in transit and at rest, including encryption, security access controls, and full audit logs. Security controls must be continuously updated and verified through regular third-party audits.",
+      "label_2": "While the program is not subject to strict data regulations, seek a tool that promotes responsible data management. Any cloud-based solution must include strong security measures, role-based access controls, and strong encryption to prevent unauthorized access or data manipulation.",
+      "label_3": "While not legally required to meet specific standards, we will follow best practices. Given the small size of the team and program, these will be managed through common-sense data protection and security policies defined outside the tool.",
+      "label_4": "",
+      "short_name": "Safeguarding Data"
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 1,
+    "fields": {
+      "language": "English",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 2,
+    "fields": {
+      "language": "Spanish",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 3,
+    "fields": {
+      "language": "French",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 4,
+    "fields": {
+      "language": "Arabic",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 5,
+    "fields": {
+      "language": "Bahasa Indonesia",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 6,
+    "fields": {
+      "language": "Bambara",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 7,
+    "fields": {
+      "language": "Cantonese",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 8,
+    "fields": {
+      "language": "Chinese",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 9,
+    "fields": {
+      "language": "Creole",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 10,
+    "fields": {
+      "language": "Dutch",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 11,
+    "fields": {
+      "language": "Farsi",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 12,
+    "fields": {
+      "language": "Filipino",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 13,
+    "fields": {
+      "language": "German",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 14,
+    "fields": {
+      "language": "Greek",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 15,
+    "fields": {
+      "language": "Hebrew",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 16,
+    "fields": {
+      "language": "Hindi",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 17,
+    "fields": {
+      "language": "Ilocano",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 18,
+    "fields": {
+      "language": "Italian",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 19,
+    "fields": {
+      "language": "Japanese",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 20,
+    "fields": {
+      "language": "Kanada",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 21,
+    "fields": {
+      "language": "Kiswahili",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 22,
+    "fields": {
+      "language": "Macedonian",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 23,
+    "fields": {
+      "language": "Malay",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 24,
+    "fields": {
+      "language": "Mandarin",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 25,
+    "fields": {
+      "language": "Philipino",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 26,
+    "fields": {
+      "language": "Polish",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 27,
+    "fields": {
+      "language": "Portuguese",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 28,
+    "fields": {
+      "language": "Russian",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 29,
+    "fields": {
+      "language": "Shona",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 30,
+    "fields": {
+      "language": "Swedish",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 31,
+    "fields": {
+      "language": "Tagalog",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 32,
+    "fields": {
+      "language": "Tamili",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 33,
+    "fields": {
+      "language": "Turkish",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 34,
+    "fields": {
+      "language": "Turkmen",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 35,
+    "fields": {
+      "language": "Uzbek",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 36,
+    "fields": {
+      "language": "Korean",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.language",
+    "pk": 37,
+    "fields": {
+      "language": "Bengali",
+      "ifrc_primary": false
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 1,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 12,
+      "text": "Cash transfer",
+      "order": 0
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 2,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 12,
+      "text": "Vouchers",
+      "order": 1
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 3,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 12,
+      "text": "In-kind",
+      "order": 2
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 4,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 12,
+      "text": "Services",
+      "order": 3
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 6,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "English",
+      "order": 0
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 7,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Spanish",
+      "order": 1
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 8,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "French",
+      "order": 2
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 9,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Arabic",
+      "order": 3
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 10,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Bahasa Indonesia",
+      "order": 4
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 11,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Bambara",
+      "order": 5
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 12,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Cantonese",
+      "order": 6
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 13,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Chinese",
+      "order": 7
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 14,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Creole",
+      "order": 8
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 15,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Dutch",
+      "order": 9
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 16,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Farsi",
+      "order": 10
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 17,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Filipino",
+      "order": 11
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 18,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "German",
+      "order": 12
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 19,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Greek",
+      "order": 13
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 20,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Hebrew",
+      "order": 14
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 21,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Hindi",
+      "order": 15
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 22,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Ilocano",
+      "order": 16
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 23,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Italian",
+      "order": 17
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 24,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Japanese",
+      "order": 18
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 25,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Kanada",
+      "order": 19
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 26,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Kiswahili",
+      "order": 20
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 27,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Macedonian",
+      "order": 21
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 28,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Malay",
+      "order": 22
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 29,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Mandarin",
+      "order": 23
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 30,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Philipino",
+      "order": 24
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 31,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Polish",
+      "order": 25
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 32,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Portuguese",
+      "order": 26
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 33,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Russian",
+      "order": 27
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 34,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Shona",
+      "order": 28
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 35,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Swedish",
+      "order": 29
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 36,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Tagalog",
+      "order": 30
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 37,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Tamili",
+      "order": 31
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 38,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Turkish",
+      "order": 32
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 39,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Turkmen",
+      "order": 33
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 40,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Uzbek",
+      "order": 34
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 41,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Korean",
+      "order": 35
+    }
+  },
+  {
+    "model": "tool_picker.checkboxoption",
+    "pk": 42,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "question": 13,
+      "text": "Bengali",
+      "order": 36
+    }
+  },
+  {
+    "model": "tool_picker.toolanswer",
+    "pk": 56,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "tool": 1,
+      "description": "Numerous possibilities to manage CVA and in-kind programmes. Can also manage a combination of CVA and in-kind within the same programme, providing information on Fund usage.",
+      "question": 12,
+      "ordinal_value": null,
+      "selected_options": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  {
+    "model": "tool_picker.toolanswer",
+    "pk": 57,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "tool": 1,
+      "description": "The RedRose system is available in English, French, Spanish. Arabic, Ukrainian, Polish, Turkish\nAdditional languages can be requested (extra cost) but AI translation tools used by RedRose mean that new languages can be added if needed.",
+      "question": 13,
+      "ordinal_value": null,
+      "selected_options": []
+    }
+  },
+  {
+    "model": "tool_picker.toolanswer",
+    "pk": 58,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "tool": 2,
+      "description": "",
+      "question": 12,
+      "ordinal_value": null,
+      "selected_options": [
+        1,
+        2,
+        4
+      ]
+    }
+  },
+  {
+    "model": "tool_picker.toolanswer",
+    "pk": 59,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "tool": 2,
+      "description": "",
+      "question": 13,
+      "ordinal_value": null,
+      "selected_options": []
+    }
+  },
+  {
+    "model": "tool_picker.toolanswer",
+    "pk": 60,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "tool": 4,
+      "description": "",
+      "question": 12,
+      "ordinal_value": null,
+      "selected_options": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  {
+    "model": "tool_picker.toolanswer",
+    "pk": 61,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "tool": 4,
+      "description": "The interface of Excel can be run in any of the languages that Microsoft supports. The main limitation accounted for here is that the exact name of any function will depend on your computer's language settings. For example, the SUM function is written as SOMME in French, SUMME in German, and SUMA in Spanish. That can make swapping between languages once data starts being collected and manipulated a challenge.",
+      "question": 13,
+      "ordinal_value": null,
+      "selected_options": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        23,
+        24,
+        25,
+        27,
+        28,
+        31,
+        32,
+        33,
+        35,
+        37,
+        38,
+        40,
+        41,
+        42
+      ]
+    }
+  },
+  {
+    "model": "tool_picker.toolanswer",
+    "pk": 62,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "tool": 3,
+      "description": "EspoCRM supports the full lifecycle of information handling for cash and voucher assistance (CVA) programs. It enables efficient collection, storage, and organization of data related to beneficiaries, programs, and activities, with features like de-duplication, mass messaging and real-time reporting.",
+      "question": 12,
+      "ordinal_value": null,
+      "selected_options": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  {
+    "model": "tool_picker.toolanswer",
+    "pk": 63,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "tool": 3,
+      "description": "",
+      "question": 13,
+      "ordinal_value": null,
+      "selected_options": [
+        6,
+        7,
+        8,
+        10,
+        13,
+        15,
+        16,
+        18,
+        23,
+        31,
+        32,
+        33,
+        38
+      ]
+    }
+  },
+  {
+    "model": "tool_picker.toolanswer",
+    "pk": 64,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "tool": 5,
+      "description": "AccessRC is a platform of three interconnected tools (Public App, Worker App, and Program Management Module). The Public App enables a self-service pathway for individuals to create and manage their own digital accounts, respond to surveys, apply for cash, in-kind, and information services, and receive communication via in‑app messaging. The Worker App allows the national society workforce to record and register individuals face to face, this helps with people without smartphone access.  The Program Management Module supports configurable program workflows for cash, voucher, and in-kind assistance. The national society can manage their disaster operations in AccessRC by launching needs assessments, digitizing their facilities to record visits through the check-in features, launching programs, as well as collect public feedback to help with troubleshooting.\n\nKey capabilities include automated eligibility assessments, in-app messaging for beneficiary communication, configurable needs assessments, information campaign launch tools, post-distribution monitoring surveys, facility check-in tracking, and real-time monitoring dashboards.\n\nRequires DMS layer for direct integration to financial service providers (FSPs) and management of financial records. Integration to FSPs (remittance, IBAN transfers, mobile money) occurs through API to data management systems (currently RedRose but others may be facilitated), facilitating coordinated assistance delivery.",
+      "question": 12,
+      "ordinal_value": null,
+      "selected_options": []
+    }
+  },
+  {
+    "model": "tool_picker.toolanswer",
+    "pk": 65,
+    "fields": {
+      "created_at": "2026-01-08T00:00:00Z",
+      "modified_at": "2026-01-08T00:00:00Z",
+      "created_by": 1,
+      "modified_by": 1,
+      "tool": 5,
+      "description": "We support 42 languages (English, Arabic, Bulgarian, Croatian, Czech, Danish, Dutch, Estonian, Finnish, French, German, Greek, Hebrew, Hindi, Hungarian, Icelandic, Italian, Japanese, Korean, Latvian, Lithuanian, Malay, Nepali, Norwegian, Persian, Polish, Portuguese, Punjabi, Romanian, Russian, Serbian, Slovak, Slovenian, Spanish, Swedish, Thai, Turkish, Ukrainian, Urdu, Armenian, Georgian, Azerbaijani). \n\nThe platform supports multi-language forms. There is native support for 42 languages, including right-to-left scripts, ensuring accessibility for diverse beneficiary populations and ease of use by a diverse National Society staff and volunteer base. The public mobile app, worker app, as well as the program management module is translated.",
+      "question": 13,
+      "ordinal_value": null,
       "selected_options": []
     }
   }
