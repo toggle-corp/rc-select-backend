@@ -12,6 +12,15 @@ services:
       - ./data/backend/static:/code/data/static
       - ipython_data_local:/root/.ipython/profile_default   # persist ipython data, including ipython history
 
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: ${INIT_POSTGRES_DB?err}
+      POSTGRES_USER: ${INIT_POSTGRES_USER?err}
+      POSTGRES_PASSWORD: ${INIT_POSTGRES_PASSWORD?err}
+    volumes:
+        - postgres_data17:/var/lib/postgresql/data
+
   caddy:
     image: caddy:2
     restart: always
@@ -35,3 +44,4 @@ services:
 volumes:
   caddy_data:
   caddy_config:
+  postgres_data17:
