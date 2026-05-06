@@ -56,9 +56,9 @@ services:
   db:
     image: postgres:17
     environment:
-      POSTGRES_DB: rc-select
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${POSTGRES_DB:-rc-select}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     volumes:
       - postgres_data17:/var/lib/postgresql/data
 
