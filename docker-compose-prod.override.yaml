@@ -28,8 +28,9 @@ services:
       # Caddy config
       - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
       # Static files
-      - ./data/backend:/app-assets/server-static:ro
-      # Caddy data volumes
+      - ./data/backend/static:/app-assets/server-static/static:ro
+      - ./data/backend/media:/app-assets/server-static/media:ro
+        # Caddy data volumes
       - caddy_data:/data
       - caddy_config:/config
     environment:

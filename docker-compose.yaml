@@ -15,9 +15,9 @@ x-server: &base_server_setup
     SESSION_COOKIE_DOMAIN: ${SESSION_COOKIE_DOMAIN:-localhost}
     CSRF_COOKIE_DOMAIN: ${CSRF_COOKIE_DOMAIN:-localhost}
     # Postgres
-    POSTGRES_DB: ${POSTGRES_DB:-rc-select}
-    POSTGRES_USER: ${POSTGRES_USER:-postgres}
-    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    POSTGRES_DB: ${INIT_POSTGRES_DB:-rc-select}
+    POSTGRES_USER: ${INIT_POSTGRES_USER:-postgres}
+    POSTGRES_PASSWORD: ${INIT_POSTGRES_PASSWORD:-postgres}
     POSTGRES_HOST: ${POSTGRES_HOST:-db}
     POSTGRES_PORT: ${POSTGRES_PORT:-5432}
     # Email
@@ -56,9 +56,9 @@ services:
   db:
     image: postgres:17
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-rc-select}
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${INIT_POSTGRES_DB:-rc-select}
+      POSTGRES_USER: ${INIT_POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${INIT_POSTGRES_PASSWORD:-postgres}
     volumes:
       - postgres_data17:/var/lib/postgresql/data
 
