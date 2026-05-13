@@ -33,7 +33,7 @@ x-server: &base_server_setup
     TEST_CACHE_REDIS_URL: ${TEST_CACHE_REDIS_URL:-redis://redis:6379/11}
 
   env_file:
-    - path: .env
+    - path: ${BACKEND_ENV_FILE:-.env}
       required: false
   extra_hosts:
     - "host.docker.internal:host-gateway"

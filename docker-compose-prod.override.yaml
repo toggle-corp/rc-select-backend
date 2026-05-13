@@ -1,6 +1,7 @@
 name: rc-select-backend
 
 services:
+  mailpit: !reset null
   web:
     command: ./deploy/run_prod.sh
     environment:
@@ -11,6 +12,15 @@ services:
       - ./data/backend/media:/code/data/media
       - ./data/backend/static:/code/data/static
       - ipython_data_local:/root/.ipython/profile_default   # persist ipython data, including ipython history
+
+    depends_on: !reset override
+      - db
+      - redis
+
+  worker:
+    depends_on: !reset override
+      - db
+      - redis
 
   db:
     image: postgres:17
