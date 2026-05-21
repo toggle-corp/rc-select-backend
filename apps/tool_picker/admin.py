@@ -130,7 +130,7 @@ class CheckboxQuestionProxy(Question):
 
 
 @admin.register(CheckboxQuestionProxy)
-class CheckboxQuestionBulkAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: ignore[reportMissingTypeArgument]
+class CheckboxQuestionBulkAdmin(UserResourceAdmin, CatalogPermission):
     list_display = ["title", "catalog", "order", "option_count", "option_list"]
     list_filter = ["catalog"]
     search_fields = ["title", "description"]
@@ -171,6 +171,21 @@ class CheckboxQuestionBulkAdmin(UserResourceAdmin, admin.ModelAdmin):  # type: i
         return False
 
     @typing.override
+    def is_owner(self, request, obj=None):
+        user = request.user
+        if not user.is_authenticated or obj is None:
+            return False
+        return obj.catalog.owners.filter(pk=user.pk).exists()
+
+    @typing.override
+    def has_change_permission(self, request, obj=None):
+        if self.is_admin(request):
+            return True
+        if obj is None:
+            return request.user.is_authenticated
+        return self.is_owner(request, obj)
+
+    @typing.override
     def save_model(self, request, obj, form, change):  # type: ignore[reportMissingTypeArgument]
         """Ensure question_type is always checkbox."""
         obj.question_type = QuestionTypeEnum.CHECKBOX
@@ -205,7 +220,7 @@ class ToolAnswerOrdinalInline(InlineAdminPermission):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
-class ToolAnswerCheckboxInline(admin.StackedInline, InlineAdminPermission):  # type: ignore[reportMissingTypeArgument]
+class ToolAnswerCheckboxInline(InlineAdminPermission, admin.StackedInline):
     model = ToolAnswer
     extra = 0
     fields = ["question", "selected_options"]
@@ -216,12 +231,12 @@ class ToolAnswerCheckboxInline(admin.StackedInline, InlineAdminPermission):  # t
     verbose_name_plural = "Checkbox Answers"
 
     @typing.override
-    def get_queryset(self, request):  # type: ignore[reportMissingTypeArgument]
+    def get_queryset(self, request):
         qs = super().get_queryset(request)
         return qs.filter(question__question_type=QuestionTypeEnum.CHECKBOX)
 
     @typing.override
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):  # type: ignore[reportMissingTypeArgument]
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "question":
             # Only show checkbox questions from the tool's catalogs
             _tool_obj = typing.cast("Tool | None", getattr(request, "_tool_obj", None))
@@ -236,7 +251,6 @@ class ToolAnswerCheckboxInline(admin.StackedInline, InlineAdminPermission):  # t
     def formfield_for_manytomany(self, db_field, request, **kwargs):  # type: ignore[reportMissingTypeArgument]
         if db_field.name == "selected_options":
             # Dynamically filter options based on the question
-            # This will be handled by JavaScript or manual selection
             pass
         return super().formfield_for_manytomany(db_field, request, **kwargs)
 
@@ -282,10 +296,27 @@ class ToolAdmin(UserResourceAdmin, ToolPermission):
     inlines = [ToolAnswerOrdinalInline, ToolAnswerCheckboxInline]
 
     @typing.override
-    def get_form(self, request, obj=None, change=False, **kwargs):  # type: ignore[reportMissingTypeArgument]
-        # Store the tool object in request for use in inlines
+    def get_form(self, request, obj=None, change=False, **kwargs):
         typing.cast("typing.Any", request)._tool_obj = obj
-        return super().get_form(request, obj, **kwargs)
+        form = super().get_form(request, obj, **kwargs)
+        if not self.is_admin(request) and "catalogs" in form.base_fields:
+            user = request.user
+            # Catalogs the user owns
+            owned_catalogs = Catalog.objects.filter(owners=user)
+
+            if obj is not None:
+                # NOTE: Also include catalogs already assigned to this tool so existing values are valid and visible
+                assigned_catalogs = obj.catalogs.all()
+                allowed_catalogs = (owned_catalogs | assigned_catalogs).distinct()
+            else:
+                allowed_catalogs = owned_catalogs
+            form.base_fields["catalogs"].queryset = allowed_catalogs  # type: ignore[reportMissingTypeArgument]
+            # If user is a tool owner but not a catalog owner, catalog field read-only.
+            is_catalog_owner = owned_catalogs.exists()
+            if not is_catalog_owner and obj is not None:
+                form.base_fields["catalogs"].disabled = True
+
+        return form
 
     @typing.override
     def save_related(self, request, form, formsets, change):  # type: ignore[reportMissingTypeArgument]
