@@ -1,8 +1,12 @@
 # Register your models here.
+import typing
+
 from django.contrib import admin
 
 from apps.resources.models import CaseStudy, ContactRequest, RequestDemo
 from apps.tool_picker.admin import ReadOnlyMixin
+from apps.tool_picker.models import Tool
+from apps.tool_picker.permission import CaseStudyPermission
 
 
 @admin.register(ContactRequest)
@@ -12,11 +16,37 @@ class ContactRequestAdmin(ReadOnlyMixin, admin.ModelAdmin[ContactRequest]):
 
 
 @admin.register(CaseStudy)
-class CaseStudyAdmin(admin.ModelAdmin[CaseStudy]):
+class CaseStudyAdmin(CaseStudyPermission):
     list_display = ("title",)
     search_fields = ("title",)
     list_select_related = ("tool",)
     autocomplete_fields = ("tool",)
+    readonly_fields = ("created_by", "modified_by")
+
+    exclude = ("created_by", "modified_by")  # NOTE: Prevent admin form validation errors
+
+    @typing.override
+    def save_model(self, request, obj, form, change):
+        """Automatically set created_by and modified_by in admin."""
+        if not obj.pk:
+            obj.created_by = request.user
+
+        obj.modified_by = request.user
+        super().save_model(request, obj, form, change)
+
+    @typing.override
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if self.is_admin(request):
+            return qs
+        return qs.filter(tool__owners=request.user)
+
+    @typing.override
+    def get_form(self, request, obj=None, **kwargs):  # type: ignore[reportMissingTypeArgument]
+        form = super().get_form(request, obj, **kwargs)
+        if not self.is_admin(request) and "tool" in form.base_fields:
+            form.base_fields["tool"].queryset = Tool.objects.filter(owners=request.user)  # type: ignore[reportMissingTypeArgument]
+        return form
 
 
 @admin.register(RequestDemo)

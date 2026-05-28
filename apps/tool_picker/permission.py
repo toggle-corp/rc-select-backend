@@ -198,3 +198,38 @@ class InlineAdminPermission(admin.TabularInline):
         is_creator = getattr(obj, "created_by_id", None) == user.pk
         is_direct_owner = hasattr(obj, "owners") and obj.owners.filter(pk=user.pk).exists()
         return is_catalog_owner or is_creator or is_direct_owner
+
+
+class CaseStudyPermission(BasePermission):
+    @typing.override
+    def is_owner(self, request, obj=None):
+        user = request.user
+        if not user.is_authenticated or obj is None:
+            return False
+        # Owner of the case study = owner of the related tool
+        return obj.tool.owners.filter(pk=user.pk).exists()
+
+    @typing.override
+    def has_add_permission(self, request):
+        if self.is_admin(request):
+            return True
+        user = request.user
+        if user.is_authenticated:
+            return Tool.objects.filter(owners=user).exists()
+        return False
+
+    @typing.override
+    def has_change_permission(self, request, obj=None):
+        if self.is_admin(request):
+            return True
+        if obj is None:
+            return request.user.is_authenticated
+        return self.is_owner(request, obj)
+
+    @typing.override
+    def has_delete_permission(self, request, obj=None):
+        if self.is_admin(request):
+            return True
+        if obj is None:
+            return request.user.is_authenticated
+        return self.is_owner(request, obj)
