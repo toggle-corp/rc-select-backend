@@ -86,8 +86,13 @@ class UserAdmin(DjangoUserAdmin, SteercoUserPermission):  # type: ignore[reportM
 
     @typing.override
     def user_change_password(self, request, id, form_url=""):
-        """Only superusers or Steerco can reset another user password."""
-        if not self.is_superuser(request) and not self.is_steerco(request):
-            messages.error(request, "You do not have permission to reset another user password.")
-            return HttpResponseRedirect(reverse("admin:user_user_change", args=[id]))
-        return super().user_change_password(request, id, form_url)
+        """Superusers or Steerco can reset another user password."""
+        if self.is_superuser(request) or self.is_steerco(request):
+            return super().user_change_password(request, id, form_url)
+
+        # NOTE: Authenticated non-admin user can reset their own password
+        if request.user.is_authenticated and request.user.pk == int(id):
+            return super().user_change_password(request, id, form_url)
+
+        messages.error(request, "You do not have permission to perform this action.")
+        return HttpResponseRedirect(reverse("admin:user_user_change", args=[id]))

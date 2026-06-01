@@ -79,7 +79,11 @@ class CatalogPermission(BasePermission):
 class SteercoUserPermission(BasePermission):
     @typing.override
     def has_change_permission(self, request, obj=None):
-        return self.is_admin(request)
+        if self.is_admin(request):
+            return True
+        if obj is None:
+            return request.user.is_authenticated
+        return obj.pk == request.user.pk
 
     @typing.override
     def has_delete_permission(self, request, obj=None):
