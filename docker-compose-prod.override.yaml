@@ -8,6 +8,9 @@ services:
       DEBUG: ${DEBUG:-false}
       ENABLE_DEBUG_TOOLBAR: ${ENABLE_DEBUG_TOOLBAR:-false}
       APP_ENVIRONMENT: ${APP_ENVIRONMENT:-PROD}
+      POSTGRES_DB: ${INIT_POSTGRES_DB?err}
+      POSTGRES_USER: ${INIT_POSTGRES_USER?err}
+      POSTGRES_PASSWORD: ${INIT_POSTGRES_PASSWORD?err}
     volumes: !override
       - ./data/backend/media:/code/data/media
       - ./data/backend/static:/code/data/static

@@ -1,6 +1,10 @@
+import typing
+
 from django import forms
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from apps.tool_picker.permission import SteercoUserPermission
 
@@ -79,3 +83,11 @@ class UserAdmin(DjangoUserAdmin, SteercoUserPermission):  # type: ignore[reportM
             },
         ),
     )
+
+    @typing.override
+    def user_change_password(self, request, id, form_url=""):
+        """Only superusers or Steerco can reset another user password."""
+        if not self.is_superuser(request) and not self.is_steerco(request):
+            messages.error(request, "You do not have permission to reset another user password.")
+            return HttpResponseRedirect(reverse("admin:user_user_change", args=[id]))
+        return super().user_change_password(request, id, form_url)
