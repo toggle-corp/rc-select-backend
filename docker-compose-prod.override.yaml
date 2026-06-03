@@ -21,6 +21,10 @@ services:
       - redis
 
   worker:
+    environment:
+      POSTGRES_DB: ${INIT_POSTGRES_DB?err}
+      POSTGRES_USER: ${INIT_POSTGRES_USER?err}
+      POSTGRES_PASSWORD: ${INIT_POSTGRES_PASSWORD?err}
     depends_on: !reset override
       - db
       - redis
