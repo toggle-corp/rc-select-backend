@@ -2,6 +2,7 @@
 import typing
 
 from django.contrib import admin
+from django.db.models import Q
 
 from apps.resources.models import CaseStudy, ContactRequest, RequestDemo
 from apps.tool_picker.admin import ReadOnlyMixin
@@ -39,13 +40,19 @@ class CaseStudyAdmin(CaseStudyPermission):
         qs = super().get_queryset(request)
         if self.is_admin(request):
             return qs
-        return qs.filter(tool__owners=request.user)
+        user = request.user
+        return qs.filter(
+            Q(tool__owners=user) | Q(tool__created_by=user) | Q(tool__catalogs__owners=user)
+        ).distinct()
 
     @typing.override
     def get_form(self, request, obj=None, **kwargs):  # type: ignore[reportMissingTypeArgument]
         form = super().get_form(request, obj, **kwargs)
         if not self.is_admin(request) and "tool" in form.base_fields:
-            form.base_fields["tool"].queryset = Tool.objects.filter(owners=request.user)  # type: ignore[reportMissingTypeArgument]
+            user = request.user
+            form.base_fields["tool"].queryset = Tool.objects.filter(  # type: ignore[reportMissingTypeArgument]
+                Q(owners=user) | Q(created_by=user) | Q(catalogs__owners=user)
+            ).distinct()
         return form
 
 

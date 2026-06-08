@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 
 from apps.common.admin import UserResourceAdmin
-from apps.tool_picker.permission import CatalogPermission, InlineAdminPermission, SteercoUserPermission, ToolPermission
+from apps.tool_picker.permission import CatalogPermission, InlineAdminPermission, SectorPermission, SteercoUserPermission, ToolFeaturePermission, ToolPermission
 
 from .models import (
     Catalog,
@@ -41,6 +41,28 @@ class CheckboxOptionInline(admin.TabularInline):  # type: ignore[reportMissingTy
     extra = 0
     fields = ["order", "text"]
     ordering = ["order"]
+
+    def _has_write_access(self, request, obj) -> bool:
+        user = request.user
+        if not user.is_authenticated:
+            return False
+        if user.is_superuser or getattr(user, "is_steerco", False):
+            return True
+        if obj is None:
+            return False
+        return hasattr(obj, "catalog") and obj.catalog.owners.filter(pk=user.pk).exists()
+
+    def has_view_permission(self, request, obj=None) -> bool:  # type: ignore[reportMissingTypeArgument]
+        return request.user.is_authenticated
+
+    def has_add_permission(self, request, obj=None) -> bool:  # type: ignore[reportMissingTypeArgument]
+        return self._has_write_access(request, obj)
+
+    def has_change_permission(self, request, obj=None) -> bool:  # type: ignore[reportMissingTypeArgument]
+        return self._has_write_access(request, obj)
+
+    def has_delete_permission(self, request, obj=None) -> bool:  # type: ignore[reportMissingTypeArgument]
+        return self._has_write_access(request, obj)
 
 
 # Inline for Ordinal Questions within Catalog
@@ -466,13 +488,44 @@ class RecommendationResultAdmin(ReadOnlyMixin, admin.ModelAdmin):  # type: ignor
 
 
 @admin.register(Sector)
-class SectorAdmin(SteercoUserPermission):
+class SectorAdmin(UserResourceAdmin, SectorPermission):
     list_display = ["name"]
     search_fields = ["name"]
+    autocomplete_fields = ["sector_owners"]
+
+    @typing.override
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if self.is_admin(request):
+            return qs
+        from django.db.models import Q
+
+        user = request.user
+        return qs.filter(
+            Q(sector_owners=user)
+            | Q(tool_sectors__owners=user)
+            | Q(tool_sectors__created_by=user)
+            | Q(tool_sectors__catalogs__owners=user)
+        ).distinct()
 
 
 @admin.register(ToolFeature)
-class ToolFeatureAdmin(SteercoUserPermission):
+class ToolFeatureAdmin(UserResourceAdmin, ToolFeaturePermission):
     list_display = ["name", "feature_category"]
     list_filter = ["feature_category"]
     search_fields = ["name"]
+
+    @typing.override
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if self.is_admin(request):
+            return qs
+        from django.db.models import Q
+
+        user = request.user
+        return qs.filter(
+            Q(created_by=user)
+            | Q(tool_features__owners=user)
+            | Q(tool_features__created_by=user)
+            | Q(tool_features__catalogs__owners=user)
+        ).distinct()
