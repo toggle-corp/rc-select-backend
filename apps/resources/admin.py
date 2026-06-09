@@ -42,7 +42,7 @@ class CaseStudyAdmin(CaseStudyPermission):
             return qs
         user = request.user
         return qs.filter(
-            Q(tool__owners=user) | Q(tool__created_by=user) | Q(tool__catalogs__owners=user)
+            Q(tool__owners=user) | Q(tool__created_by=user) | Q(tool__catalogs__owners=user),
         ).distinct()
 
     @typing.override
@@ -51,7 +51,7 @@ class CaseStudyAdmin(CaseStudyPermission):
         if not self.is_admin(request) and "tool" in form.base_fields:
             user = request.user
             form.base_fields["tool"].queryset = Tool.objects.filter(  # type: ignore[reportMissingTypeArgument]
-                Q(owners=user) | Q(created_by=user) | Q(catalogs__owners=user)
+                Q(owners=user) | Q(created_by=user) | Q(catalogs__owners=user),
             ).distinct()
         return form
 

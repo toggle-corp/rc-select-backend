@@ -6,7 +6,13 @@ from django.urls import reverse
 from django.utils.html import format_html
 
 from apps.common.admin import UserResourceAdmin
-from apps.tool_picker.permission import CatalogPermission, InlineAdminPermission, SectorPermission, SteercoUserPermission, ToolFeaturePermission, ToolPermission
+from apps.tool_picker.permission import (
+    CatalogPermission,
+    InlineAdminPermission,
+    SectorPermission,
+    ToolFeaturePermission,
+    ToolPermission,
+)
 
 from .models import (
     Catalog,
@@ -505,7 +511,7 @@ class SectorAdmin(UserResourceAdmin, SectorPermission):
             Q(sector_owners=user)
             | Q(tool_sectors__owners=user)
             | Q(tool_sectors__created_by=user)
-            | Q(tool_sectors__catalogs__owners=user)
+            | Q(tool_sectors__catalogs__owners=user),
         ).distinct()
 
 
@@ -527,5 +533,5 @@ class ToolFeatureAdmin(UserResourceAdmin, ToolFeaturePermission):
             Q(created_by=user)
             | Q(tool_features__owners=user)
             | Q(tool_features__created_by=user)
-            | Q(tool_features__catalogs__owners=user)
+            | Q(tool_features__catalogs__owners=user),
         ).distinct()

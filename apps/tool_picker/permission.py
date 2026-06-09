@@ -15,7 +15,7 @@ class BasePermission(admin.ModelAdmin):
     def is_admin(self, request):
         return self.is_superuser(request) or self.is_steerco(request)
 
-    def is_owner(self, request, obj=None):
+    def is_owner(self, request, obj=None) -> bool:
         return False
 
     @typing.override
@@ -206,7 +206,7 @@ class InlineAdminPermission(admin.TabularInline):
 
 class SectorPermission(BasePermission):
     @typing.override
-    def is_owner(self, request, obj=None):
+    def is_owner(self, request, obj=None):  # type: ignore[reportMissingParameterType]
         user = request.user
         if not user.is_authenticated or obj is None:
             return False
@@ -216,7 +216,7 @@ class SectorPermission(BasePermission):
         return is_sector_owner or is_tool_owner or is_catalog_owner
 
     @typing.override
-    def has_add_permission(self, request):
+    def has_add_permission(self, request):  # type: ignore[reportMissingParameterType]
         if self.is_admin(request):
             return True
         user = request.user
@@ -227,7 +227,7 @@ class SectorPermission(BasePermission):
         return owns_tool or owns_catalog
 
     @typing.override
-    def has_change_permission(self, request, obj=None):
+    def has_change_permission(self, request, obj=None):  # type: ignore[reportMissingParameterType]
         if self.is_admin(request):
             return True
         if obj is None:
@@ -235,7 +235,7 @@ class SectorPermission(BasePermission):
         return self.is_owner(request, obj)
 
     @typing.override
-    def has_delete_permission(self, request, obj=None):
+    def has_delete_permission(self, request, obj=None):  # type: ignore[reportMissingParameterType]
         if self.is_admin(request):
             return True
         if obj is None:
@@ -245,7 +245,7 @@ class SectorPermission(BasePermission):
 
 class ToolFeaturePermission(BasePermission):
     @typing.override
-    def is_owner(self, request, obj=None):
+    def is_owner(self, request, obj=None):  # type: ignore[reportMissingParameterType]
         user = request.user
         if not user.is_authenticated or obj is None:
             return False
@@ -255,7 +255,7 @@ class ToolFeaturePermission(BasePermission):
         return is_creator or is_tool_owner or is_catalog_owner
 
     @typing.override
-    def has_add_permission(self, request):
+    def has_add_permission(self, request):  # type: ignore[reportMissingParameterType]
         if self.is_admin(request):
             return True
         user = request.user
@@ -266,7 +266,7 @@ class ToolFeaturePermission(BasePermission):
         return owns_tool or owns_catalog
 
     @typing.override
-    def has_change_permission(self, request, obj=None):
+    def has_change_permission(self, request, obj=None):  # type: ignore[reportMissingParameterType]
         if self.is_admin(request):
             return True
         if obj is None:
@@ -274,7 +274,7 @@ class ToolFeaturePermission(BasePermission):
         return self.is_owner(request, obj)
 
     @typing.override
-    def has_delete_permission(self, request, obj=None):
+    def has_delete_permission(self, request, obj=None):  # type: ignore[reportMissingParameterType]
         if self.is_admin(request):
             return True
         if obj is None:
