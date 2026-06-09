@@ -15,7 +15,7 @@ class BasePermission(admin.ModelAdmin):
     def is_admin(self, request):
         return self.is_superuser(request) or self.is_steerco(request)
 
-    def is_owner(self, request, obj=None):
+    def is_owner(self, request, obj=None) -> bool:
         return False
 
     @typing.override
@@ -204,23 +204,105 @@ class InlineAdminPermission(admin.TabularInline):
         return is_catalog_owner or is_creator or is_direct_owner
 
 
+class SectorPermission(BasePermission):
+    @typing.override
+    def is_owner(self, request, obj=None):  # type: ignore[reportMissingParameterType]
+        user = request.user
+        if not user.is_authenticated or obj is None:
+            return False
+        is_sector_owner = obj.sector_owners.filter(pk=user.pk).exists()
+        is_tool_owner = obj.tool_sectors.filter(owners=user).exists() or obj.tool_sectors.filter(created_by=user).exists()
+        is_catalog_owner = Catalog.objects.filter(owners=user, tool_catalogs__tool_sectors=obj).exists()
+        return is_sector_owner or is_tool_owner or is_catalog_owner
+
+    @typing.override
+    def has_add_permission(self, request):  # type: ignore[reportMissingParameterType]
+        if self.is_admin(request):
+            return True
+        user = request.user
+        if not user.is_authenticated:
+            return False
+        owns_tool = Tool.objects.filter(owners=user).exists() or Tool.objects.filter(created_by=user).exists()
+        owns_catalog = Catalog.objects.filter(owners=user).exists()
+        return owns_tool or owns_catalog
+
+    @typing.override
+    def has_change_permission(self, request, obj=None):  # type: ignore[reportMissingParameterType]
+        if self.is_admin(request):
+            return True
+        if obj is None:
+            return request.user.is_authenticated
+        return self.is_owner(request, obj)
+
+    @typing.override
+    def has_delete_permission(self, request, obj=None):  # type: ignore[reportMissingParameterType]
+        if self.is_admin(request):
+            return True
+        if obj is None:
+            return request.user.is_authenticated
+        return self.is_owner(request, obj)
+
+
+class ToolFeaturePermission(BasePermission):
+    @typing.override
+    def is_owner(self, request, obj=None):  # type: ignore[reportMissingParameterType]
+        user = request.user
+        if not user.is_authenticated or obj is None:
+            return False
+        is_creator = getattr(obj, "created_by_id", None) == user.pk
+        is_tool_owner = obj.tool_features.filter(owners=user).exists() or obj.tool_features.filter(created_by=user).exists()
+        is_catalog_owner = Catalog.objects.filter(owners=user, tool_catalogs__tool_features=obj).exists()
+        return is_creator or is_tool_owner or is_catalog_owner
+
+    @typing.override
+    def has_add_permission(self, request):  # type: ignore[reportMissingParameterType]
+        if self.is_admin(request):
+            return True
+        user = request.user
+        if not user.is_authenticated:
+            return False
+        owns_tool = Tool.objects.filter(owners=user).exists() or Tool.objects.filter(created_by=user).exists()
+        owns_catalog = Catalog.objects.filter(owners=user).exists()
+        return owns_tool or owns_catalog
+
+    @typing.override
+    def has_change_permission(self, request, obj=None):  # type: ignore[reportMissingParameterType]
+        if self.is_admin(request):
+            return True
+        if obj is None:
+            return request.user.is_authenticated
+        return self.is_owner(request, obj)
+
+    @typing.override
+    def has_delete_permission(self, request, obj=None):  # type: ignore[reportMissingParameterType]
+        if self.is_admin(request):
+            return True
+        if obj is None:
+            return request.user.is_authenticated
+        return self.is_owner(request, obj)
+
+
 class CaseStudyPermission(BasePermission):
     @typing.override
     def is_owner(self, request, obj=None):
         user = request.user
         if not user.is_authenticated or obj is None:
             return False
-        # Owner of the case study = owner of the related tool
-        return obj.tool.owners.filter(pk=user.pk).exists()
+        tool = obj.tool
+        is_tool_owner = tool.owners.filter(pk=user.pk).exists() or getattr(tool, "created_by_id", None) == user.pk
+        is_catalog_owner = tool.catalogs.filter(owners=user).exists()
+        return is_tool_owner or is_catalog_owner
 
     @typing.override
     def has_add_permission(self, request):
         if self.is_admin(request):
             return True
         user = request.user
-        if user.is_authenticated:
-            return Tool.objects.filter(owners=user).exists()
-        return False
+        if not user.is_authenticated:
+            return False
+        owns_tool = Tool.objects.filter(owners=user).exists() or Tool.objects.filter(created_by=user).exists()
+        owns_catalog = Catalog.objects.filter(owners=user).exists()
+        return owns_tool or owns_catalog
 
     @typing.override
     def has_change_permission(self, request, obj=None):
